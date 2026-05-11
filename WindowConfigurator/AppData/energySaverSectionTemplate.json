@@ -1,0 +1,117 @@
+{
+  "id": "72f8e72f-caee-4c60-9b64-8d219d6bad51",
+  "row": 0,
+  "col": 1,
+  "width": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 34,
+    "numerator": 5,
+    "denominator": 8
+  },
+  "widthDescription": "34 5/8",
+  "height": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 44,
+    "numerator": 1,
+    "denominator": 16
+  },
+  "heightDescription": "44 1/16",
+  "paneOptions": null,
+  "style": {
+    "name": "Picture",
+    "hasVerticalSlider": false,
+    "hasHorizontalSlider": false,
+    "sliderImageWidth": "0",
+    "sliderImage": "",
+    "enclosureWidth": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 1,
+      "numerator": 0,
+      "denominator": 1
+    },
+    "imageWidth": "28",
+    "imageTopLeft": "img\\aww\\pvc\\energySaver\\Picture-Top-Left.png",
+    "imageTopRight": "img\\aww\\pvc\\energySaver\\Picture-Top-Right.png",
+    "imageBottomRight": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Right.png",
+    "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Left.png",
+    "imageTop": "img\\aww\\pvc\\energySaver\\Picture-Top.png",
+    "imageRight": "img\\aww\\pvc\\energySaver\\Picture-Right.png",
+    "imageBottom": "img\\aww\\pvc\\energySaver\\Picture-Bottom.png",
+    "imageLeft": "img\\aww\\pvc\\energySaver\\Picture-Left.png",
+    "hasCrank": false,
+    "restrictions": {
+      "minWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 15,
+        "numerator": 7,
+        "denominator": 8
+      },
+      "minHeight": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 19,
+        "numerator": 3,
+        "denominator": 4
+      },
+      "maxWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 96,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "maxHeight": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 82,
+        "numerator": 5,
+        "denominator": 8
+      }
+    }
+  },
+  "crank": {
+    "name": "None"
+  },
+  "grillePattern": {
+    "name": "None"
+  },
+  "grilleColor": {
+    "name": "White",
+    "fillColor": "#ffffff",
+    "fillOpacity": "0.0",
+    "image": "/img/aww/pvc/colorWhite.png"
+  },
+  "grilleSize": {
+    "name": "None",
+    "width": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 1,
+      "numerator": 0,
+      "denominator": 1
+    }
+  },
+  "sdlPattern": {
+    "name": "None"
+  },
+  "sdlColor": {
+    "name": "White",
+    "fillColor": "#ffffff",
+    "fillOpacity": "0.0",
+    "image": "/img/aww/pvc/colorWhite.png"
+  },
+  "sdlSize": {
+    "name": "None",
+    "width": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 1,
+      "numerator": 0,
+      "denominator": 1
+    }
+  }
+}

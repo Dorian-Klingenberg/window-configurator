@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "kill-port-5149",
+      "type": "shell",
+      "command": "try { $p = (netstat -ano | Select-String ':5149 .*LISTENING' | ForEach-Object { ($_ -split '\\s+')[-1] } | Select-Object -First 1); if ($p) { Stop-Process -Id $p -Force -ErrorAction SilentlyContinue } } catch {}; exit 0",
+      "problemMatcher": [],
+      "presentation": { "reveal": "never", "panel": "shared" }
+    },
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/WindowConfigurator/WindowConfigurator.Web.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": "kill-port-5149",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

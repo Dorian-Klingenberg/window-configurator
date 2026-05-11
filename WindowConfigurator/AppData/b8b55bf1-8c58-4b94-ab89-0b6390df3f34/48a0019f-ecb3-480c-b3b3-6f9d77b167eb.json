@@ -1,0 +1,1505 @@
+{
+  "id": "7d7f0473-4695-42e6-9617-499dd7d0f330",
+  "orderId": "9e1ab5fc-affb-4244-b99e-ff3829d217ca",
+  "contractorName": "Hardcoded Contractor Name",
+  "meetsEgress": false,
+  "lineItemNumber": "100",
+  "location": "Location 1",
+  "productLine": {
+    "name": "EnergySaver 2500",
+    "manufacturerName": "All Weather Windows",
+    "defaultJambDepth": {
+      "name": "4 Inches"
+    },
+    "defaultPaneConfiguration": {
+      "name": "Dual"
+    },
+    "defaultBrickmouldColor": {
+      "name": "None",
+      "colorLight": "",
+      "colorMedium": "",
+      "colorDark": "",
+      "image": ""
+    },
+    "defaultBrickmouldStyle": {
+      "name": "None"
+    },
+    "defaultFrameColor": {
+      "name": "Architectural Brown",
+      "colorLight": "#4f4b39",
+      "colorMedium": "#4f4b39",
+      "colorDark": "#2f2d22",
+      "image": "/Images/exteriorArchitecturalBrown.png"
+    },
+    "frameRestrictions": {
+      "minWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 16,
+        "numerator": 7,
+        "denominator": 8
+      },
+      "minHeight": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 20,
+        "numerator": 3,
+        "denominator": 4
+      },
+      "maxWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 97,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "maxHeight": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 83,
+        "numerator": 5,
+        "denominator": 8
+      }
+    },
+    "defaultOperatingCrank": {
+      "name": "None"
+    },
+    "defaultGrillePattern": {
+      "name": "None"
+    },
+    "defaultGrilleColor": {
+      "name": "Gold",
+      "colorLight": "#D4AF37",
+      "colorMedium": "#D4AF37",
+      "colorDark": "#D4AF37",
+      "image": "/Images/exteriorWhite.png"
+    },
+    "defaultGrilleSize": {
+      "name": "1 Inch",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      }
+    },
+    "defaultSdlPattern": {
+      "name": "None"
+    },
+    "defaultSdlColor": {
+      "name": "White",
+      "colorLight": "#aaaaaa",
+      "colorMedium": "#dedfdf",
+      "colorDark": "#f7f7f7",
+      "image": "/Images/exteriorWhite.png"
+    },
+    "defaultSdlSize": {
+      "name": "1 Inch",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      }
+    },
+    "operationalStyles": [
+      {
+        "name": "Awning",
+        "hasCrank": true,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 36,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      {
+        "name": "Casement",
+        "hasCrank": true,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 36,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      {
+        "name": "Casement - Left",
+        "hasCrank": true,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 36,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      {
+        "name": "Fixed Sash",
+        "hasCrank": false,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 96,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      }
+    ],
+    "defaultOperationalStyleName": "Fixed Sash"
+  },
+  "jambDepth": {
+    "name": "4 Inches"
+  },
+  "height": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 45,
+    "numerator": 1,
+    "denominator": 16
+  },
+  "heightDescription": "45 1/16",
+  "osmHeight": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 44,
+    "numerator": 1,
+    "denominator": 16
+  },
+  "osmHeightDescription": "44 1/16",
+  "width": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 70,
+    "numerator": 1,
+    "denominator": 4
+  },
+  "widthDescription": "70 1/4",
+  "osmWidth": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 69,
+    "numerator": 1,
+    "denominator": 4
+  },
+  "osmWidthDescription": "69 1/4",
+  "paneConfiguration": {
+    "name": "Dual"
+  },
+  "brickmouldColor": {
+    "name": "None",
+    "colorLight": "",
+    "colorMedium": "",
+    "colorDark": "",
+    "image": ""
+  },
+  "brickmouldStyle": {
+    "name": "None"
+  },
+  "frameColor": {
+    "name": "White",
+    "colorLight": "#f7f7f7",
+    "colorMedium": "#dedfdf",
+    "colorDark": "#aaaaaa",
+    "image": "/Images/exteriorWhite.png"
+  },
+  "sections": [
+    {
+      "id": "72f8e72f-caee-4c60-9b64-8d219d6bad51",
+      "row": 0,
+      "col": 1,
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 34,
+        "numerator": 5,
+        "denominator": 8
+      },
+      "widthDescription": "34 5/8",
+      "height": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 44,
+        "numerator": 1,
+        "denominator": 16
+      },
+      "heightDescription": "44 1/16",
+      "paneOptions": null,
+      "style": {
+        "name": "Fixed Sash",
+        "hasCrank": false,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 96,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      "crank": {
+        "name": "None"
+      },
+      "grillePattern": {
+        "name": "None"
+      },
+      "grilleColor": {
+        "name": "None",
+        "colorLight": "#D4AF37",
+        "colorMedium": "#D4AF37",
+        "colorDark": "#D4AF37",
+        "image": "/Images/exteriorWhite.png"
+      },
+      "grilleSize": {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      "sdlPattern": {
+        "name": "None"
+      },
+      "sdlColor": {
+        "name": "None",
+        "colorLight": "#aaaaaa",
+        "colorMedium": "#dedfdf",
+        "colorDark": "#f7f7f7",
+        "image": "/Images/exteriorWhite.png"
+      },
+      "sdlSize": {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      }
+    },
+    {
+      "id": "72f8e72f-caee-4c60-9b64-8d219d6bad51",
+      "row": 0,
+      "col": 2,
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 34,
+        "numerator": 5,
+        "denominator": 8
+      },
+      "widthDescription": "34 5/8",
+      "height": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 44,
+        "numerator": 1,
+        "denominator": 16
+      },
+      "heightDescription": "44 1/16",
+      "paneOptions": null,
+      "style": {
+        "name": "Fixed Sash",
+        "hasCrank": false,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 96,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      "crank": {
+        "name": "None"
+      },
+      "grillePattern": {
+        "name": "None"
+      },
+      "grilleColor": {
+        "name": "None",
+        "colorLight": "#D4AF37",
+        "colorMedium": "#D4AF37",
+        "colorDark": "#D4AF37",
+        "image": "/Images/exteriorWhite.png"
+      },
+      "grilleSize": {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      "sdlPattern": {
+        "name": "None"
+      },
+      "sdlColor": {
+        "name": "None",
+        "colorLight": "#aaaaaa",
+        "colorMedium": "#dedfdf",
+        "colorDark": "#f7f7f7",
+        "image": "/Images/exteriorWhite.png"
+      },
+      "sdlSize": {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      }
+    }
+  ],
+  "selectedSection": {
+    "id": "72f8e72f-caee-4c60-9b64-8d219d6bad51",
+    "row": 0,
+    "col": 1,
+    "width": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 34,
+      "numerator": 5,
+      "denominator": 8
+    },
+    "widthDescription": "34 5/8",
+    "height": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 44,
+      "numerator": 1,
+      "denominator": 16
+    },
+    "heightDescription": "44 1/16",
+    "paneOptions": null,
+    "style": {
+      "name": "Picture",
+      "hasCrank": false,
+      "restrictions": {
+        "minWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 15,
+          "numerator": 7,
+          "denominator": 8
+        },
+        "minHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 19,
+          "numerator": 3,
+          "denominator": 4
+        },
+        "maxWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 82,
+          "numerator": 5,
+          "denominator": 8
+        },
+        "maxHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 82,
+          "numerator": 5,
+          "denominator": 8
+        }
+      }
+    },
+    "crank": {
+      "name": "None"
+    },
+    "grillePattern": {
+      "name": "None"
+    },
+    "grilleColor": {
+      "name": "None",
+      "colorLight": "#D4AF37",
+      "colorMedium": "#D4AF37",
+      "colorDark": "#D4AF37",
+      "image": "/Images/exteriorWhite.png"
+    },
+    "grilleSize": {
+      "name": "None",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      }
+    },
+    "sdlPattern": {
+      "name": "None"
+    },
+    "sdlColor": {
+      "name": "None",
+      "colorLight": "#aaaaaa",
+      "colorMedium": "#dedfdf",
+      "colorDark": "#f7f7f7",
+      "image": "/Images/exteriorWhite.png"
+    },
+    "sdlSize": {
+      "name": "None",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      }
+    }
+  },
+  "price": 12345.0,
+  "sizeDescription": "79 1/4 X 44 1/16",
+  "egressDescription": "This item does not meet egress standards.",
+  "manufacturers": [
+    {
+      "name": "All Weather Windows"
+    },
+    {
+      "name": "Jeld Wen"
+    }
+  ],
+  "productLines": [
+    {
+      "name": "EnergySaver 2500",
+      "manufacturerName": "All Weather Windows",
+      "defaultJambDepth": {
+        "name": "4 Inches"
+      },
+      "defaultPaneConfiguration": {
+        "name": "Dual"
+      },
+      "defaultBrickmouldColor": {
+        "name": "None",
+        "colorLight": "",
+        "colorMedium": "",
+        "colorDark": "",
+        "image": ""
+      },
+      "defaultBrickmouldStyle": {
+        "name": "None"
+      },
+      "defaultFrameColor": {
+        "name": "Architectural Brown",
+        "colorLight": "#4f4b39",
+        "colorMedium": "#4f4b39",
+        "colorDark": "#2f2d22",
+        "image": "/Images/exteriorArchitecturalBrown.png"
+      },
+      "frameRestrictions": {
+        "minWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 16,
+          "numerator": 7,
+          "denominator": 8
+        },
+        "minHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 20,
+          "numerator": 3,
+          "denominator": 4
+        },
+        "maxWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 97,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "maxHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 83,
+          "numerator": 5,
+          "denominator": 8
+        }
+      },
+      "defaultOperatingCrank": {
+        "name": "None"
+      },
+      "defaultGrillePattern": {
+        "name": "None"
+      },
+      "defaultGrilleColor": {
+        "name": "Gold",
+        "colorLight": "#D4AF37",
+        "colorMedium": "#D4AF37",
+        "colorDark": "#D4AF37",
+        "image": "/Images/exteriorWhite.png"
+      },
+      "defaultGrilleSize": {
+        "name": "1 Inch",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      "defaultSdlPattern": {
+        "name": "None"
+      },
+      "defaultSdlColor": {
+        "name": "White",
+        "colorLight": "#aaaaaa",
+        "colorMedium": "#dedfdf",
+        "colorDark": "#f7f7f7",
+        "image": "/Images/exteriorWhite.png"
+      },
+      "defaultSdlSize": {
+        "name": "1 Inch",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      "operationalStyles": [
+        {
+          "name": "Awning",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Casement",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Casement - Left",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Fixed Sash",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 96,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        }
+      ],
+      "defaultOperationalStyleName": "Fixed Sash"
+    },
+    {
+      "name": "Magnum 7000",
+      "manufacturerName": "All Weather Windows",
+      "defaultJambDepth": {
+        "name": "4 Inches"
+      },
+      "defaultPaneConfiguration": {
+        "name": "Dual"
+      },
+      "defaultBrickmouldColor": {
+        "name": "None",
+        "colorLight": "",
+        "colorMedium": "",
+        "colorDark": "",
+        "image": ""
+      },
+      "defaultBrickmouldStyle": {
+        "name": "None"
+      },
+      "defaultFrameColor": {
+        "name": "Architectural Brown",
+        "colorLight": "#4f4b39",
+        "colorMedium": "#4f4b39",
+        "colorDark": "#2f2d22",
+        "image": "/Images/exteriorArchitecturalBrown.png"
+      },
+      "frameRestrictions": {
+        "minWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 16,
+          "numerator": 7,
+          "denominator": 8
+        },
+        "minHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 20,
+          "numerator": 3,
+          "denominator": 4
+        },
+        "maxWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 97,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "maxHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 83,
+          "numerator": 5,
+          "denominator": 8
+        }
+      },
+      "defaultOperatingCrank": {
+        "name": "None"
+      },
+      "defaultGrillePattern": {
+        "name": "None"
+      },
+      "defaultGrilleColor": {
+        "name": "Gold",
+        "colorLight": "#D4AF37",
+        "colorMedium": "#D4AF37",
+        "colorDark": "#D4AF37",
+        "image": "/Images/exteriorWhite.png"
+      },
+      "defaultGrilleSize": {
+        "name": "1 Inch",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      "defaultSdlPattern": {
+        "name": "None"
+      },
+      "defaultSdlColor": {
+        "name": "White",
+        "colorLight": "#aaaaaa",
+        "colorMedium": "#dedfdf",
+        "colorDark": "#f7f7f7",
+        "image": "/Images/exteriorWhite.png"
+      },
+      "defaultSdlSize": {
+        "name": "1 Inch",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      "operationalStyles": [
+        {
+          "name": "Picture",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Glider",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 26,
+              "numerator": 6,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Glider - Left",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 26,
+              "numerator": 6,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Single Hung",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Single Hung - Down",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Double Hung",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        }
+      ],
+      "defaultOperationalStyleName": "Picture"
+    }
+  ],
+  "jambDepths": [
+    {
+      "name": "4 Inches"
+    },
+    {
+      "name": "6 Inches"
+    },
+    {
+      "name": "8 Inches"
+    },
+    {
+      "name": "10 Inches"
+    },
+    {
+      "name": "12 Inches"
+    }
+  ],
+  "paneConfigurations": [
+    {
+      "name": "Dual"
+    },
+    {
+      "name": "Dual - LowE/Argon"
+    },
+    {
+      "name": "Triple"
+    },
+    {
+      "name": "Triple - LowE/Argon"
+    }
+  ],
+  "brickmouldColors": [
+    {
+      "name": "None",
+      "colorLight": "",
+      "colorMedium": "",
+      "colorDark": "",
+      "image": ""
+    },
+    {
+      "name": "Architectural Brown",
+      "colorLight": "#4f4b39",
+      "colorMedium": "#4f4b39",
+      "colorDark": "#2f2d22",
+      "image": "/Images/exteriorArchitecturalBrown.png"
+    },
+    {
+      "name": "Black",
+      "colorLight": "#000000",
+      "colorMedium": "#000000",
+      "colorDark": "#000000",
+      "image": "/Images/exteriorBlack.png"
+    },
+    {
+      "name": "Canyon Clay",
+      "colorLight": "#b6b0a6",
+      "colorMedium": "#a29f96",
+      "colorDark": "#726e68",
+      "image": "/Images/exteriorCanyonClay.png"
+    },
+    {
+      "name": "Pebble",
+      "colorLight": "#958c81",
+      "colorMedium": "#867e74",
+      "colorDark": "#5f5953",
+      "image": "/Images/exteriorPebble.png"
+    },
+    {
+      "name": "Sable",
+      "colorLight": "#51544a",
+      "colorMedium": "#484b42",
+      "colorDark": "#373832",
+      "image": "/Images/exteriorSable.png"
+    },
+    {
+      "name": "White",
+      "colorLight": "#f7f7f7",
+      "colorMedium": "#dedfdf",
+      "colorDark": "#aaaaaa",
+      "image": "/Images/exteriorWhite.png"
+    },
+    {
+      "name": "Wicker",
+      "colorLight": "#bab18c",
+      "colorMedium": "#a6a07f",
+      "colorDark": "#77725b",
+      "image": "/Images/exteriorWicker.png"
+    }
+  ],
+  "brickmouldStyles": [
+    {
+      "name": "None"
+    },
+    {
+      "name": "1 5/8 Inch"
+    },
+    {
+      "name": "2 Inch"
+    },
+    {
+      "name": "3 1/2 Inch"
+    }
+  ],
+  "frameColors": [
+    {
+      "name": "Architectural Brown",
+      "colorLight": "#4f4b39",
+      "colorMedium": "#4f4b39",
+      "colorDark": "#2f2d22",
+      "image": "/Images/exteriorArchitecturalBrown.png"
+    },
+    {
+      "name": "Black",
+      "colorLight": "#000000",
+      "colorMedium": "#000000",
+      "colorDark": "#000000",
+      "image": "/Images/exteriorBlack.png"
+    },
+    {
+      "name": "Canyon Clay",
+      "colorLight": "#b6b0a6",
+      "colorMedium": "#a29f96",
+      "colorDark": "#726e68",
+      "image": "/Images/exteriorCanyonClay.png"
+    },
+    {
+      "name": "Pebble",
+      "colorLight": "#958c81",
+      "colorMedium": "#867e74",
+      "colorDark": "#5f5953",
+      "image": "/Images/exteriorPebble.png"
+    },
+    {
+      "name": "Sable",
+      "colorLight": "#51544a",
+      "colorMedium": "#484b42",
+      "colorDark": "#373832",
+      "image": "/Images/exteriorSable.png"
+    },
+    {
+      "name": "White",
+      "colorLight": "#f7f7f7",
+      "colorMedium": "#dedfdf",
+      "colorDark": "#aaaaaa",
+      "image": "/Images/exteriorWhite.png"
+    },
+    {
+      "name": "Wicker",
+      "colorLight": "#bab18c",
+      "colorMedium": "#a6a07f",
+      "colorDark": "#77725b",
+      "image": "/Images/exteriorWicker.png"
+    }
+  ],
+  "cranks": [
+    {
+      "name": "None"
+    },
+    {
+      "name": "Regular"
+    },
+    {
+      "name": "Folding"
+    },
+    {
+      "name": "Encore"
+    },
+    {
+      "name": "Roto"
+    }
+  ],
+  "grillePatterns": [
+    {
+      "name": "None"
+    },
+    {
+      "name": "Ladder"
+    },
+    {
+      "name": "Double Ladder"
+    },
+    {
+      "name": "Rectangular"
+    },
+    {
+      "name": "Perimeter"
+    },
+    {
+      "name": "Double Perimeter"
+    },
+    {
+      "name": "Empress"
+    }
+  ],
+  "grilleColors": [
+    {
+      "name": "White",
+      "colorLight": "#aaaaaa",
+      "colorMedium": "#dedfdf",
+      "colorDark": "#f7f7f7",
+      "image": "/Images/exteriorWhite.png"
+    },
+    {
+      "name": "Gold",
+      "colorLight": "#D4AF37",
+      "colorMedium": "#D4AF37",
+      "colorDark": "#D4AF37",
+      "image": "/Images/exteriorWhite.png"
+    },
+    {
+      "name": "Lead",
+      "colorLight": "#444f53",
+      "colorMedium": "#444f53",
+      "colorDark": "#444f53",
+      "image": "/Images/exteriorWhite.png"
+    },
+    {
+      "name": "Patina",
+      "colorLight": "#777459",
+      "colorMedium": "#777459",
+      "colorDark": "#777459",
+      "image": "/Images/exteriorWhite.png"
+    },
+    {
+      "name": "Wicker",
+      "colorLight": "#77725b",
+      "colorMedium": "#a6a07f",
+      "colorDark": "#bab18c",
+      "image": "/Images/exteriorWicker.png"
+    }
+  ],
+  "grilleSizes": [
+    {
+      "name": "5/16 Inches",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 0,
+        "numerator": 5,
+        "denominator": 16
+      }
+    },
+    {
+      "name": "5/8 Inches",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 0,
+        "numerator": 5,
+        "denominator": 8
+      }
+    },
+    {
+      "name": "1 Inch",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      }
+    },
+    {
+      "name": "Georgian",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 5,
+        "denominator": 8
+      }
+    }
+  ],
+  "sdlPatterns": [
+    {
+      "name": "None"
+    },
+    {
+      "name": "Colonial"
+    },
+    {
+      "name": "Craftsman"
+    },
+    {
+      "name": "Heritage"
+    }
+  ],
+  "sdlColors": [
+    {
+      "name": "White",
+      "colorLight": "#aaaaaa",
+      "colorMedium": "#dedfdf",
+      "colorDark": "#f7f7f7",
+      "image": "/Images/exteriorWhite.png"
+    },
+    {
+      "name": "Wicker",
+      "colorLight": "#77725b",
+      "colorMedium": "#a6a07f",
+      "colorDark": "#bab18c",
+      "image": "/Images/exteriorWicker.png"
+    }
+  ],
+  "sdlSizes": [
+    {
+      "name": "5/16 Inches",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 0,
+        "numerator": 5,
+        "denominator": 16
+      }
+    },
+    {
+      "name": "5/8 Inches",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 0,
+        "numerator": 5,
+        "denominator": 8
+      }
+    },
+    {
+      "name": "1 Inch",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      }
+    },
+    {
+      "name": "Georgian",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 5,
+        "denominator": 8
+      }
+    }
+  ]
+}

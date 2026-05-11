@@ -1,0 +1,1342 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+@model OrderItemViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Order Item</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @*    @Styles.Render("~/Content/Base")
+        @Styles.Render("~/Content/StoreFront/Configurator/css")
+    *@
+
+    <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/configurator.css" asp-append-version="true" />
+
+    <script src="~/js/knockout-3.4.1.debug.js"></script>
+    <script src="~/js/knockout.mapping-latest.debug.js"></script>
+    <script src="~/js/windowStore/fraction.js"></script>
+    <script src="~/js/windowStore/windowStore.measurement.js"></script>
+    <script src="~/js/windowStore/windowStore.order.item.preview.viewModel.js"></script>
+    <script src="~/js/windowStore/windowStore.order.item.validator.js"></script>
+    <script src="~/js/windowStore/windowStore.order.item.viewmodel.js"></script>
+    <script src="~/js/windowStore/windowStore.preview.sectionOptions.js"></script>
+    <script src="~/js/windowStore/pricing.js"></script>
+
+    @*@Scripts.Render("~/bundles/windowStore")*@
+
+</head>
+
+<body>
+
+    <section id="popups">
+
+        @*General Modal*@
+
+        <div class="modal fade" id="general-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="align-content">
+                    <div class="modal-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                General
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-3 control-label">
+                                        <p>Location</p>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <input type="text" class="form-control" data-bind="value: location">
+                                    </div>
+                                </div>
+                                <div class="row section-count">
+                                    <div class="col-xs-3 control-label">
+                                        <p>Sections</p>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <button class="col-xs-4 btn btn-default" data-bind="click: onOneSectionButtonClick">
+                                            <p>1</p>
+                                        </button>
+                                        <button class="col-xs-4 btn btn-default" data-bind="click: onTwoSectionButtonClick">
+                                            <p>2</p>
+                                        </button>
+                                        <button class="col-xs-4 btn btn-default" data-bind="click: onThreeSectionButtonClick">
+                                            <p>3</p>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-default" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dimensions Modal -->
+
+        <div class="modal fade" id="dimensions-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="align-content">
+                    <div class="modal-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Dimensions
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p>Sizing Type</p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-bind="text: sizingType"><span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="#" data-bind="click: onSizingTypeChangedBrickmould">Brickmould</a></li>
+                                                <li><a href="#" data-bind="click: onSizingTypeChangedFrame">Frame</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 control-label">
+                                        <p>Width</p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <input type="text" class="form-control" data-bind="value: widthDescription" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 control-label">
+                                        <p>Height</p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <input type="text" class="form-control" data-bind="value: heightDescription" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-default" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Fit/Finish Modal*@
+
+        <div class="modal fade" id="fit-finish-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="align-content">
+                    <div class="modal-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Fit/Finish
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 btn-group-vertical">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <p>Subsil</p>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="checkbox" id="keepSizeSwitch">
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#frame-color-modal">
+                                            <div class="row">
+                                                <p class="col-xs-5">Frame Color:</p>
+                                                <p class="col-xs-7" data-bind="text: frameColor.name"></p>
+                                            </div>
+                                        </button>
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#brickmould-style-modal">
+                                            <div class="row">
+                                                <p class="col-xs-5">Brickmould:</p>
+                                                <p class="col-xs-7" data-bind="text: brickmouldStyle.name"></p>
+                                            </div>
+                                        </button>
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#jamb-depth-modal">
+                                            <div class="row">
+                                                <p class="col-xs-5">Wall Depth:</p>
+                                                <p class="col-xs-7" data-bind="text: jambDepth.name"></p>
+                                            </div>
+                                        </button>
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#pane-configuration-modal">
+                                            <div class="row">
+                                                <p class="col-xs-5">Pane Configuration:</p>
+                                                <p class="col-xs-7" data-bind="text: paneConfiguration.name"></p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-default" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Grille/SDL Modal*@
+        <div class="modal fade" id="grille-sdl-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="align-content">
+                    <div class="modal-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Grille/SDL
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="panel-body">
+
+                                <!-- ko with: selectedSection -->
+
+                                <div class="row grille">
+                                    <div class="col-xs-12 control-label">
+                                        <p>Grille</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-12 btn-group-vertical" role="group">
+                                                <button class="btn btn-default" data-toggle="modal" data-target="#grille-pattern-modal">
+                                                    <div class="row">
+                                                        <p class="col-xs-5">Pattern:</p>
+                                                        <p class="col-xs-7" data-bind="text: grillePattern.name">fake grille</p>
+                                                    </div>
+                                                </button>
+                                                <button class="btn btn-default" data-bind="attr: { disabled: grillePattern.name() === 'None' }" data-toggle="modal" data-target="#grille-color-modal">
+                                                    <div class="row">
+                                                        <p class="col-xs-5">Color:</p>
+                                                        <p class="col-xs-7" data-bind="text: grilleColor.name">fake color</p>
+                                                    </div>
+                                                </button>
+                                                <button class="btn btn-default" data-bind="attr: { disabled: grillePattern.name() === 'None' }" data-toggle="modal" data-target="#grille-size-modal">
+                                                    <div class="row">
+                                                        <p class="col-xs-5">Size:</p>
+                                                        <p class="col-xs-7" data-bind="text: grilleSize.name">1/4 inch</p>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default" data-bind="click: $parent.onGrilleAppliesToCurrentClick, css: $parent.grilleAppliesToCurrent ? 'btn btn-default active' : 'btn btn-default'">
+                                                <input type="radio" value="thisSection">Selection
+                                            </label>
+                                            <label class="btn btn-default" data-bind="click: $parent.onGrilleAppliesToOutsideClick, css: $parent.grilleAppliesToOutside ? 'btn btn-default active' : 'btn btn-default'">
+                                                <input type="radio" value="outsideSection">Outside
+                                            </label>
+                                            <label class="btn btn-default" data-bind="click: $parent.onGrilleAppliesToAllClick, css: $parent.grilleAppliesToAll ? 'btn btn-default active' : 'btn btn-default'">
+                                                <input type="radio" value="allSections">All
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row sdl">
+                                    <div class="col-xs-12 control-label">
+                                        <p>SDL</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-12 btn-group-vertical" role="group">
+                                                <button class="btn btn-default" data-toggle="modal" data-target="#sdl-pattern-modal">
+                                                    <div class="row">
+                                                        <p class="col-xs-5">Pattern:</p>
+                                                        <p class="col-xs-7" data-bind="text: sdlPattern.name">Fake sdl</p>
+                                                    </div>
+                                                </button>
+                                                <button class="btn btn-default" data-bind="attr: { disabled: sdlPattern.name() === 'None' }" data-toggle="modal" data-target="#sdl-color-modal">
+                                                    <div class="row">
+                                                        <p class="col-xs-5">Color:</p>
+                                                        <p class="col-xs-7" data-bind="text: sdlColor.name">Fake color</p>
+                                                    </div>
+                                                </button>
+                                                <button class="btn btn-default" data-bind="attr: { disabled: sdlPattern.name() === 'None' }" data-toggle="modal" data-target="#sdl-size-modal">
+                                                    <div class="row">
+                                                        <p class="col-xs-5">Size:</p>
+                                                        <p class="col-xs-7" data-bind="text: sdlSize.name">1/8 inch</p>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default" data-bind="click: $parent.onSdlAppliesToCurrentClick, css: $parent.sdlAppliesToCurrent ? 'btn btn-default active' : 'btn btn-default'">
+                                                <input type="radio" value="thisSection">Selection
+                                            </label>
+                                            <label class="btn btn-default" data-bind="click: $parent.onSdlAppliesToOutsideClick, css: $parent.sdlAppliesToOutside ? 'btn btn-default active' : 'btn btn-default'">
+                                                <input type="radio" value="outsideSection">Outside
+                                            </label>
+                                            <label class="btn btn-default" data-bind="click: $parent.onSdlAppliesToAllClick, css: $parent.sdlAppliesToAll ? 'btn btn-default active' : 'btn btn-default'">
+                                                <input type="radio" value="allSections">All
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /ko -->
+
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-default" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="selected-section-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="align-content">
+                    <div class="modal-body">
+                        <div class="panel panel-default">
+                            <div class=" panel-heading">
+                                Selected Section Settings
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="panel-body">
+
+                                <!-- ko with: selectedSection -->
+
+                                <div class="row section-width">
+                                    <div class="col-xs-12 control-label">
+                                        <p>Width</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <input type="text" class="form-control" data-bind="attr: { disabled: $parent.sections().length <= 1 }, value: widthDescription">
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-default" data-bind="click: $parent.onSectionWidthAppliesToCurrentClick, css: $parent.sectionWidthAppliesToCurrent ? 'btn btn-default active' : 'btn btn-default'">
+                                                        <input type="radio" value="thisSection">Selection
+                                                    </label>
+                                                    <label class="btn btn-default" data-bind="click: $parent.onSectionWidthAppliesToOutsideClick, css: $parent.sectionWidthAppliesToOutside ? 'btn btn-default active' : 'btn btn-default'">
+                                                        <input type="radio" value="outsideSection">Outside
+                                                    </label>
+                                                    <label class="btn btn-default" data-bind="click: $parent.onSectionWidthAppliesToAllClick, css: $parent.sectionWidthAppliesToAll ? 'btn btn-default active' : 'btn btn-default'">
+                                                        <input type="radio" value="allSections">All
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row operation">
+                                    <div class="col-xs-12 control-label">
+                                        <p>Operation</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-12 btn-group-vertical" role="group">
+                                                <button class="btn btn-default" data-toggle="modal" data-target="#operational-style-modal">
+                                                    <div class="row">
+                                                        <p class="col-xs-5">Style:</p>
+                                                        <p class="col-xs-7" data-bind="text: style.name">Temporary name</p>
+                                                    </div>
+                                                </button>
+                                                <button class="col-xs-6 btn btn-default" data-bind="attr: { disabled: !style.hasCrank() }" data-toggle="modal" data-target="#crank-modal">
+                                                    <div class="row">
+                                                        <p class="col-xs-5">Crank:</p>
+                                                        <p class="col-xs-7" data-bind="text: crank.name">Fake crank</p>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-default" data-bind="click: $parent.onStyleAppliesToCurrentClick, css: $parent.styleAppliesToCurrent ? 'btn btn-default active' : 'btn btn-default'">
+                                                        <input type="radio" value="thisSection">Selection
+                                                    </label>
+                                                    <label class="btn btn-default" data-bind="click: $parent.onStyleAppliesToOutsideClick, css: $parent.styleAppliesToOutside ? 'btn btn-default active' : 'btn btn-default'">
+                                                        <input type="radio" value="outsideSection">Outside
+                                                    </label>
+                                                    <label class="btn btn-default" data-bind="click: $parent.onStyleAppliesToAllClick, css: $parent.styleAppliesToAll ? 'btn btn-default active' : 'btn btn-default'">
+                                                        <input type="radio" value="allSections">All
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /ko -->
+
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-default" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Line Modal -->
+
+        <div class="modal fade" id="product-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Product Line</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLines -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onProductLineSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Frame Color Modal -->
+
+        <div class="modal fade" id="frame-color-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Color</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.frameColors -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onFrameColorSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wall Depth Modal -->
+
+        <div class="modal fade" id="jamb-depth-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Wall Depth</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.jambDepths -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onJambDepthSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pane Configurations Modal -->
+
+        <div class="modal fade" id="pane-configuration-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose Your Pane Configuration</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.paneConfigurations -->
+
+                            <a class="list-group-item" href="#" data-dismiss="modal" data-bind="text: name, click: $parent.onPaneConfugurationSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brickmould Style Modal -->
+
+        <div class="modal fade" id="brickmould-style-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Brickmould Style</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.brickmouldStyles -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onBrickmouldStyleSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brickmould Color Modal -->
+
+        <div class="modal fade" id="brickmould-color-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Brickmould Color</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.brickmouldColors -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onBrickmouldColorSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Operational Style Modal -->
+
+        <div class="modal fade" id="operational-style-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose an Operational Style</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.operationalStyles -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onStyleSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crank Modal -->
+
+        <div class="modal fade" id="crank-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Crank</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.cranks -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onCrankSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grille Pattern Modal -->
+
+        <div class="modal fade" id="grille-pattern-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Grille Pattern</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.grillePatterns -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onGrillePatternSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grille Color Modal -->
+
+        <div class="modal fade" id="grille-color-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Grille Color</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.grilleColors -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onGrilleColorSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grille Size Modal -->
+
+        <div class="modal fade" id="grille-size-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose a Grille Size</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.grilleSizes -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onGrilleSizeSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SDL Pattern Modal -->
+
+        <div class="modal fade" id="sdl-pattern-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose an SDL Pattern</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.sdlPatterns -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onSdlPatternSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SDL Color Modal -->
+
+        <div class="modal fade" id="sdl-color-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose an SDL Color</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.sdlColors -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onSdlColorSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SDL Size Modal -->
+
+        <div class="modal fade" id="sdl-size-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Choose an SDL Size</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+
+                            <!-- ko foreach: productLine.sdlSizes -->
+
+                            <a class="list-group-item" data-dismiss="modal" href="#" data-bind="text: name, click: $parent.onSdlSizeSelected"></a>
+
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Under Construction Modal -->
+
+        <div class="modal fade" id="under-construction-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog under-construction" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="myModalLabel">Under Construction!</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>This section of our website is still under construction. We are hard at work refining the accuracy of our pricing, and enhancing the usability of the interface. Be on the lookout for a full order creation tool which will allow you to submit orders with multiple windows for purchase in the near future.</p>
+                        <p>We are looking for feedback. If you have questions or suggestions please <a href="mailto:klingenberg.d+stjohn@gmail.com?Subject=Configurator%20Suggestions">drop me a line</a>. I would love to here from you!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a id="closemodal" class="btn btn-primary" target="_blank">Design My Windows...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote Modal -->
+
+        <div class="modal fade" id="quote-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog under-construction" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="myModalLabel">Get a Manufacturer Quote</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Due to the constantly changing nature of window manufacturer pricing models.  We are only able to provide an estimate for the final price of any given window.  If you want us to however, we can submit your creation to the manufacturer, and provide an actual quote with the price locked in for <strong>30 days</strong>.</p>
+                        <p>Fill in some contact information and click the <strong>Submit</strong> button to send us the specification for your design, and we will attempt contact you with a quote within the next <strong>24 hours</strong>.  No purchase will be made on your behalf without your approval and all purchases require payment up front.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" data-bind="value: contactInfo" placeholder="phone number or email address" />
+                            </div>
+                            <div class="col-xs-3">
+                                <a id="quote-submit-btn" class="btn btn-primary">Submit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*    <h1>Order Item will be displayed here</h1>
+        <h3>Order Id = @Model.Id</h3>
+    *@
+    <section class="container vertical-fill">
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6 preview-side">
+                <div class="row preview-header">
+                    <div class="col-xs-6 product-logo">
+                        <p data-bind="text: productLine.name"></p>
+                    </div>
+                    <div class="col-xs-6 price">
+                        <div><span>Estimated Price:&nbsp;&nbsp;&nbsp;</span><span data-bind="text: price">$1600</span></div>
+                        @*<div><button class="btn btn-default" data-toggle="modal" data-target="#quote-modal">Get A Quote!</button></div>*@
+                    </div>
+                </div>
+                <div class="row preview-display" id="preview">
+
+                    <!-- ko with: preview -->
+
+                    <svg width="100%" height="100%" shape-rendering="crispEdges" id="preview-svg" style="background-color: transparent">
+
+                        <!-- ko with: frame -->
+
+                        <defs>
+
+                            <marker id="triangle" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="strokeWidth" markerWidth="10" markerHeight="10" orient="auto">
+                                <path d="M 0 0 L 10 5 L 0 10 z" />
+                            </marker>
+                            <marker id="triangle-start" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="strokeWidth" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" />
+                            </marker>
+
+                            <!-- ko foreach: sections -->
+
+                            <pattern width="1" height="1" data-bind="attr: { id: topLeftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': topLeftImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: topImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: width, height: enclosureWidth, 'xlink:href': topImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: topRightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': topRightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: rightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="16" height="0" data-bind="attr: { width: enclosureWidth, height: height, 'xlink:href': rightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomRightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': bottomRightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: width, height: enclosureWidth, 'xlink:href': bottomImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomLeftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': bottomLeftImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: leftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: height, 'xlink:href': leftImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: horizontalSliderImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: horizontalSliderWidth, height: horizontalSliderHeight, 'xlink:href': sliderImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: verticalSliderImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: verticalSliderWidth, height: verticalSliderHeight, 'xlink:href': verticalSliderImage }" xlink:href="" />
+                            </pattern>
+
+                            <!-- /ko -->
+
+                            <pattern width="1" height="1" data-bind="attr: { id: topLeftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': topLeftImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: topImagePatternId}">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: width, height: enclosureWidth, 'xlink:href': topImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: topRightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': topRightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: rightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="16" height="0" data-bind="attr: { width: enclosureWidth, height: height, 'xlink:href': rightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomRightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': bottomRightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: width, height: enclosureWidth, 'xlink:href': bottomImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomLeftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': bottomLeftImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: leftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: height, 'xlink:href': leftImage }" xlink:href="" />
+                            </pattern>
+
+                            <!-- ko with: brickmould -->
+
+                            <pattern width="1" height="1" data-bind="attr: { id: topLeftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': topLeftImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: topImagePatternId}">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: width, height: enclosureWidth, 'xlink:href': topImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: topRightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': topRightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: rightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="16" height="0" data-bind="attr: { width: enclosureWidth, height: height, 'xlink:href': rightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomRightImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': bottomRightImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: width, height: enclosureWidth, 'xlink:href': bottomImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: bottomLeftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: enclosureWidth, 'xlink:href': bottomLeftImage }" xlink:href="" />
+                            </pattern>
+                            <pattern width="1" height="1" data-bind="attr: { id: leftImagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: enclosureWidth, height: height, 'xlink:href': leftImage }" xlink:href="" />
+                            </pattern>
+
+                            <!-- /ko -->
+                            <!-- ko foreach: mullions -->
+
+                            <pattern width="1" height="1" data-bind="attr: { id: imagePatternId }">
+                                <image preserveAspectRatio="none" x="0" y="0" width="0" height="0" data-bind="attr: { width: imageWidth, height: height, 'xlink:href': image }" xlink:href="" />
+                            </pattern>
+
+                            <!-- /ko -->
+
+                        </defs>
+
+                        <!-- ko foreach: sections -->
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topLeftX, y: topLeftY, width: topLeftWidth, height: topLeftHeight, fill: topLeftImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topX, y: topY, width: topWidth, height: topHeight, fill: topLeftImagePatternUrl, fill: topImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topRightX, y: topRightY, width: topRightWidth, height: topRightWidth, fill: topRightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: rightX, y: rightY, width: rightWidth, height: rightHeight, fill: topLeftImagePatternUrl, fill: rightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomRightX, y: bottomRightY, width: bottomRightWidth, height: bottomRightWidth, fill: bottomRightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomX, y: bottomY, width: bottomWidth, height: bottomHeight, fill: bottomImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomLeftX, y: bottomLeftY, width: bottomLeftWidth, height: bottomLeftHeight, fill: bottomLeftImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: leftX, y: leftY, width: leftWidth, height: leftHeight, fill: leftImagePatternUrl }"></rect>
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topLeftX, y: topLeftY, width: topLeftWidth, height: topLeftHeight, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topX, y: topY, width: topWidth, height: topHeight, fill: topLeftImagePatternUrl, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topRightX, y: topRightY, width: topRightWidth, height: topRightWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: rightX, y: rightY, width: rightWidth, height: rightHeight, fill: topLeftImagePatternUrl, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomRightX, y: bottomRightY, width: bottomRightWidth, height: bottomRightWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomX, y: bottomY, width: bottomWidth, height: bottomHeight, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomLeftX, y: bottomLeftY, width: bottomLeftWidth, height: bottomLeftHeight, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: leftX, y: leftY, width: leftWidth, height: leftHeight, fill: color, opacity: opacity }"></rect>
+
+                        <!-- ko if: stylePattern.hasStartArrow() && stylePattern.hasEndArrow() -->
+                        <!-- ko foreach: stylePattern.styleLines -->
+
+                        <line data-bind="attr: {x1: x1, y1: y1, x2: x2, y2: y2 }" x1="1" y1="1" x2="100" y1="100" stroke="#000000" stroke-width="1" marker-end="url(#triangle)" marker-start="url(#triangle-start)"></line>
+
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: stylePattern.hasStartArrow() && !stylePattern.hasEndArrow() -->
+                        <!-- ko foreach: stylePattern.styleLines -->
+
+                        <line data-bind="attr: {x1: x1, y1: y1, x2: x2, y2: y2 }" x1="1" y1="1" x2="100" y1="100" stroke="#000000" stroke-width="1" marker-start="url(#triangle-start)"></line>
+
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: !stylePattern.hasStartArrow() && stylePattern.hasEndArrow() -->
+                        <!-- ko foreach: stylePattern.styleLines -->
+
+                        <line data-bind="attr: {x1: x1, y1: y1, x2: x2, y2: y2 }" x1="1" y1="1" x2="100" y1="100" stroke="#000000" stroke-width="1" marker-end="url(#triangle)"></line>
+
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: !stylePattern.hasStartArrow() && !stylePattern.hasEndArrow() -->
+                        <!-- ko foreach: stylePattern.styleLines -->
+
+                        <line shape-rendering="geometricPrecision" data-bind="attr: {x1: x1, y1: y1, x2: x2, y2: y2 }" x1="1" y1="1" x2="100" y1="100" stroke="#000000" stroke-width="1"></line>
+
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko foreach: grillePattern.grilleLines -->
+
+                        <line data-bind="attr: {x1: x1, y1: y1, x2: x2, y2: y2, stroke: $parent.grilleColor }" x1="1" y1="1" x2="100" y1="100" stroke="#ffffff" stroke-width="2"></line>
+
+                        <!-- /ko -->
+                        <!-- ko foreach: sdlPattern.sdlLines -->
+
+                        <line data-bind="attr: {x1: x1, y1: y1, x2: x2, y2: y2, stroke: $parent.sdlColor }" x1="1" y1="1" x2="100" y1="100" stroke="#ffffff" stroke-width="5"></line>
+
+                        <!-- /ko -->
+                        <!-- ko if: hasHorizontalSlider -->
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: horizontalSliderX, y: horizontalSliderY, width: horizontalSliderWidth, height: horizontalSliderHeight, fill: horizontalSliderImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: horizontalSliderX, y: horizontalSliderY, width: horizontalSliderWidth, height: horizontalSliderHeight, fill: color, opacity: opacity }"></rect>
+
+                        <!-- /ko -->
+                        <!-- ko if: hasVerticalSlider() -->
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: verticalSliderX, y: verticalSliderY, width: verticalSliderWidth, height: verticalSliderHeight, fill: verticalSliderImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: verticalSliderX, y: verticalSliderY, width: verticalSliderWidth, height: verticalSliderHeight, fill: color, opacity: opacity }"></rect>
+
+                        <!-- /ko -->
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: x, y: y, width: width, height: height, fill: overlayColor, opacity: overlayOpacity }, event: { click: $parents[1].onSectionClick }"></rect>
+
+                        <!-- /ko -->
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topLeftX, y: topLeftY, width: enclosureWidth, height: enclosureWidth, fill: topLeftImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topX, y: topY, width: width, height: enclosureWidth, fill: topImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topRightX, y: topRightY, width: enclosureWidth, height: enclosureWidth, fill: topRightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: rightX, y: rightY, height: height, width: enclosureWidth, fill: rightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomRightX, y: bottomRightY, width: enclosureWidth, height: enclosureWidth, fill: bottomRightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomX, y: bottomY, width: width, height: enclosureWidth, fill: bottomImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomLeftX, y: bottomLeftY, width: enclosureWidth, height: enclosureWidth, fill: bottomLeftImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: leftX, y: leftY, width: enclosureWidth, height: height, fill: leftImagePatternUrl }"></rect>
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topLeftX, y: topLeftY, width: enclosureWidth, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topX, y: topY, width: width, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topRightX, y: topRightY, width: enclosureWidth, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: rightX, y: rightY, height: height, width: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomRightX, y: bottomRightY, width: enclosureWidth, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomX, y: bottomY, width: width, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomLeftX, y: bottomLeftY, width: enclosureWidth, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: leftX, y: leftY, width: enclosureWidth, height: height, fill: color, opacity: opacity }"></rect>
+
+                        <!-- ko with: brickmould -->
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topLeftX, y: topLeftY, width: enclosureWidth, height: enclosureWidth, fill: topLeftImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topX, y: topY, width: width, height: enclosureWidth, fill: topImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topRightX, y: topRightY, width: enclosureWidth, height: enclosureWidth, fill: topRightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: rightX, y: rightY, height: height, width: enclosureWidth, fill: rightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomRightX, y: bottomRightY, width: enclosureWidth, height: enclosureWidth, fill: bottomRightImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomX, y: bottomY, width: width, height: enclosureWidth, fill: bottomImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomLeftX, y: bottomLeftY, width: enclosureWidth, height: enclosureWidth, fill: bottomLeftImagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: leftX, y: leftY, width: enclosureWidth, height: height, fill: leftImagePatternUrl }"></rect>
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topLeftX, y: topLeftY, width: enclosureWidth, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topX, y: topY, width: width, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: topRightX, y: topRightY, width: enclosureWidth, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: rightX, y: rightY, height: height, width: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomRightX, y: bottomRightY, width: enclosureWidth, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomX, y: bottomY, width: width, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: bottomLeftX, y: bottomLeftY, width: enclosureWidth, height: enclosureWidth, fill: color, opacity: opacity }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: leftX, y: leftY, width: enclosureWidth, height: height, fill: color, opacity: opacity }"></rect>
+
+                        <!-- /ko -->
+                        <!-- ko foreach: mullions -->
+
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: x, y: y, width: width, height: height, fill: imagePatternUrl }"></rect>
+                        <rect x="1" y="1" width="1" height="1" data-bind="attr: { x: x, y: y, width: width, height: height, fill: color, opacity: opacity }"></rect>
+
+                        <!-- /ko -->
+                        <!-- /ko -->
+
+                    </svg>
+                    <!-- /ko -->
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-pull-6 control-side-container">
+                <div class="control-side">
+
+                    @*                    <section class="row">
+                        <div class="alert alert-warning alert-dismissible under-construction" role="alert">
+                        <p>We are looking for feedback.  If you have questions or suggestions please <a href="mailto:klingenberg.d+stjohn@gmail.com?Subject=Configurator%20Suggestions">drop me a line</a>.  I would love to here from you!</p>
+                        </div>
+                        </section>
+                    *@
+                    <section class="row">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="form-group">
+
+                                @*General*@
+
+                                <div class="panel panel-default btn" data-toggle="modal" data-target="#general-modal">
+                                    <div class="panel-heading"><p>General</p></div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <p class="col-xs-5">Location</p>
+                                            <p class="col-xs-7" data-bind="text: location"></p>
+                                        </div>
+                                        <div class="row section-count">
+                                            <p class="col-xs-5">Section Count</p>
+                                            <p class="col-xs-7" data-bind="text: sections.count">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*Dimensions*@
+
+                                <div class="panel panel-default btn" data-toggle="modal" data-target="#dimensions-modal">
+                                    <div class="panel-heading"><p>Dimensions</p></div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <p class="col-xs-5">Frame:</p>
+                                            <p class="col-xs-7" data-bind="text: frameWidthDescription() + '&quot; X ' + frameHeightDescription() + '&quot;'"></p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Brickmould:</p>
+                                            <p class="col-xs-7"  data-bind="text: brickmouldWidthDescription() + '&quot; X ' + brickmouldHeightDescription() + '&quot;'"></p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Rough Opening:</p>
+                                            <p class="col-xs-7" data-bind="text: roWidthDescription() + '&quot; X ' + roHeightDescription() + '&quot;'"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*Fit/Finish*@
+
+                                <div class="panel panel-default btn" data-toggle="modal" data-target="#fit-finish-modal">
+                                    <div class="panel-heading"><p>Fit/Finish</p></div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <p class="col-xs-5">Subsill:</p>
+                                            <p class="col-xs-7">Yes</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Frame Color:</p>
+                                            <p class="col-xs-7" data-bind="text: frameColor.name"></p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Brickmould:</p>
+                                            <p class="col-xs-7" data-bind="text: brickmouldStyle.name"></p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Wall Depth:</p>
+                                            <p class="col-xs-7" data-bind="text: jambDepth.name"></p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Pane Configuration:</p>
+                                            <p class="col-xs-7" data-bind="text: paneConfiguration.name"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*Grille?SDL*@
+
+                                <div class="panel panel-default btn" data-toggle="modal" data-target="#grille-sdl-modal">
+                                    <div class="panel-heading"><p>Grille/SDL</p></div>
+                                    <div class="panel-body">
+
+                                        <!-- ko with: selectedSection -->
+
+                                        <div class="row">
+                                            <p class="col-xs-5">Pattern:</p>
+                                            <p class="col-xs-7" data-bind="text: grillePattern.name">fake grille</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Color:</p>
+                                            <p class="col-xs-7" data-bind="text: grilleColor.name">fake color</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Size:</p>
+                                            <p class="col-xs-7" data-bind="text: grilleSize.name">1/4 inch</p>
+                                        </div>
+
+                                        <!-- /ko -->
+
+                                    </div>
+                                </div>
+
+                                @*Selected Section*@
+
+                                <div class="panel panel-default btn" data-toggle="modal" data-target="#selected-section-modal">
+                                    <div class="panel-heading"><p>Selected Sectiopn Properties</p></div>
+                                    <div class="panel-body">
+
+                                        <!-- ko with: selectedSection -->
+
+                                        <div class="row">
+                                            <p class="col-xs-5">Width:</p>
+                                            <p class="col-xs-7" data-bind="text: widthDescription">fake grille</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Operation:</p>
+                                            <p class="col-xs-7" data-bind="text: style.name">fake color</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-xs-5">Crank:</p>
+                                            <p class="col-xs-7" data-bind="text: crank.name">1/4 inch</p>
+                                        </div>
+
+                                        <!-- /ko -->
+
+                                    </div>
+                                </div>
+
+                                @*                                *@
+
+                                @*
+                                *@
+
+                                @*                                *@
+                            </div>
+
+
+                            @*                            <div class="panel-body">
+                                <div class="row panel-heading">
+                                <div class="col-xs-8 text-center">
+                                <h5><strong>Rough Opening</strong></h5>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                <h5><strong>OSM</strong></h5>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-xs-3 control-label">
+                                <p>Width</p>
+                                </div>
+                                <div class="col-xs-5">
+                                <input type="text" class="form-control" data-bind="value: widthDescription" />
+                                </div>
+                                <div class="col-xs-4 text-center control-label">
+                                <p data-bind="text: osmWidthDescription"></p>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-xs-3 control-label">
+                                <p>Height</p>
+                                </div>
+                                <div class="col-xs-5">
+                                <input type="text" class="form-control" data-bind="value: heightDescription">
+                                </div>
+                                <div class="col-xs-4 text-center control-label">
+                                <p data-bind="text: osmHeightDescription"></p>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-xs-3 control-label">
+                                <p>Location</p>
+                                </div>
+                                <div class="col-xs-9">
+                                <input type="text" class="form-control" data-bind="value: location">
+                                </div>
+                                </div>
+                                <div class="row section-count">
+                                <div class="col-xs-3 control-label">
+                                <p>Sections</p>
+                                </div>
+                                <div class="col-xs-9">
+                                <button class="col-xs-4 btn btn-default" data-bind="click: onOneSectionButtonClick">
+                                <p>1</p>
+                                </button>
+                                <button class="col-xs-4 btn btn-default" data-bind="click: onTwoSectionButtonClick">
+                                <p>2</p>
+                                </button>
+                                <button class="col-xs-4 btn btn-default" data-bind="click: onThreeSectionButtonClick">
+                                <p>3</p>
+                                </button>
+                                </div>
+                                </div>
+                                </div>*@
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*    <section class="row section-settings">
+
+        </section>
+    *@
+    <script src="~/js/jquery-3.1.0.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+
+    <script>
+        //$(window).on('load', function () {
+        //  $('#under-construction-modal').modal('show');
+        //});
+        $('#closemodal').click(function () {
+          $('#under-construction-modal').modal('hide');
+        });
+        $('#quote-modal').on('shown.bs.modal', function () {
+          ga('send', 'event', 'site', 'quote-modal');
+        });
+
+        var itemViewModel = new windowStore.order.item.ItemViewModel();
+        //  itemViewModel.loadItem("energySaverItemTemplate", function() {
+        itemViewModel.loadItem("energySaverItemTemplate", function () {
+          ko.applyBindings(itemViewModel, $("body")[0]);
+        });
+
+        $(window).on('resize', function () {
+          itemViewModel.updatePreview();
+        });
+        $("#quote-submit-btn").click(function () {
+          //var content = "Callback number: " + $("#text-callback-number").val();
+          //content += "\n"
+          //content += "Message: " + $("#text-content").val();
+
+          var content = "Callback number: " + $("#quote-text-callback-number").val();
+          content += itemViewModel.getSpec();
+
+          $.ajax({
+            url: "/text",
+            type: "POST",
+            data: { content: content }
+          })
+          .done(function () { })
+          .fail(function () { alert("text failed"); });
+
+          $('#quote-modal').modal('toggle');
+
+          // Google event tracking
+          ga('send', 'event', 'phone', 'quote-submit');
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,3315 @@
+{
+  "id": "7d7f0473-4695-42e6-9617-499dd7d0f330",
+  "orderId": "9e1ab5fc-affb-4244-b99e-ff3829d217ca",
+  "contractorName": "Hardcoded Contractor Name",
+  "meetsEgress": false,
+  "lineItemNumber": "100",
+  "location": "Location 1",
+  "productLine": {
+    "name": "EnergySaver 2500",
+    "manufacturerName": "All Weather Windows",
+    "sectionTemplateName": "energySaverSectionTemplate",
+    "itemTemplateName": "energySaverItemTemplate",
+    "enclosureWidth": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 3,
+      "numerator": 0,
+      "denominator": 1
+    },
+    "mullionWidth": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 4,
+      "numerator": 0,
+      "denominator": 1
+    },
+    "mullionIndentTop": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 1,
+      "numerator": 3,
+      "denominator": 8
+    },
+    "mullionIndentBottom": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 1,
+      "numerator": 7,
+      "denominator": 8
+    },
+    "imageTopLeft": "img\\aww\\pvc\\energySaver\\Top-Left.png",
+    "imageTopRight": "img\\aww\\pvc\\energySaver\\Top-Right.png",
+    "imageBottomRight": "img\\aww\\pvc\\energySaver\\Bottom-Right.png",
+    "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Bottom-Left.png",
+    "imageTop": "img\\aww\\pvc\\energySaver\\Top.png",
+    "imageRight": "img\\aww\\pvc\\energySaver\\Right.png",
+    "imageBottom": "img\\aww\\pvc\\energySaver\\Bottom.png",
+    "imageLeft": "img\\aww\\pvc\\energySaver\\Left.png",
+    "imageMullion": "img\\aww\\pvc\\energySaver\\Mullion.png",
+    "frameRestrictions": {
+      "minWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 16,
+        "numerator": 7,
+        "denominator": 8
+      },
+      "minHeight": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 20,
+        "numerator": 3,
+        "denominator": 4
+      },
+      "maxWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 97,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "maxHeight": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 83,
+        "numerator": 5,
+        "denominator": 8
+      }
+    },
+    "operationalStyles": [
+      {
+        "name": "Picture",
+        "hasVerticalSlider": false,
+        "hasHorizontalSlider": false,
+        "sliderImageWidth": "0",
+        "sliderImage": "",
+        "enclosureWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "imageWidth": "10",
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Picture-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Picture-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Picture-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Picture-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Picture-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Picture-Left.png",
+        "hasCrank": false,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 72,
+            "numerator": 5,
+            "denominator": 8
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      {
+        "name": "Awning",
+        "hasVerticalSlider": false,
+        "hasHorizontalSlider": false,
+        "sliderImageWidth": "0",
+        "sliderImage": "",
+        "enclosureWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 3,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "imageWidth": "28",
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Fixed-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Fixed-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Fixed-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Fixed-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Fixed-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Fixed-Left.png",
+        "hasCrank": true,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 59,
+            "numerator": 1,
+            "denominator": 16
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 47,
+            "numerator": 1,
+            "denominator": 4
+          }
+        }
+      },
+      {
+        "name": "Casement",
+        "hasVerticalSlider": false,
+        "hasHorizontalSlider": false,
+        "sliderImageWidth": "0",
+        "sliderImage": "",
+        "enclosureWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 3,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "imageWidth": "28",
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Fixed-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Fixed-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Fixed-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Fixed-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Fixed-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Fixed-Left.png",
+        "hasCrank": true,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 37,
+            "numerator": 7,
+            "denominator": 16
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      {
+        "name": "Casement - Left",
+        "hasVerticalSlider": false,
+        "hasHorizontalSlider": false,
+        "sliderImageWidth": "0",
+        "sliderImage": "",
+        "enclosureWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 3,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "imageWidth": "28",
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Fixed-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Fixed-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Fixed-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Fixed-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Fixed-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Fixed-Left.png",
+        "hasCrank": true,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 37,
+            "numerator": 7,
+            "denominator": 16
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      {
+        "name": "Fixed Sash",
+        "hasVerticalSlider": false,
+        "hasHorizontalSlider": false,
+        "sliderImageWidth": "0",
+        "sliderImage": "",
+        "enclosureWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 3,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "imageWidth": "28",
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Fixed-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Fixed-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Fixed-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Fixed-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Fixed-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Fixed-Left.png",
+        "hasCrank": false,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 72,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      }
+    ],
+    "jambDepths": [
+      {
+        "name": "4 1/2 Inches"
+      },
+      {
+        "name": "6 1/2 Inches"
+      },
+      {
+        "name": "6 5/8 Inches"
+      }
+    ],
+    "paneConfigurations": [
+      {
+        "name": "Dual"
+      },
+      {
+        "name": "Dual - LowE/Argon"
+      },
+      {
+        "name": "Triple"
+      },
+      {
+        "name": "Triple - LowE/Argon"
+      }
+    ],
+    "brickmouldColors": [
+      {
+        "name": "None",
+        "fillColor": "#ffffff",
+        "fillOpacity": "0.0",
+        "image": "/Images/exteriorArchitecturalBrown.png"
+      },
+      {
+        "name": "Architectural Brown",
+        "fillColor": "#393120",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorArchBrown.png"
+      },
+      {
+        "name": "Black",
+        "fillColor": "#000000",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorBlack.png"
+      },
+      {
+        "name": "Clear Anodized",
+        "fillColor": "#e2e3e4",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorClearAnodized.png"
+      },
+      {
+        "name": "Pebble",
+        "fillColor": "#c9c9c6",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorPebble.png"
+      },
+      {
+        "name": "Sable",
+        "fillColor": "#555c5c",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorSable.png"
+      },
+      {
+        "name": "White",
+        "fillColor": "#ffffff",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorWhite.png"
+      },
+      {
+        "name": "Wicker",
+        "fillColor": "#d9c794",
+        "fillOpacity": "0.4",
+        "image": "/img/aww/pvc/colorWicker.png"
+      }
+    ],
+    "brickmouldStyles": [
+      {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 0,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "subsill": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 1,
+          "denominator": 8
+        },
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+      },
+      {
+        "name": "1 1/2 Inch",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 3,
+          "denominator": 8
+        },
+        "subsill": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 1,
+          "denominator": 8
+        },
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+      },
+      {
+        "name": "2 Inch",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 5,
+          "denominator": 8
+        },
+        "subsill": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 1,
+          "denominator": 8
+        },
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+      },
+      {
+        "name": "1 1/2 Inch - Fin",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 3,
+          "denominator": 8
+        },
+        "subsill": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 1,
+          "denominator": 8
+        },
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+      }
+    ],
+    "frameColors": [
+      {
+        "name": "White",
+        "fillColor": "#ffffff",
+        "fillOpacity": "0.4",
+        "image": "/img/aww/pvc/colorWhite.png"
+      },
+      {
+        "name": "Wicker",
+        "fillColor": "#d9c794",
+        "fillOpacity": "0.4",
+        "image": "/img/aww/pvc/colorWicker.png"
+      }
+    ],
+    "cranks": [
+      {
+        "name": "None"
+      },
+      {
+        "name": "Regular"
+      },
+      {
+        "name": "Folding"
+      },
+      {
+        "name": "Encore"
+      },
+      {
+        "name": "Roto"
+      }
+    ],
+    "grillePatterns": [
+      {
+        "name": "None"
+      },
+      {
+        "name": "Ladder"
+      },
+      {
+        "name": "Double Ladder"
+      },
+      {
+        "name": "Rectangular"
+      },
+      {
+        "name": "Perimeter"
+      },
+      {
+        "name": "Double Perimeter"
+      }
+    ],
+    "grilleColors": [
+      {
+        "name": "White",
+        "fillColor": "#ffffff",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorWhite.png"
+      },
+      {
+        "name": "Gold",
+        "fillColor": "#d4af37",
+        "fillOpacity": "0.0",
+        "image": ""
+      },
+      {
+        "name": "Lead",
+        "fillColor": "#444f53",
+        "fillOpacity": "0.0",
+        "image": ""
+      },
+      {
+        "name": "Patina",
+        "fillColor": "#777459",
+        "fillOpacity": "0.0",
+        "image": ""
+      },
+      {
+        "name": "Wicker",
+        "fillColor": "#d9c794",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorWicker.png"
+      }
+    ],
+    "grilleSizes": [
+      {
+        "name": "5/16 Inches",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 0,
+          "numerator": 5,
+          "denominator": 16
+        }
+      },
+      {
+        "name": "5/8 Inches",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 0,
+          "numerator": 5,
+          "denominator": 8
+        }
+      },
+      {
+        "name": "1 Inch",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      {
+        "name": "Georgian",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 5,
+          "denominator": 8
+        }
+      }
+    ],
+    "sdlPatterns": [
+      {
+        "name": "None"
+      },
+      {
+        "name": "Colonial"
+      },
+      {
+        "name": "Craftsman"
+      },
+      {
+        "name": "Heritage"
+      }
+    ],
+    "sdlColors": [
+      {
+        "name": "White",
+        "fillColor": "#ffffff",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorWhite.png"
+      },
+      {
+        "name": "Wicker",
+        "fillColor": "#d9c794",
+        "fillOpacity": "0.4",
+        "image": "/img/aww/pvc/colorWicker.png"
+      }
+    ],
+    "sdlSizes": [
+      {
+        "name": "5/16 Inches",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 0,
+          "numerator": 5,
+          "denominator": 16
+        }
+      },
+      {
+        "name": "5/8 Inches",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 0,
+          "numerator": 5,
+          "denominator": 8
+        }
+      },
+      {
+        "name": "1 Inch",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      {
+        "name": "Georgian",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 5,
+          "denominator": 8
+        }
+      }
+    ]
+  },
+  "jambDepth": {
+    "name": "6 1/2 Inches"
+  },
+  "sizingType": "Brickmould",
+  "height": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 46,
+    "numerator": 1,
+    "denominator": 16
+  },
+  "heightDescription": "46 1/16",
+  "frameHeight": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 42,
+    "numerator": 3,
+    "denominator": 8
+  },
+  "frameHeightDescription": "42 3/8",
+  "brickmouldHeight": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 46,
+    "numerator": 1,
+    "denominator": 16
+  },
+  "brickmouldHeightDescription": "46 1/16",
+  "osmHeight": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 43,
+    "numerator": 3,
+    "denominator": 8
+  },
+  "osmHeightDescription": "43 3/8",
+  "roHeight": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 43,
+    "numerator": 3,
+    "denominator": 8
+  },
+  "roHeightDescription": "43 3/8",
+  "width": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 71,
+    "numerator": 1,
+    "denominator": 4
+  },
+  "widthDescription": "71 1/4",
+  "frameWidth": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 66,
+    "numerator": 9,
+    "denominator": 16
+  },
+  "frameWidthDescription": "66 9/16",
+  "brickmouldWidth": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 71,
+    "numerator": 1,
+    "denominator": 4
+  },
+  "brickmouldWidthDescription": "71 1/4",
+  "osmWidth": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 67,
+    "numerator": 9,
+    "denominator": 16
+  },
+  "osmWidthDescription": "67 9/16",
+  "roWidth": {
+    "unitName": "Inches",
+    "sign": 1,
+    "whole": 67,
+    "numerator": 9,
+    "denominator": 16
+  },
+  "roWidthDescription": "67 9/16",
+  "paneConfiguration": {
+    "name": "Dual"
+  },
+  "brickmouldColor": {
+    "name": "None",
+    "fillColor": "#ffffff",
+    "fillOpacity": "0.0",
+    "image": "/Images/exteriorArchitecturalBrown.png"
+  },
+  "brickmouldStyle": {
+    "name": "2 Inch",
+    "width": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 1,
+      "numerator": 5,
+      "denominator": 8
+    },
+    "subsill": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 1,
+      "numerator": 1,
+      "denominator": 8
+    },
+    "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+    "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+    "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+    "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+    "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+    "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+    "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+    "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+  },
+  "frameColor": {
+    "name": "White",
+    "fillColor": "#ffffff",
+    "fillOpacity": "0.0",
+    "image": "/img/aww/pvc/colorWhite.png"
+  },
+  "sections": [
+    {
+      "id": "72f8e72f-caee-4c60-9b64-8d219d6bad51",
+      "row": 0,
+      "col": 1,
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 34,
+        "numerator": 5,
+        "denominator": 8
+      },
+      "widthDescription": "34 5/8",
+      "height": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 44,
+        "numerator": 1,
+        "denominator": 16
+      },
+      "heightDescription": "44 1/16",
+      "paneOptions": null,
+      "style": {
+        "name": "Picture",
+        "hasVerticalSlider": false,
+        "hasHorizontalSlider": false,
+        "sliderImageWidth": "10",
+        "sliderImage": "",
+        "enclosureWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "imageWidth": "10",
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Picture-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Picture-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Picture-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Picture-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Picture-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Picture-Left.png",
+        "hasCrank": false,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 72,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      "crank": {
+        "name": "None"
+      },
+      "grillePattern": {
+        "name": "None"
+      },
+      "grilleColor": {
+        "name": "Gold",
+        "fillColor": "#d4af37",
+        "fillOpacity": "1",
+        "image": ""
+      },
+      "grilleSize": {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      "sdlPattern": {
+        "name": "None"
+      },
+      "sdlColor": {
+        "name": "White",
+        "fillColor": "#ffffff",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorWhite.png"
+      },
+      "sdlSize": {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      }
+    },
+    {
+      "id": "72f8e72f-caee-4c60-9b64-8d219d6bad51",
+      "row": 0,
+      "col": 2,
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 34,
+        "numerator": 5,
+        "denominator": 8
+      },
+      "widthDescription": "34 5/8",
+      "height": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 44,
+        "numerator": 1,
+        "denominator": 16
+      },
+      "heightDescription": "44 1/16",
+      "paneOptions": null,
+      "style": {
+        "name": "Picture",
+        "hasVerticalSlider": false,
+        "hasHorizontalSlider": false,
+        "sliderImageWidth": "0",
+        "sliderImage": "",
+        "enclosureWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "imageWidth": "28",
+        "imageTopLeft": "img\\aww\\pvc\\energySaver\\Picture-Top-Left.png",
+        "imageTopRight": "img\\aww\\pvc\\energySaver\\Picture-Top-Right.png",
+        "imageBottomRight": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Right.png",
+        "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Left.png",
+        "imageTop": "img\\aww\\pvc\\energySaver\\Picture-Top.png",
+        "imageRight": "img\\aww\\pvc\\energySaver\\Picture-Right.png",
+        "imageBottom": "img\\aww\\pvc\\energySaver\\Picture-Bottom.png",
+        "imageLeft": "img\\aww\\pvc\\energySaver\\Picture-Left.png",
+        "hasCrank": false,
+        "restrictions": {
+          "minWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 15,
+            "numerator": 7,
+            "denominator": 8
+          },
+          "minHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 19,
+            "numerator": 3,
+            "denominator": 4
+          },
+          "maxWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 72,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "maxHeight": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 82,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      },
+      "crank": {
+        "name": "None"
+      },
+      "grillePattern": {
+        "name": "None"
+      },
+      "grilleColor": {
+        "name": "Gold",
+        "fillColor": "#d4af37",
+        "fillOpacity": "1",
+        "image": ""
+      },
+      "grilleSize": {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      },
+      "sdlPattern": {
+        "name": "None"
+      },
+      "sdlColor": {
+        "name": "White",
+        "fillColor": "#ffffff",
+        "fillOpacity": "0.0",
+        "image": "/img/aww/pvc/colorWhite.png"
+      },
+      "sdlSize": {
+        "name": "None",
+        "width": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 1,
+          "numerator": 0,
+          "denominator": 1
+        }
+      }
+    }
+  ],
+  "selectedSection": {
+    "id": "72f8e72f-caee-4c60-9b64-8d219d6bad51",
+    "row": 0,
+    "col": 1,
+    "width": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 34,
+      "numerator": 5,
+      "denominator": 8
+    },
+    "widthDescription": "34 5/8",
+    "height": {
+      "unitName": "Inches",
+      "sign": 1,
+      "whole": 44,
+      "numerator": 1,
+      "denominator": 16
+    },
+    "heightDescription": "44 1/16",
+    "paneOptions": null,
+    "style": {
+      "name": "Picture",
+      "hasVerticalSlider": false,
+      "hasHorizontalSlider": false,
+      "sliderImageWidth": "0",
+      "sliderImage": "",
+      "enclosureWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "imageWidth": "10",
+      "imageTopLeft": "Picture-Top-Left.png",
+      "imageTopRight": "Picture-Top-Right.png",
+      "imageBottomRight": "Picture-Bottom-Right.png",
+      "imageBottomLeft": "Picture-Bottom-Left.png",
+      "imageTop": "Picture-Top.png",
+      "imageRight": "Picture-Right.png",
+      "imageBottom": "Picture-Bottom.png",
+      "imageLeft": "Picture-Left.png",
+      "hasCrank": false,
+      "restrictions": {
+        "minWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 15,
+          "numerator": 7,
+          "denominator": 8
+        },
+        "minHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 19,
+          "numerator": 3,
+          "denominator": 4
+        },
+        "maxWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 72,
+          "numerator": 5,
+          "denominator": 8
+        },
+        "maxHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 82,
+          "numerator": 5,
+          "denominator": 8
+        }
+      }
+    },
+    "crank": {
+      "name": "None"
+    },
+    "grillePattern": {
+      "name": "None"
+    },
+    "grilleColor": {
+      "name": "Gold",
+      "fillColor": "#d4af37",
+      "fillOpacity": "1",
+      "image": ""
+    },
+    "grilleSize": {
+      "name": "None",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      }
+    },
+    "sdlPattern": {
+      "name": "None"
+    },
+    "sdlColor": {
+      "name": "White",
+      "fillColor": "#ffffff",
+      "fillOpacity": "0.0",
+      "image": "/img/aww/pvc/colorWhite.png"
+    },
+    "sdlSize": {
+      "name": "None",
+      "width": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 0,
+        "denominator": 1
+      }
+    }
+  },
+  "price": 12345.0,
+  "sizeDescription": "79 1/4 X 44 1/16",
+  "egressDescription": "This item does not meet egress standards.",
+  "manufacturers": [
+    {
+      "name": "All Weather Windows"
+    },
+    {
+      "name": "Jeld Wen"
+    }
+  ],
+  "productLines": [
+    {
+      "name": "EnergySaver 2500",
+      "manufacturerName": "All Weather Windows",
+      "sectionTemplateName": "energySaverSectionTemplate",
+      "itemTemplateName": "energySaverItemTemplate",
+      "enclosureWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 3,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "mullionWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 4,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "mullionIndentTop": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 3,
+        "denominator": 8
+      },
+      "mullionIndentBottom": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 1,
+        "numerator": 7,
+        "denominator": 8
+      },
+      "imageTopLeft": "img\\aww\\pvc\\energySaver\\Top-Left.png",
+      "imageTopRight": "img\\aww\\pvc\\energySaver\\Top-Right.png",
+      "imageBottomRight": "img\\aww\\pvc\\energySaver\\Bottom-Right.png",
+      "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Bottom-Left.png",
+      "imageTop": "img\\aww\\pvc\\energySaver\\Top.png",
+      "imageRight": "img\\aww\\pvc\\energySaver\\Right.png",
+      "imageBottom": "img\\aww\\pvc\\energySaver\\Bottom.png",
+      "imageLeft": "img\\aww\\pvc\\energySaver\\Left.png",
+      "imageMullion": "img\\aww\\pvc\\energySaver\\Mullion.png",
+      "frameRestrictions": {
+        "minWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 16,
+          "numerator": 7,
+          "denominator": 8
+        },
+        "minHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 20,
+          "numerator": 3,
+          "denominator": 4
+        },
+        "maxWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 97,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "maxHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 83,
+          "numerator": 5,
+          "denominator": 8
+        }
+      },
+      "operationalStyles": [
+        {
+          "name": "Picture",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "10",
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Picture-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Picture-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Picture-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Picture-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Picture-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Picture-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Picture-Left.png",
+          "imageMullion": "img\\aww\\pvc\\energySaver\\Mullion.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 72,
+              "numerator": 5,
+              "denominator": 8
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Awning",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 3,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "28",
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Fixed-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Fixed-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Fixed-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Fixed-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Fixed-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Fixed-Left.png",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 59,
+              "numerator": 1,
+              "denominator": 16
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 47,
+              "numerator": 1,
+              "denominator": 4
+            }
+          }
+        },
+        {
+          "name": "Casement",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 3,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "28",
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Fixed-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Fixed-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Fixed-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Fixed-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Fixed-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Fixed-Left.png",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 37,
+              "numerator": 7,
+              "denominator": 16
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Casement - Left",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 3,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "28",
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Fixed-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Fixed-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Fixed-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Fixed-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Fixed-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Fixed-Left.png",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 37,
+              "numerator": 7,
+              "denominator": 16
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Fixed Sash",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 3,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "28",
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Fixed-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Fixed-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Fixed-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Fixed-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Fixed-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Fixed-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Fixed-Left.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 72,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        }
+      ],
+      "jambDepths": [
+        {
+          "name": "4 1/2 Inches"
+        },
+        {
+          "name": "6 1/2 Inches"
+        },
+        {
+          "name": "6 5/8 Inches"
+        }
+      ],
+      "paneConfigurations": [
+        {
+          "name": "Dual"
+        },
+        {
+          "name": "Dual - LowE/Argon"
+        },
+        {
+          "name": "Triple"
+        },
+        {
+          "name": "Triple - LowE/Argon"
+        }
+      ],
+      "brickmouldColors": [
+        {
+          "name": "None",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/Images/exteriorArchitecturalBrown.png"
+        },
+        {
+          "name": "Architectural Brown",
+          "fillColor": "#393120",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorArchBrown.png"
+        },
+        {
+          "name": "Black",
+          "fillColor": "#000000",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorBlack.png"
+        },
+        {
+          "name": "Clear Anodized",
+          "fillColor": "#e2e3e4",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorClearAnodized.png"
+        },
+        {
+          "name": "Pebble",
+          "fillColor": "#c9c9c6",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorPebble.png"
+        },
+        {
+          "name": "Sable",
+          "fillColor": "#555c5c",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorSable.png"
+        },
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "brickmouldStyles": [
+        {
+          "name": "None",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "1 1/2 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "2 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 2,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "1 1/2 Inch - Fin",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 2,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        }
+      ],
+      "frameColors": [
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "cranks": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Regular"
+        },
+        {
+          "name": "Folding"
+        },
+        {
+          "name": "Encore"
+        },
+        {
+          "name": "Roto"
+        }
+      ],
+      "grillePatterns": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Ladder"
+        },
+        {
+          "name": "Double Ladder"
+        },
+        {
+          "name": "Rectangular"
+        },
+        {
+          "name": "Perimeter"
+        },
+        {
+          "name": "Double Perimeter"
+        }
+      ],
+      "grilleColors": [
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Gold",
+          "fillColor": "#d4af37",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Lead",
+          "fillColor": "#444f53",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Patina",
+          "fillColor": "#777459",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "grilleSizes": [
+        {
+          "name": "5/16 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 16
+          }
+        },
+        {
+          "name": "5/8 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 8
+          }
+        },
+        {
+          "name": "1 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          }
+        },
+        {
+          "name": "Georgian",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      ],
+      "sdlPatterns": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Colonial"
+        },
+        {
+          "name": "Craftsman"
+        },
+        {
+          "name": "Heritage"
+        }
+      ],
+      "sdlColors": [
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "sdlSizes": [
+        {
+          "name": "5/16 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 16
+          }
+        },
+        {
+          "name": "5/8 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 8
+          }
+        },
+        {
+          "name": "1 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          }
+        },
+        {
+          "name": "Georgian",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      ]
+    },
+    {
+      "name": "Apex",
+      "manufacturerName": "All Weather Windows",
+      "sectionTemplateName": "apexSectionTemplate",
+      "itemTemplateName": "apexItemTemplate",
+      "enclosureWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 3,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "mullionWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 3,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "mullionIndentTop": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 2,
+        "numerator": 1,
+        "denominator": 2
+      },
+      "mullionIndentBottom": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 3,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "imageTopLeft": "img\\aww\\pvc\\apex\\Top-Left.png",
+      "imageTopRight": "img\\aww\\pvc\\apex\\Top-Right.png",
+      "imageBottomRight": "img\\aww\\pvc\\apex\\Bottom-Right.png",
+      "imageBottomLeft": "img\\aww\\pvc\\apex\\Bottom-Left.png",
+      "imageTop": "img\\aww\\pvc\\apex\\Top.png",
+      "imageRight": "img\\aww\\pvc\\apex\\Right.png",
+      "imageBottom": "img\\aww\\pvc\\apex\\Bottom.png",
+      "imageLeft": "img\\aww\\pvc\\apex\\Left.png",
+      "imageMullion": "img\\aww\\pvc\\apex\\Mullion.png",
+      "frameRestrictions": {
+        "minWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 16,
+          "numerator": 7,
+          "denominator": 8
+        },
+        "minHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 20,
+          "numerator": 3,
+          "denominator": 4
+        },
+        "maxWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 97,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "maxHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 83,
+          "numerator": 5,
+          "denominator": 8
+        }
+      },
+      "operationalStyles": [
+        {
+          "name": "Picture",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "10",
+          "imageTopLeft": "img\\aww\\pvc\\apex\\Picture-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\apex\\Picture-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\apex\\Picture-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\apex\\Picture-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\apex\\Picture-Top.png",
+          "imageRight": "img\\aww\\pvc\\apex\\Picture-Right.png",
+          "imageBottom": "img\\aww\\pvc\\apex\\Picture-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\apex\\Picture-Left.png",
+          "imageMullion": "img\\aww\\pvc\\apex\\Mullion.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 72,
+              "numerator": 5,
+              "denominator": 8
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Awning",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 3,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "28",
+          "imageTopLeft": "img\\aww\\pvc\\apex\\Awning-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\apex\\Awning-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\apex\\Awning-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\apex\\Awning-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\apex\\Awning-Top.png",
+          "imageRight": "img\\aww\\pvc\\apex\\Awning-Right.png",
+          "imageBottom": "img\\aww\\pvc\\apex\\Awning-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\apex\\Awning-Left.png",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 59,
+              "numerator": 1,
+              "denominator": 16
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 47,
+              "numerator": 1,
+              "denominator": 4
+            }
+          }
+        },
+        {
+          "name": "Casement",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 3,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "28",
+          "imageTopLeft": "img\\aww\\pvc\\apex\\Casement-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\apex\\Casement-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\apex\\Casement-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\apex\\Casement-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\apex\\Casement-Top.png",
+          "imageRight": "img\\aww\\pvc\\apex\\Casement-Right.png",
+          "imageBottom": "img\\aww\\pvc\\apex\\Casement-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\apex\\Casement-Left.png",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 37,
+              "numerator": 1,
+              "denominator": 17
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Casement - Left",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 3,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "28",
+          "imageTopLeft": "img\\aww\\pvc\\apex\\Casement-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\apex\\Casement-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\apex\\Casement-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\apex\\Casement-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\apex\\Casement-Top.png",
+          "imageRight": "img\\aww\\pvc\\apex\\Casement-Right.png",
+          "imageBottom": "img\\aww\\pvc\\apex\\Casement-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\apex\\Casement-Left.png",
+          "hasCrank": true,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 37,
+              "numerator": 7,
+              "denominator": 16
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        }
+      ],
+      "jambDepths": [
+        {
+          "name": "4 1/2 Inches"
+        },
+        {
+          "name": "6 1/2 Inches"
+        },
+        {
+          "name": "6 5/8 Inches"
+        }
+      ],
+      "paneConfigurations": [
+        {
+          "name": "Dual"
+        },
+        {
+          "name": "Dual - LowE/Argon"
+        },
+        {
+          "name": "Triple"
+        },
+        {
+          "name": "Triple - LowE/Argon"
+        }
+      ],
+      "brickmouldColors": [
+        {
+          "name": "None",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/Images/exteriorArchitecturalBrown.png"
+        },
+        {
+          "name": "Architectural Brown",
+          "fillColor": "#393120",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorArchBrown.png"
+        },
+        {
+          "name": "Black",
+          "fillColor": "#000000",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorBlack.png"
+        },
+        {
+          "name": "Clear Anodized",
+          "fillColor": "#e2e3e4",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorClearAnodized.png"
+        },
+        {
+          "name": "Pebble",
+          "fillColor": "#c9c9c6",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorPebble.png"
+        },
+        {
+          "name": "Sable",
+          "fillColor": "#555c5c",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorSable.png"
+        },
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "brickmouldStyles": [
+        {
+          "name": "None",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "1 1/2 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "2 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 2,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "1 1/2 Inch - Fin",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 2,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        }
+      ],
+      "frameColors": [
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "cranks": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Regular"
+        },
+        {
+          "name": "Folding"
+        },
+        {
+          "name": "Encore"
+        },
+        {
+          "name": "Roto"
+        }
+      ],
+      "grillePatterns": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Ladder"
+        },
+        {
+          "name": "Double Ladder"
+        },
+        {
+          "name": "Rectangular"
+        },
+        {
+          "name": "Perimeter"
+        },
+        {
+          "name": "Double Perimeter"
+        }
+      ],
+      "grilleColors": [
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Gold",
+          "fillColor": "#d4af37",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Lead",
+          "fillColor": "#444f53",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Patina",
+          "fillColor": "#777459",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "grilleSizes": [
+        {
+          "name": "5/16 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 16
+          }
+        },
+        {
+          "name": "5/8 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 8
+          }
+        },
+        {
+          "name": "1 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          }
+        },
+        {
+          "name": "Georgian",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      ],
+      "sdlPatterns": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Colonial"
+        },
+        {
+          "name": "Craftsman"
+        },
+        {
+          "name": "Heritage"
+        }
+      ],
+      "sdlColors": [
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "sdlSizes": [
+        {
+          "name": "5/16 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 16
+          }
+        },
+        {
+          "name": "5/8 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 8
+          }
+        },
+        {
+          "name": "1 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          }
+        },
+        {
+          "name": "Georgian",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      ]
+    },
+    {
+      "name": "Carriage",
+      "manufacturerName": "All Weather Windows",
+      "sectionTemplateName": "carriageSectionTemplate",
+      "itemTemplateName": "carriageItemTemplate",
+      "enclosureWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 3,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "mullionWidth": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 2,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "mullionIndentTop": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 3,
+        "numerator": 1,
+        "denominator": 8
+      },
+      "mullionIndentBottom": {
+        "unitName": "Inches",
+        "sign": 1,
+        "whole": 3,
+        "numerator": 1,
+        "denominator": 8
+      },
+      "imageTopLeft": "img\\aww\\pvc\\carriage\\Top-Left.png",
+      "imageTopRight": "img\\aww\\pvc\\carriage\\Top-Right.png",
+      "imageBottomRight": "img\\aww\\pvc\\carriage\\Bottom-Right.png",
+      "imageBottomLeft": "img\\aww\\pvc\\carriage\\Bottom-Left.png",
+      "imageTop": "img\\aww\\pvc\\carriage\\Top.png",
+      "imageRight": "img\\aww\\pvc\\carriage\\Right.png",
+      "imageBottom": "img\\aww\\pvc\\carriage\\Bottom.png",
+      "imageLeft": "img\\aww\\pvc\\carriage\\Left.png",
+      "imageMullion": "img\\aww\\pvc\\carriage\\Mullion.png",
+      "frameRestrictions": {
+        "minWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 16,
+          "numerator": 7,
+          "denominator": 8
+        },
+        "minHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 20,
+          "numerator": 3,
+          "denominator": 4
+        },
+        "maxWidth": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 97,
+          "numerator": 0,
+          "denominator": 1
+        },
+        "maxHeight": {
+          "unitName": "Inches",
+          "sign": 1,
+          "whole": 83,
+          "numerator": 5,
+          "denominator": 8
+        }
+      },
+      "operationalStyles": [
+        {
+          "name": "Picture",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "0",
+          "sliderImage": "",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "10",
+          "imageTopLeft": "img\\aww\\pvc\\carriage\\Picture-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\carriage\\Picture-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\carriage\\Picture-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\carriage\\Picture-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\carriage\\Picture-Top.png",
+          "imageRight": "img\\aww\\pvc\\carriage\\Picture-Right.png",
+          "imageBottom": "img\\aww\\pvc\\carriage\\Picture-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\carriage\\Picture-Left.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 72,
+              "numerator": 5,
+              "denominator": 8
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Glider",
+          "hasVerticalSlider": true,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "19",
+          "sliderImage": "img\\aww\\pvc\\carriage\\Glider-Slider.png",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "19",
+          "imageTopLeft": "img\\aww\\pvc\\carriage\\Picture-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\carriage\\Picture-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\carriage\\Picture-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\carriage\\Picture-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\carriage\\Picture-Top.png",
+          "imageRight": "img\\aww\\pvc\\carriage\\Picture-Right.png",
+          "imageBottom": "img\\aww\\pvc\\carriage\\Picture-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\carriage\\Picture-Left.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 26,
+              "numerator": 6,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 72,
+              "numerator": 5,
+              "denominator": 8
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Glider - Left",
+          "hasVerticalSlider": true,
+          "hasHorizontalSlider": false,
+          "sliderImageWidth": "19",
+          "sliderImage": "img\\aww\\pvc\\carriage\\Glider-Slider.png",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "19",
+          "imageTopLeft": "img\\aww\\pvc\\carriage\\Picture-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\carriage\\Picture-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\carriage\\Picture-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\carriage\\Picture-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\carriage\\Picture-Top.png",
+          "imageRight": "img\\aww\\pvc\\carriage\\Picture-Right.png",
+          "imageBottom": "img\\aww\\pvc\\carriage\\Picture-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\carriage\\Picture-Left.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 26,
+              "numerator": 6,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 72,
+              "numerator": 5,
+              "denominator": 8
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Single Hung",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": true,
+          "sliderImageWidth": "19",
+          "sliderImage": "img\\aww\\pvc\\carriage\\Single-Hung-Slider.png",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "19",
+          "imageTopLeft": "img\\aww\\pvc\\carriage\\Picture-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\carriage\\Picture-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\carriage\\Picture-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\carriage\\Picture-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\carriage\\Picture-Top.png",
+          "imageRight": "img\\aww\\pvc\\carriage\\Picture-Right.png",
+          "imageBottom": "img\\aww\\pvc\\carriage\\Picture-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\carriage\\Picture-Left.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Single Hung - Down",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": true,
+          "sliderImageWidth": "19",
+          "sliderImage": "img\\aww\\pvc\\carriage\\Single-Hung-Slider.png",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "19",
+          "imageTopLeft": "img\\aww\\pvc\\carriage\\Picture-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\carriage\\Picture-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\carriage\\Picture-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\carriage\\Picture-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\carriage\\Picture-Top.png",
+          "imageRight": "img\\aww\\pvc\\carriage\\Picture-Right.png",
+          "imageBottom": "img\\aww\\pvc\\carriage\\Picture-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\carriage\\Picture-Left.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        },
+        {
+          "name": "Double Hung",
+          "hasVerticalSlider": false,
+          "hasHorizontalSlider": true,
+          "sliderImageWidth": "19",
+          "sliderImage": "img\\aww\\pvc\\carriage\\Double-Hung-Slider.png",
+          "enclosureWidth": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageWidth": "19",
+          "imageTopLeft": "img\\aww\\pvc\\carriage\\Picture-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\carriage\\Picture-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\carriage\\Picture-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\carriage\\Picture-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\carriage\\Picture-Top.png",
+          "imageRight": "img\\aww\\pvc\\carriage\\Picture-Right.png",
+          "imageBottom": "img\\aww\\pvc\\carriage\\Picture-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\carriage\\Picture-Left.png",
+          "hasCrank": false,
+          "restrictions": {
+            "minWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 15,
+              "numerator": 7,
+              "denominator": 8
+            },
+            "minHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 19,
+              "numerator": 3,
+              "denominator": 4
+            },
+            "maxWidth": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 36,
+              "numerator": 0,
+              "denominator": 1
+            },
+            "maxHeight": {
+              "unitName": "Inches",
+              "sign": 1,
+              "whole": 82,
+              "numerator": 5,
+              "denominator": 8
+            }
+          }
+        }
+      ],
+      "jambDepths": [
+        {
+          "name": "4 1/2 Inches"
+        },
+        {
+          "name": "6 1/2 Inches"
+        },
+        {
+          "name": "6 5/8 Inches"
+        }
+      ],
+      "paneConfigurations": [
+        {
+          "name": "Dual"
+        },
+        {
+          "name": "Dual - LowE/Argon"
+        },
+        {
+          "name": "Triple"
+        },
+        {
+          "name": "Triple - LowE/Argon"
+        }
+      ],
+      "brickmouldColors": [
+        {
+          "name": "None",
+          "colorLight": "",
+          "colorMedium": "",
+          "colorDark": "",
+          "image": ""
+        },
+        {
+          "name": "Architectural Brown",
+          "fillColor": "#393120",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorArchBrown.png"
+        },
+        {
+          "name": "Black",
+          "fillColor": "#000000",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorBlack.png"
+        },
+        {
+          "name": "Clear Anodized",
+          "fillColor": "#e2e3e4",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorClearAnodized.png"
+        },
+        {
+          "name": "Pebble",
+          "fillColor": "#c9c9c6",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorPebble.png"
+        },
+        {
+          "name": "Sable",
+          "fillColor": "#555c5c",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorSable.png"
+        },
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "brickmouldStyles": [
+        {
+          "name": "None",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "1 1/2 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "2 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 2,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        },
+        {
+          "name": "1 1/2 Inch - Fin",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 2,
+            "numerator": 0,
+            "denominator": 1
+          },
+          "imageTopLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Left.png",
+          "imageTopRight": "img\\aww\\pvc\\energySaver\\Brickmould-Top-Right.png",
+          "imageBottomRight": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Right.png",
+          "imageBottomLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom-Left.png",
+          "imageTop": "img\\aww\\pvc\\energySaver\\Brickmould-Top.png",
+          "imageRight": "img\\aww\\pvc\\energySaver\\Brickmould-Right.png",
+          "imageBottom": "img\\aww\\pvc\\energySaver\\Brickmould-Bottom.png",
+          "imageLeft": "img\\aww\\pvc\\energySaver\\Brickmould-Left.png"
+        }
+      ],
+      "frameColors": [
+        {
+          "name": "Architectural Brown",
+          "fillColor": "#393120",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorArchBrown.png"
+        },
+        {
+          "name": "Black",
+          "fillColor": "#000000",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorBlack.png"
+        },
+        {
+          "name": "Clear Anodized",
+          "fillColor": "#e2e3e4",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorClearAnodized.png"
+        },
+        {
+          "name": "Pebble",
+          "fillColor": "#c9c9c6",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorPebble.png"
+        },
+        {
+          "name": "Sable",
+          "fillColor": "#555c5c",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorSable.png"
+        },
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.4",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "cranks": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Regular"
+        },
+        {
+          "name": "Folding"
+        },
+        {
+          "name": "Encore"
+        },
+        {
+          "name": "Roto"
+        }
+      ],
+      "grillePatterns": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Ladder"
+        },
+        {
+          "name": "Double Ladder"
+        },
+        {
+          "name": "Rectangular"
+        },
+        {
+          "name": "Perimeter"
+        },
+        {
+          "name": "Double Perimeter"
+        }
+      ],
+      "grilleColors": [
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Gold",
+          "fillColor": "#d4af37",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Lead",
+          "fillColor": "#444f53",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Patina",
+          "fillColor": "#777459",
+          "fillOpacity": "0.0",
+          "image": ""
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#d9c794",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "grilleSizes": [
+        {
+          "name": "5/16 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 16
+          }
+        },
+        {
+          "name": "5/8 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 8
+          }
+        },
+        {
+          "name": "1 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          }
+        },
+        {
+          "name": "Georgian",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      ],
+      "sdlPatterns": [
+        {
+          "name": "None"
+        },
+        {
+          "name": "Colonial"
+        },
+        {
+          "name": "Craftsman"
+        },
+        {
+          "name": "Heritage"
+        }
+      ],
+      "sdlColors": [
+        {
+          "name": "White",
+          "fillColor": "#ffffff",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWhite.png"
+        },
+        {
+          "name": "Wicker",
+          "fillColor": "#777459",
+          "fillOpacity": "0.0",
+          "image": "/img/aww/pvc/colorWicker.png"
+        }
+      ],
+      "sdlSizes": [
+        {
+          "name": "5/16 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 16
+          }
+        },
+        {
+          "name": "5/8 Inches",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 0,
+            "numerator": 5,
+            "denominator": 8
+          }
+        },
+        {
+          "name": "1 Inch",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 0,
+            "denominator": 1
+          }
+        },
+        {
+          "name": "Georgian",
+          "width": {
+            "unitName": "Inches",
+            "sign": 1,
+            "whole": 1,
+            "numerator": 5,
+            "denominator": 8
+          }
+        }
+      ]
+    }
+  ]
+}
