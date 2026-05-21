@@ -25,3 +25,8 @@ At each phase handoff (closeout or kickoff), do a quick documentation sanity che
 - README/test-note freshness (counts, commands, paths)
 
 Keep this quick unless the user explicitly asks for a deep documentation review.
+
+At each phase handoff, also create or update lessons in `lessons/`:
+- maintain one lesson per phase touched and keep `lessons/README.md` current
+- include actionable build steps, code snippets, and at least one Mermaid diagram per lesson
+- run a quick consistency check so lessons match roadmap/ADRs/journal and current endpoint/code names

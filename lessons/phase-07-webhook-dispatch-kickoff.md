@@ -12,6 +12,9 @@ A submitted session that never leaves the system is not integrated. This slice w
 4. Called dispatcher from `POST /api/v1/quote-sessions/{id}/complete`.
 5. Returned dispatch attempt status metadata in completion response.
 6. Added dispatcher unit tests and controller integration-style tests.
+7. Added durable webhook delivery-attempt persistence with first retry metadata (`NextRetryAtUtc`).
+8. Added retry execution service for due failed attempts (`IWebhookRetryProcessor`).
+9. Added tenant integration settings API for callback URL management.
 
 ## Dispatch Diagram
 
@@ -53,9 +56,24 @@ return Ok(new CompleteQuoteSessionResponse
 
 ## What Comes Next
 
-- Durable delivery logging
-- Retry/backoff policy
-- Failure recovery workflow
+- Background retry worker orchestration
+- Delivery observability/reporting surfaces
+- Full tenant/auth hardening
+
+## Durable Attempt Tracking Diagram
+
+```mermaid
+flowchart LR
+  A[Session Submit] --> B[Dispatch Webhook]
+  B --> C{HTTP Success?}
+  C -- Yes --> D[Persist Attempt: Delivered]
+  C -- No --> E[Persist Attempt: Failed]
+  E --> F[Set NextRetryAtUtc]
+  F --> G[Retry Processor]
+  G --> H{Retry Success?}
+  H -- Yes --> I[Mark Delivered]
+  H -- No --> J[Increment Attempt + Reschedule]
+```
 
 ## What To Teach In A Video
 

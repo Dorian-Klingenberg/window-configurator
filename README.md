@@ -70,6 +70,8 @@ The platform is the **source of truth for order item configuration data**. The C
 - **Server catalog resolution** — `OrderItemController` resolves item and section templates from session/product-line context instead of trusting arbitrary client filenames
 - **Minimal versioned API surface** — `/api/v1/quote-sessions` now supports create/get/update, item add/update, and submit with shared API error envelopes
 - **Webhook dispatch kickoff** — session submit now triggers a `quote.completed` webhook attempt and returns delivery attempt metadata
+- **Webhook delivery tracking + retry processing** — each submit attempt is persisted, failed attempts receive retry scheduling metadata, and due retries can be processed via API
+- **Tenant integration settings API** — tenant webhook callback URL can be queried/updated at `/api/v1/tenants/{id}/integration`
 
 ### What's Stubbed / Placeholder
 - The MVC completion path is still a pragmatic bridge, not the final versioned `/api/v1/...` surface
@@ -80,7 +82,7 @@ The platform is the **source of truth for order item configuration data**. The C
 ### What Doesn't Exist Yet
 - Secured external API layer (authentication/authorization and production integration hardening for CRM workflows)
 - Authentication / authorization (no JWT validation, no API keys, no magic link system)
-- Full webhook delivery system (durable delivery logging, retry/backoff, and failure recovery)
+- Full webhook delivery system hardening (background worker orchestration, advanced backoff policy controls, and operations dashboards)
 - Full multi-tenant hardening (per-client auth, tenant isolation at every entry point, production branding/admin workflows)
 - Email delivery
 - Any outbound CRM calls (intentionally — by design)

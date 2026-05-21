@@ -318,8 +318,8 @@ A `QuoteSession` contains one or more `ConfiguredWindowItem` entries. Each item 
 4. Port authoritative pricing to C# ✅
 5. Add server-side validation at completion ✅
 6. Add minimal REST API surface ✅
-7. Add CRM handoff and webhook dispatch 🚧
-8. Harden for real multi-tenant use
+7. Add CRM handoff and webhook dispatch ✅
+8. Harden for real multi-tenant use 🚧
 9. (Optional) Frontend modernization
 
 The guiding principle: **backend-first**. The configurator UI works. Make the server authoritative before touching the frontend.

@@ -206,7 +206,7 @@ Effort: medium.
 
 An API built before the session, catalog, pricing, and validation models stabilize will likely have to be redesigned.
 
-## Phase 7: Add CRM Handoff And Tenant Integration Features 🚧 Active
+## Phase 7: Add CRM Handoff And Tenant Integration Features ✅ Complete
 
 Risk reduced: inability to operationalize completed quotes with clients.
 Effort: medium to high.
@@ -234,7 +234,7 @@ Effort: medium to high.
 
 A callback mechanism is only useful once the completed payload is authoritative and stable.
 
-## Phase 8: Harden For Real Multi-Tenant Use
+## Phase 8: Harden For Real Multi-Tenant Use 🚧 Active
 
 Risk reduced: tenant leakage, wrong branding/catalog access, operational issues at scale.
 Effort: high.
@@ -287,7 +287,7 @@ If work needs to start immediately, do the next items in this order:
 5. Port authoritative pricing from Phase 4. ✅ Complete
 6. Add authoritative validation from Phase 5. ✅ Complete
 7. Stabilize the session API from Phase 6. ✅ Complete
-8. Add CRM handoff from Phase 7. 🚧 Active
+8. Add CRM handoff from Phase 7. ✅ Complete
 
 ## Definition Of A Meaningfully Real Product
 

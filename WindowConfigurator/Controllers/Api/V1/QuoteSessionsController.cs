@@ -15,17 +15,20 @@ namespace WindowConfigurator.Controllers.Api.V1
         private readonly ITenantRepository _tenantRepository;
         private readonly ICatalogService _catalog;
         private readonly IQuoteCompletionWebhookDispatcher _webhookDispatcher;
+        private readonly IWebhookDeliveryAttemptRepository _deliveryAttemptRepository;
 
         public QuoteSessionsController(
             IQuoteSessionRepository sessionRepository,
             ITenantRepository tenantRepository,
             ICatalogService catalog,
-            IQuoteCompletionWebhookDispatcher webhookDispatcher)
+            IQuoteCompletionWebhookDispatcher webhookDispatcher,
+            IWebhookDeliveryAttemptRepository deliveryAttemptRepository)
         {
             _sessionRepository = sessionRepository;
             _tenantRepository = tenantRepository;
             _catalog = catalog;
             _webhookDispatcher = webhookDispatcher;
+            _deliveryAttemptRepository = deliveryAttemptRepository;
         }
 
         [HttpPost]
@@ -266,6 +269,21 @@ namespace WindowConfigurator.Controllers.Api.V1
                     Error = "Unknown tenant."
                 }
                 : await _webhookDispatcher.DispatchQuoteCompletedAsync(session, tenant, _catalog);
+
+            var attemptedAtUtc = DateTime.UtcNow;
+            await _deliveryAttemptRepository.AddAsync(new WebhookDeliveryAttemptEntity
+            {
+                QuoteSessionId = session.Id,
+                TenantId = session.TenantId,
+                EventType = "quote.completed",
+                Status = dispatch.Succeeded ? "Delivered" : "Failed",
+                AttemptCount = 1,
+                StatusCode = dispatch.StatusCode,
+                Error = dispatch.Error,
+                AttemptedAtUtc = attemptedAtUtc,
+                NextRetryAtUtc = dispatch.Succeeded ? null : attemptedAtUtc.AddMinutes(5)
+            });
+            await _deliveryAttemptRepository.SaveChangesAsync();
 
             return Ok(new CompleteQuoteSessionResponse
             {

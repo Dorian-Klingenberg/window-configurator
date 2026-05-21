@@ -18,6 +18,8 @@ builder.Services.AddDbContext<WindowConfiguratorDbContext>(options =>
 
 builder.Services.AddScoped<IQuoteSessionRepository, EfQuoteSessionRepository>();
 builder.Services.AddScoped<ITenantRepository, EfTenantRepository>();
+builder.Services.AddScoped<IWebhookDeliveryAttemptRepository, EfWebhookDeliveryAttemptRepository>();
+builder.Services.AddScoped<IWebhookRetryProcessor, WebhookRetryProcessor>();
 builder.Services.AddSingleton<ICatalogService, CatalogService>();
 builder.Services.AddSingleton<WindowConfiguratorDataHelper>();
 builder.Services.AddSingleton<ITemplateReader>(sp => sp.GetRequiredService<WindowConfiguratorDataHelper>());

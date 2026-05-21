@@ -11,6 +11,7 @@ namespace WindowConfigurator.Data
         public DbSet<TenantEntity> Tenants => Set<TenantEntity>();
         public DbSet<QuoteSessionEntity> QuoteSessions => Set<QuoteSessionEntity>();
         public DbSet<ConfiguredWindowItemEntity> ConfiguredWindowItems => Set<ConfiguredWindowItemEntity>();
+        public DbSet<WebhookDeliveryAttemptEntity> WebhookDeliveryAttempts => Set<WebhookDeliveryAttemptEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,6 +54,14 @@ namespace WindowConfigurator.Data
             {
                 entity.HasKey(i => i.Id);
                 entity.HasIndex(i => i.QuoteSessionId);
+            });
+
+            modelBuilder.Entity<WebhookDeliveryAttemptEntity>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.HasIndex(x => x.QuoteSessionId);
+                entity.HasIndex(x => x.TenantId);
+                entity.HasIndex(x => x.AttemptedAtUtc);
             });
         }
     }

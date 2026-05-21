@@ -17,6 +17,7 @@ namespace WindowConfigurator.Tests.Controllers
         private readonly WindowConfiguratorDbContext _context;
         private readonly ITenantRepository _tenantRepository;
         private readonly IQuoteSessionRepository _sessionRepository;
+        private readonly IWebhookDeliveryAttemptRepository _deliveryAttemptRepository;
         private readonly FakeQuoteCompletionWebhookDispatcher _webhookDispatcher;
         private readonly QuoteSessionsController _controller;
 
@@ -33,8 +34,14 @@ namespace WindowConfigurator.Tests.Controllers
 
             _tenantRepository = new EfTenantRepository(_context);
             _sessionRepository = new EfQuoteSessionRepository(_context);
+            _deliveryAttemptRepository = new EfWebhookDeliveryAttemptRepository(_context);
             _webhookDispatcher = new FakeQuoteCompletionWebhookDispatcher();
-            _controller = new QuoteSessionsController(_sessionRepository, _tenantRepository, new CatalogService(), _webhookDispatcher);
+            _controller = new QuoteSessionsController(
+                _sessionRepository,
+                _tenantRepository,
+                new CatalogService(),
+                _webhookDispatcher,
+                _deliveryAttemptRepository);
         }
 
         [Fact]
@@ -221,6 +228,46 @@ namespace WindowConfigurator.Tests.Controllers
             Assert.Equal("Submitted", response.Status);
             Assert.Equal("delivered", response.WebhookDispatchStatus);
             Assert.Equal(1, _webhookDispatcher.CallCount);
+            Assert.Single(_context.WebhookDeliveryAttempts);
+            Assert.Equal("Delivered", _context.WebhookDeliveryAttempts.Single().Status);
+        }
+
+        [Fact]
+        public async Task Complete_WhenWebhookDispatchFails_PersistsFailedAttemptWithRetryMetadata()
+        {
+            var tenant = await SeedTenantAsync(["energysaver-2500"]);
+            var session = new QuoteSessionEntity
+            {
+                TenantId = tenant.Id,
+                Status = QuoteSessionStatus.Completed,
+                DefaultProductLineKey = "energysaver-2500"
+            };
+            await _sessionRepository.AddAsync(session);
+            await _sessionRepository.AddItemAsync(session.Id, new ConfiguredWindowItemEntity
+            {
+                ProductLineKey = "energysaver-2500",
+                Status = ConfiguredWindowItemStatus.Completed,
+                Location = "Done"
+            });
+            await _sessionRepository.SaveChangesAsync();
+            _webhookDispatcher.NextResult = new QuoteCompletionWebhookDispatchResult
+            {
+                Succeeded = false,
+                StatusCode = 500,
+                Error = "remote 500"
+            };
+
+            var result = await _controller.Complete(session.Id, new CompleteQuoteSessionRequest());
+
+            var ok = Assert.IsType<OkObjectResult>(result.Result);
+            var response = Assert.IsType<CompleteQuoteSessionResponse>(ok.Value);
+            Assert.Equal("failed", response.WebhookDispatchStatus);
+
+            var attempt = Assert.Single(_context.WebhookDeliveryAttempts);
+            Assert.Equal("Failed", attempt.Status);
+            Assert.Equal(500, attempt.StatusCode);
+            Assert.Equal(1, attempt.AttemptCount);
+            Assert.NotNull(attempt.NextRetryAtUtc);
         }
 
         private async Task<TenantEntity> SeedTenantAsync(List<string> allowedProductLineKeys)
@@ -246,6 +293,8 @@ namespace WindowConfigurator.Tests.Controllers
         private class FakeQuoteCompletionWebhookDispatcher : IQuoteCompletionWebhookDispatcher
         {
             public int CallCount { get; private set; }
+            public QuoteCompletionWebhookDispatchResult NextResult { get; set; } =
+                new QuoteCompletionWebhookDispatchResult { Succeeded = true, StatusCode = 200 };
 
             public Task<QuoteCompletionWebhookDispatchResult> DispatchQuoteCompletedAsync(
                 QuoteSessionEntity session,
@@ -254,7 +303,7 @@ namespace WindowConfigurator.Tests.Controllers
                 CancellationToken cancellationToken = default)
             {
                 CallCount++;
-                return Task.FromResult(new QuoteCompletionWebhookDispatchResult { Succeeded = true, StatusCode = 200 });
+                return Task.FromResult(NextResult);
             }
         }
     }

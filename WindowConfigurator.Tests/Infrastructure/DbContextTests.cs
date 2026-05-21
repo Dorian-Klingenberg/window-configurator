@@ -48,6 +48,13 @@ namespace WindowConfigurator.Tests.Infrastructure
         }
 
         [Fact]
+        public void DbContext_HasWebhookDeliveryAttemptsDbSet()
+        {
+            var (ctx, conn) = CreateContext();
+            using (conn) using (ctx) { Assert.NotNull(ctx.WebhookDeliveryAttempts); }
+        }
+
+        [Fact]
         public void DbContext_CanSaveAndReload_Tenant()
         {
             var (ctx, conn) = CreateContext();
