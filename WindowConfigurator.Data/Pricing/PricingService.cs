@@ -108,9 +108,16 @@ public class PricingService : IPricingService
         if (brickmould is null)
             return 0m;
 
-        var ppi = InterpolateLegacyBrickmouldPricePerInch(brickmould, input.FrameWidthDecimal, input.FrameHeightDecimal);
-        decimal framePerimeter = (input.FrameWidthDecimal * 2) + (input.FrameHeightDecimal * 2);
-        return framePerimeter * ppi;
+        var width = input.BrickmouldPricingWidthDecimal != 0m
+            ? input.BrickmouldPricingWidthDecimal
+            : input.FrameWidthDecimal;
+        var height = input.BrickmouldPricingHeightDecimal != 0m
+            ? input.BrickmouldPricingHeightDecimal
+            : input.FrameHeightDecimal;
+
+        var ppi = InterpolateLegacyBrickmouldPricePerInch(brickmould, width, height);
+        decimal perimeter = (width * 2) + (height * 2);
+        return perimeter * ppi;
     }
 
     // -------------------------------------------------------------------------

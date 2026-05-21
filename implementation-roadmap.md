@@ -122,7 +122,7 @@ Effort: medium.
 
 Authoritative pricing depends on authoritative catalog selection. If the wrong product line can still be loaded, server-side pricing is only partially trustworthy.
 
-## Phase 4: Port Authoritative Pricing To The Server
+## Phase 4: Port Authoritative Pricing To The Server ✅ Complete
 
 Risk reduced: client-side price tampering, inconsistent totals, inability to trust submitted amounts.
 Effort: medium to high.
@@ -150,7 +150,7 @@ Effort: medium to high.
 
 This is the first phase that makes the system commercially trustworthy.
 
-## Phase 5: Add Server-Side Validation At Completion
+## Phase 5: Add Server-Side Validation At Completion 🚧 Active
 
 Risk reduced: invalid configurations being accepted, inconsistent catalog usage, pricing computed from unsupported states.
 Effort: medium to high.
@@ -284,8 +284,8 @@ If work needs to start immediately, do the next items in this order:
 2. Produce the domain and session contracts from Phase 1.
 3. Implement persistence from Phase 2.
 4. Implement server-owned catalog resolution from Phase 3.
-5. Port authoritative pricing from Phase 4.
-6. Add authoritative validation from Phase 5.
+5. Port authoritative pricing from Phase 4. ✅ Complete
+6. Add authoritative validation from Phase 5. 🚧 Active
 7. Stabilize the session API from Phase 6.
 8. Add CRM handoff from Phase 7.
 

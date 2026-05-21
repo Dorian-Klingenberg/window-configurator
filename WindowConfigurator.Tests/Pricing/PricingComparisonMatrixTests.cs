@@ -31,6 +31,20 @@ public class PricingComparisonMatrixTests
     }
 
     [Fact]
+    public void GeneratedMatrix_IncludesSubmittedBrickmouldSizingRegression()
+    {
+        var fixture = LoadFixture();
+
+        Assert.Contains(fixture.Cases, c =>
+            c.Id == "EnergySaver 2500|submitted-regression|two-section|brickmould-sizing-dimensions" &&
+            c.BrickmouldPricingWidth == 46m &&
+            c.BrickmouldPricingHeight == 46.0625m &&
+            c.FrameWidth == 66.5625m &&
+            c.FrameHeight == 42.375m &&
+            c.Expected == 447.75m);
+    }
+
+    [Fact]
     public void GeneratedMatrix_PastFinalBreakpointCases_ShowParityGaps()
     {
         var fixture = LoadFixture();
@@ -62,6 +76,12 @@ public class PricingComparisonMatrixTests
             ProductLineName = @case.ProductLine,
             FrameWidthDecimal = @case.FrameWidth,
             FrameHeightDecimal = @case.FrameHeight,
+            BrickmouldPricingWidthDecimal = @case.BrickmouldPricingWidth == 0m
+                ? @case.FrameWidth
+                : @case.BrickmouldPricingWidth,
+            BrickmouldPricingHeightDecimal = @case.BrickmouldPricingHeight == 0m
+                ? @case.FrameHeight
+                : @case.BrickmouldPricingHeight,
             OutsideWidthDecimal = @case.OutsideWidth,
             OutsideHeightDecimal = @case.OutsideHeight,
             FrameColorName = @case.FrameColor,
@@ -87,7 +107,7 @@ public class PricingComparisonMatrixTests
 
     private static PricingComparisonFixture LoadFixture()
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Pricing", "pricing-comparison-fixture.json");
+        var path = Path.Combine(FindSolutionRoot(), "WindowConfigurator.Tests", "Pricing", "pricing-comparison-fixture.json");
         var json = File.ReadAllText(path);
         return JsonSerializer.Deserialize<PricingComparisonFixture>(json)!;
     }
@@ -99,6 +119,20 @@ public class PricingComparisonMatrixTests
         return JsonSerializer.Deserialize<PriceInfoRoot>(
             json,
             new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
+    }
+
+    private static string FindSolutionRoot()
+    {
+        var current = new DirectoryInfo(AppContext.BaseDirectory);
+        while (current != null)
+        {
+            if (File.Exists(Path.Combine(current.FullName, "WindowConfigurator.sln")))
+                return current.FullName;
+
+            current = current.Parent;
+        }
+
+        return Directory.GetCurrentDirectory();
     }
 
     public sealed class PricingComparisonFixture
@@ -144,6 +178,12 @@ public class PricingComparisonMatrixTests
 
         [JsonPropertyName("fh")]
         public decimal FrameHeight { get; set; }
+
+        [JsonPropertyName("bw")]
+        public decimal BrickmouldPricingWidth { get; set; }
+
+        [JsonPropertyName("bh")]
+        public decimal BrickmouldPricingHeight { get; set; }
 
         [JsonPropertyName("ow")]
         public decimal OutsideWidth { get; set; }

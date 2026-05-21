@@ -50,9 +50,9 @@ The platform is the **source of truth for order item configuration data**. The C
 | Backend | ASP.NET Core MVC, .NET 10 |
 | Frontend (configurator) | Knockout.js 3.4.1, knockout.mapping, jQuery, Bootstrap 3 |
 | Preview rendering | SVG, generated via Knockout computed observables |
-| Persistence (current) | In-memory repository (placeholder) |
-| Product catalog | Flat JSON files in AppData folder |
-| Pricing data | JSON lookup tables with 2D width/height breakpoints |
+| Persistence (current) | EF Core with SQLite for local development |
+| Product catalog | Server-resolved manifest plus flat JSON assets in AppData |
+| Pricing data | JSON lookup tables with 2D width/height breakpoints, loaded by the server pricing service |
 
 ---
 
@@ -63,23 +63,22 @@ The platform is the **source of truth for order item configuration data**. The C
 - **Fractional inch measurement system** — custom JS library handling sign/whole/numerator/denominator arithmetic, parsing strings like `"34 5/8"`, validation, add/subtract, decimal conversion
 - **SVG live preview** — Knockout-bound SVG that renders the window frame, mullions, brickmould, and section panes using tiled image patterns. Updates in real time as the user configures
 - **Grille pattern geometry engine** — generates SVG line sets for patterns: Ladder, Double Ladder, Rectangular, Perimeter, Double Perimeter, Empress
-- **Pricing calculator** — fetches pricing JSON and interpolates across a 2D grid of width/height breakpoints with a price-per-inch model, per manufacturer/product line/style
-- **Validation** — section width/height checked against per-style restrictions and overall frame restrictions
+- **Pricing calculator** — browser still provides a live estimate, while the server computes and persists the authoritative completion price
+- **Validation** — browser checks remain for UX, and server-side completion validation now enforces tenant product-line policy, frame/style restrictions, option availability, and pricing-grid support before completion is accepted
 - **Product catalog data** — three product lines fully configured: EnergySaver 2500, Apex, Carriage (all from All Weather Windows, all PVC)
+- **Session persistence** — EF Core stores tenants, quote sessions, configured window items, JSON snapshots, completion status, and authoritative prices
+- **Server catalog resolution** — `OrderItemController` resolves item and section templates from session/product-line context instead of trusting arbitrary client filenames
 
 ### What's Stubbed / Placeholder
-- `OrderItemEntity` is nearly empty (just a Guid) — the rich configuration data has no C# model counterpart yet
-- `OrderItemController.GetOverview()` always returns the EnergySaver template regardless of ID
-- `SectionTemplate()` always returns the EnergySaver section template regardless of templateName parameter
-- Salesforce user IDs are hardcoded strings in the controller
-- No save flow — configured window data never POSTs back to the server
+- The MVC completion path is still a pragmatic bridge, not the final versioned `/api/v1/...` surface
+- `/` falls back to the first available development session; production entry points must pass explicit session IDs
+- Draft save is intentionally absent until the UI supports adding and switching between multiple items
 
 ### What Doesn't Exist Yet
 - External-facing API layer (no versioned, secured REST endpoints for CRM consumption)
 - Authentication / authorization (no JWT validation, no API keys, no magic link system)
 - Webhook registration and dispatch system
-- Multi-tenant configuration (per-client CRM callback URLs, branding, etc.)
-- Real database / persistence
+- Full multi-tenant hardening (per-client auth, tenant isolation at every entry point, production branding/admin workflows)
 - Email delivery
 - Any outbound CRM calls (intentionally — by design)
 
@@ -148,15 +147,17 @@ The price-per-inch value is multiplied against some measure of the window (perim
 
 ## What Needs To Be Built (Priority Order)
 
-### 1. Persistence Layer
-Replace the in-memory repository with a real database. Entity Framework Core + SQL Server or PostgreSQL. The `OrderItemEntity` needs to be fleshed out to capture the full configured state (or store the JSON blob).
+### 1. Expand Server-Side Validation At Completion
+Continue broadening the now-active validation layer: add deeper compatibility rules, richer error modeling, and remaining catalog/business constraints that are still only enforced in the client.
 
 ### 2. External API Layer
 Versioned REST API (`/api/v1/...`) with proper request/response DTOs. Key endpoints:
-- `POST /api/v1/sessions` — CRM creates a configurator session, gets back a URL
-- `GET /api/v1/sessions/{token}` — retrieve session state
-- `POST /api/v1/sessions/{token}/complete` — configurator posts final config (internal)
-- `POST /api/v1/webhooks` — register a callback URL (tenant setup)
+- `POST /api/v1/quote-sessions` — CRM creates a configurator session, gets back a URL
+- `GET /api/v1/quote-sessions/{id}` — retrieve session state
+- `PUT /api/v1/quote-sessions/{id}` — update draft state
+- `POST /api/v1/quote-sessions/{id}/items` — add an item
+- `PUT /api/v1/quote-sessions/{id}/items/{itemId}` — update an item
+- `POST /api/v1/quote-sessions/{id}/complete` — complete a session
 
 ### 3. Authentication
 - **API key or OAuth client credentials** for CRM-to-API authentication (B2B flow)
@@ -174,7 +175,7 @@ Each client (window dealer) gets a tenant record with:
 - Which product lines they have access to
 
 ### 6. Configurator Modernization
-The Knockout.js / Bootstrap 3 frontend works but is dated. Long-term this probably moves to a modern JS framework. Short-term, fixing the stubbed endpoints (load correct templates by product line, save configured state) is enough to make it functional end-to-end.
+The Knockout.js / Bootstrap 3 frontend works but is dated. Long-term this probably moves to a modern JS framework after backend contracts stabilize.
 
 ---
 

@@ -1,138 +1,96 @@
 # Pricing Test Suite Summary
 
-## Overview
+## Current Status
 
-Created comprehensive pricing tests covering **59 feature combination permutations** using a standard 36" × 48" window size. These tests validate that the C# pricing engine calculates prices consistently across all feature combinations.
+The pricing comparison tests are part of the normal `dotnet test .\WindowConfigurator.sln` suite.
 
-## Test Results
+Current verification:
 
-**Total Tests:** 62  
-**Passing:** 61 ✅  
-**Failing:** 1 ❌ (known bug: JavaScript $1812.33 vs C# $544.10)
+- `PricingComparisonMatrixTests` -> JavaScript-generated fixture compared against C# pricing service
+- `PricingCrossValidationTests` -> hand-curated JavaScript vs C# regression cases
+- Full suite -> 152 passing
 
-## Test Coverage
+The earlier `$1812.33` expectation was resolved as a stale screenshot narrative, not an actual result from executing the legacy JavaScript engine against the same payload. The verified JavaScript result for that disputed large two-section case is `$1066.75`, and the C# service now matches it.
 
-### Single-Section Feature Variations
+## JavaScript Comparison Matrix
 
-1. **Frame Colors** (4 tests)
-   - White, Wicker
-   - Combined with Picture/Fixed Sash styles
+The generated fixture is `pricing-comparison-fixture.json`. It was produced by `generate-pricing-comparison-fixture.js`, which executes the legacy browser pricing engine directly from:
 
-2. **Operational Styles** (5 tests)
-   - Picture (no crank)
-   - Awning (with crank)
-   - Casement (with crank)
-   - Casement - Left (with crank)
-   - Fixed Sash (no crank)
+- `wwwroot/js/windowStore/windowStore.measurement.js`
+- `wwwroot/js/windowStore/pricing.js`
+- `AppData/priceInfo.json`
 
-3. **Brickmould Styles** (4 tests)
-   - None: $222.14
-   - 1 1/2 Inch: $310.43
-   - 2 Inch: $310.43
-   - 1 1/2 Inch - Fin: $284.13
+The matrix contains:
 
-4. **Pane Configurations** (4 tests)
-   - Dual: $222.14 (base)
-   - Dual - LowE/Argon: $258.47 (+$36.33)
-   - Triple: $313.56 (+$91.42)
-   - Triple - LowE/Argon: $336.65 (+$114.51)
+| Category | Count |
+|---|---:|
+| Total generated cases | 80,911 |
+| In-range cases | 49,461 |
+| Past-final-breakpoint cases | 31,450 |
 
-5. **Grille Patterns** (6 tests)
-   - None: $222.14 (base)
-   - Ladder: $233.03 (+$10.89)
-   - Double Ladder: $240.76 (+$18.62)
-   - Rectangular: $257.09 (+$34.95)
-   - Perimeter: $249.63 (+$27.49)
-   - Double Perimeter: $277.14 (+$54.99)
+The in-range comparison test requires every in-range case to match JavaScript exactly. The past-final-breakpoint test intentionally confirms parity gaps still exist beyond supported pricing grids, so raw pricing-service differences remain visible. Phase 5 completion validation now rejects submitted dimensions that exceed the supported pricing grid before authoritative pricing runs.
 
-6. **SDL Patterns** (6 tests)
-   - All patterns return $222.14 (SDL pricing appears to be $0 in current data)
+The matrix also includes a submitted two-section regression case where brickmould pricing dimensions (`width`/`height`) differ from frame dimensions (`frameWidth`/`frameHeight`). This catches the `$447.75` client estimate versus `$467.72` server result that occurred when C# priced brickmould from frame dimensions instead of the top-level sizing used by the legacy JavaScript.
 
-7. **Crank Types** (4 tests)
-   - All crank types (Regular, Folding, Encore, Roto) return same price: $410.57
-   - Crank pricing appears to be flat per-section, not per-type
+## Product Line Coverage
 
-### Multi-Section Combinations
+| Product line | Total | In range | Past breakpoint |
+|---|---:|---:|---:|
+| EnergySaver 2500 | 50,651 | 31,957 | 18,694 |
+| Apex | 7,880 | 5,072 | 2,808 |
+| Carriage | 22,380 | 12,432 | 9,948 |
 
-8. **Two-Section Style Combos** (5 tests)
-   - Picture + Picture: $343.28
-   - Picture + Fixed Sash: $415.88
-   - Casement + Casement: $710.73
-   - Casement-Left + Casement: $710.73
-   - Awning + Picture: $576.42
+## Section Count Coverage
 
-9. **Three+ Sections** (2 tests)
-   - Three sections (Picture/Casement/Picture): $721.79
-   - Four sections (all Picture, fully loaded): $893.21
+| Section count | Cases |
+|---|---:|
+| 1 section | 42,350 |
+| 2 sections | 6,161 |
+| 3 sections | 32,400 |
 
-10. **Mixed Features** (3 tests)
-    - Different pane configs per section: $373.30
-    - Different grille patterns per section: $350.83
-    - Casement + Picture with premium features: $696.74
+## Feature Coverage
 
-### Feature Combination Matrix
+Across the generated matrix:
 
-11. **Common Real-World Combos** (8 tests)
-    - Tests all combinations of:
-      - Frame colors: White, Wicker
-      - Brickmould: None, 2 Inch
-      - Pane: Dual, Triple - LowE/Argon
+- Frame colors: White, Wicker
+- Brickmould styles: None, 1 1/2 Inch, 1 1/2 Inch - Fin, 1 5/8 Inch, 2 Inch, 3 1/2 Inch
+- Pane configurations: Dual, Dual - LowE/Argon, Triple, Triple - LowE/Argon
+- Styles: Awning, Casement, Casement - Left, Double hung, Fixed Sash, Glider, Glider - Left, Picture, Single Hung, Single hung - Down
+- Cranks: None, Regular, Folding, Encore, Roto, Encore/ADA, Encore/Folding, Roto/Folding, Roto/Regular
+- Grilles: None, Ladder, Double Ladder, Rectangular, Perimeter, Double Perimeter, plus unpriced placeholders for product lines without grille breakpoint pricing
+- SDL: None, Colonial, Craftsman, Heritage, plus unpriced placeholders for product lines without SDL breakpoint pricing
 
-12. **Grille/SDL Combinations** (5 tests)
-    - Casement with various grille/SDL permutations
-    - Awning with grille patterns
+## Size Coverage
 
-### Edge Cases
+Single-section cases use ten profiles per style:
 
-13. **Minimal Configuration**
-    - White, no brickmould, Picture, Dual: $222.14
+- min exact breakpoint
+- first midpoint
+- second exact breakpoint
+- second/third midpoint
+- middle exact breakpoint
+- middle/next midpoint
+- penultimate exact breakpoint
+- max exact breakpoint
+- width overflow
+- width and height overflow
 
-14. **Fully Loaded Configuration**
-    - Wicker, 2" brickmould, Casement, Triple LowE/Argon, Encore crank, Double Perimeter grille, Rectangular SDL: $687.19
+Multi-section cases use ten corresponding profile indexes (`p0` through `p9`) across all 2-style and 3-style tuples for each product line.
 
-## Key Findings
+## Previous Matrix Construction Bug
 
-### Pricing Patterns Observed
+The previous comparison issue was in fixture construction, not the C# pricing engine:
 
-1. **Additive Components:**
-   - Frame color: ~$19-$68 depending on perimeter and color
-   - Sections: Varies by style (Picture cheapest, Casement/Awning more expensive)
-   - Brickmould: +$88-$62 depending on style
-   - Pane configs: +$0 (Dual) to +$114 (Triple LowE/Argon)
-   - Grilles: +$0 (None) to +$55 (Double Perimeter)
+- some single-section cases omitted pane configuration
+- some multi-section cases treated pane configuration as per-section even though legacy JavaScript prices it from the window-level selection
+- some cases were marked in-range by style grid only, without checking grille, SDL, pane, or brickmould breakpoint grids
 
-2. **Flat Pricing (No Variation):**
-   - Crank types: All cost the same per section
-   - SDL patterns: Currently $0 in all cases
+The current generator fixes those problems:
 
-3. **Perimeter-Based:**
-   - Frame color, grilles, brickmould, and pane configs all scale with perimeter
-   - Style pricing includes base + perimeter calculation
+- pane configuration is included consistently
+- multi-section cases use one window-level pane selection
+- past-final-breakpoint detection checks style, grille, SDL, pane, and brickmould pricing grids
 
-### Data Quality Issues
+## Other Pricing Tests
 
-1. **SDL Pricing:** All SDL patterns return $0 — suggests missing pricing data
-2. **Crank Pricing:** No differentiation between crank types — may be intentional or missing data
-3. **Dual Pane Config:** Base pane config has $0 PPI (intentional — it's the baseline)
-
-## Test Files
-
-- `PricingFeatureCombinationTests.cs` — 59 feature combination tests
-- `PricingCrossValidationTests.cs` — 2 JavaScript vs C# validation tests
-- `PricingDebugTests.cs` — 1 detailed breakdown diagnostic test
-
-## Usage
-
-These tests serve as:
-1. **Regression protection** — Ensures pricing logic changes don't break existing calculations
-2. **Feature coverage** — Documents which feature combinations are supported
-3. **Cross-validation baseline** — Once the JS/C# discrepancy is resolved, these provide reference prices for all combinations
-4. **Performance baseline** — 62 tests run in <2 seconds, suitable for CI/CD
-
-## Next Steps
-
-1. **Resolve the $1812.33 vs $544.10 bug** — Root cause still unknown
-2. **Add JavaScript-generated expected values** — Run actual JS pricing engine to get authoritative prices for each test case
-3. **Investigate SDL pricing** — Confirm whether $0 is intentional or missing data
-4. **Verify crank pricing** — Confirm whether all crank types should cost the same
-5. **Add size variation tests** — Currently all tests use 36" × 48"; add tests for small/large/edge dimensions
+`PricingFeatureCombinationTests.cs` contains feature smoke/regression coverage over common combinations at a standard size. Those tests assert pricing remains positive/non-negative across combinations, but they are not the JavaScript golden comparison; the matrix and cross-validation tests are the authoritative JS-vs-C# checks.

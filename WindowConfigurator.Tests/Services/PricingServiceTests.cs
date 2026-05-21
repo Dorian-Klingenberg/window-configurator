@@ -353,7 +353,7 @@ public class PricingServiceTests
     }
 
     [Fact]
-    public void CalculatePrice_BrickmouldUsesFrameMeasurements_NotOutsideMeasurements()
+    public void CalculatePrice_BrickmouldFallsBackToFrameMeasurements_WhenExplicitBrickmouldDimensionsAreAbsent()
     {
         var service = new PricingService(LoadPriceInfo());
 
@@ -385,6 +385,53 @@ public class PricingServiceTests
         var price = service.CalculatePrice(input);
 
         Assert.Equal(312.62m, price, precision: 2);
+    }
+
+    [Fact]
+    public void CalculatePrice_BrickmouldUsesExplicitBrickmouldPricingMeasurements()
+    {
+        var service = new PricingService(LoadPriceInfo());
+
+        var input = new WindowPricingInput
+        {
+            ManufacturerName = "All Weather Windows",
+            ProductLineName = "EnergySaver 2500",
+            FrameWidthDecimal = 66.5625m,
+            FrameHeightDecimal = 42.375m,
+            BrickmouldPricingWidthDecimal = 46m,
+            BrickmouldPricingHeightDecimal = 46.0625m,
+            OutsideWidthDecimal = 45m,
+            OutsideHeightDecimal = 43.375m,
+            FrameColorName = "White",
+            BrickmouldStyleName = "2 Inch",
+            Sections =
+            [
+                new SectionPricingInput
+                {
+                    WidthDecimal = 22.1875m,
+                    HeightDecimal = 44.0625m,
+                    StyleName = "Picture",
+                    GrillePatternName = "None",
+                    SdlPatternName = "None",
+                    CrankName = "None",
+                    PaneConfigurationName = "Dual"
+                },
+                new SectionPricingInput
+                {
+                    WidthDecimal = 22.1875m,
+                    HeightDecimal = 44.0625m,
+                    StyleName = "Picture",
+                    GrillePatternName = "None",
+                    SdlPatternName = "None",
+                    CrankName = "None",
+                    PaneConfigurationName = "Dual"
+                }
+            ]
+        };
+
+        var price = service.CalculatePrice(input);
+
+        Assert.Equal(447.75m, price, precision: 2);
     }
 
     [Fact]

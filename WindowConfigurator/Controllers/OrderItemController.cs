@@ -5,6 +5,7 @@ using WindowConfigurator.Data.Catalog;
 using WindowConfigurator.Data.Entities;
 using WindowConfigurator.Data.Pricing;
 using WindowConfigurator.Data.Repositories;
+using WindowConfigurator.Data.Validation;
 using WindowConfigurator.Models;
 using WindowConfigurator.Web.Service;
 
@@ -37,17 +38,23 @@ namespace WindowConfigurator.Controllers
         private readonly ICatalogService _catalog;
         private readonly ITemplateReader _templateReader;
         private readonly IPricingService _pricingService;
+        private readonly ITenantRepository _tenantRepository;
+        private readonly ICompletionValidationService _completionValidation;
 
         public OrderItemController(
             IQuoteSessionRepository sessionRepository,
             ICatalogService catalog,
             ITemplateReader templateReader,
-            IPricingService pricingService)
+            IPricingService pricingService,
+            ITenantRepository tenantRepository,
+            ICompletionValidationService completionValidation)
         {
             _sessionRepository = sessionRepository;
             _catalog = catalog;
             _templateReader = templateReader;
             _pricingService = pricingService;
+            _tenantRepository = tenantRepository;
+            _completionValidation = completionValidation;
         }
 
         public async Task<IActionResult> Index(string id)
@@ -74,6 +81,24 @@ namespace WindowConfigurator.Controllers
 
             var item = await ResolveOrCreateItemAsync(session, payload);
             var productLineKey = ResolveProductLineKey(session, item, payload);
+            var catalogEntry = _catalog.GetProductLine(productLineKey);
+            if (catalogEntry == null)
+            {
+                return BadRequest(new
+                {
+                    validationErrors = new[]
+                    {
+                        new CompletionValidationError("productLine", "The selected product line is not supported.")
+                    }
+                });
+            }
+
+            var tenant = await _tenantRepository.GetByIdAsync(session.TenantId);
+            var itemTemplateJson = await _templateReader.ReadTemplateAsync(catalogEntry.ItemTemplateFile);
+            var validation = _completionValidation.Validate(payload, productLineKey, tenant, itemTemplateJson);
+            if (!validation.IsValid)
+                return BadRequest(new { validationErrors = validation.Errors });
+
             var pricingInput = BuildPricingInput(payload, productLineKey);
 
             decimal authoritativePrice;
@@ -243,6 +268,12 @@ namespace WindowConfigurator.Controllers
                     ?? string.Empty,
                 FrameWidthDecimal = TryReadMeasurementDecimal(payload, "frameWidth") ?? 0m,
                 FrameHeightDecimal = TryReadMeasurementDecimal(payload, "frameHeight") ?? 0m,
+                BrickmouldPricingWidthDecimal = TryReadMeasurementDecimal(payload, "width")
+                    ?? TryReadMeasurementDecimal(payload, "frameWidth")
+                    ?? 0m,
+                BrickmouldPricingHeightDecimal = TryReadMeasurementDecimal(payload, "height")
+                    ?? TryReadMeasurementDecimal(payload, "frameHeight")
+                    ?? 0m,
                 OutsideWidthDecimal = TryReadMeasurementDecimal(payload, "osmWidth") ?? 0m,
                 OutsideHeightDecimal = TryReadMeasurementDecimal(payload, "osmHeight") ?? 0m,
                 FrameColorName = TryReadNestedString(payload, "frameColor", "name") ?? string.Empty,

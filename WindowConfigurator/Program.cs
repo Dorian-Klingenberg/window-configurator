@@ -5,6 +5,7 @@ using WindowConfigurator.Data.Catalog;
 using WindowConfigurator.Data.Entities;
 using WindowConfigurator.Data.Pricing;
 using WindowConfigurator.Data.Repositories;
+using WindowConfigurator.Data.Validation;
 using WindowConfigurator.Web.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,9 +21,8 @@ builder.Services.AddSingleton<ICatalogService, CatalogService>();
 builder.Services.AddSingleton<WindowConfiguratorDataHelper>();
 builder.Services.AddSingleton<ITemplateReader>(sp => sp.GetRequiredService<WindowConfiguratorDataHelper>());
 
-// Load priceInfo.json once at startup and register PricingService as a singleton.
-// The service itself has no file I/O — all pricing data is passed in via the constructor.
-builder.Services.AddSingleton<IPricingService>(sp =>
+// Load priceInfo.json once at startup and share it with server pricing and validation.
+builder.Services.AddSingleton(sp =>
 {
     var env = sp.GetRequiredService<IWebHostEnvironment>();
     var path = Path.Combine(env.ContentRootPath, "AppData", "priceInfo.json");
@@ -30,8 +30,11 @@ builder.Services.AddSingleton<IPricingService>(sp =>
     var priceInfoRoot = JsonSerializer.Deserialize<PriceInfoRoot>(
         json,
         new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
-    return new PricingService(priceInfoRoot);
+    return priceInfoRoot;
 });
+builder.Services.AddSingleton<IPricingService>(sp => new PricingService(sp.GetRequiredService<PriceInfoRoot>()));
+builder.Services.AddSingleton<ICompletionValidationService>(sp =>
+    new CompletionValidationService(sp.GetRequiredService<PriceInfoRoot>()));
 
 var app = builder.Build();
 

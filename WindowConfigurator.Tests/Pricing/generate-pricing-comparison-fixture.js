@@ -155,7 +155,7 @@ function buildSection(styleName, crankName, grilleName, sdlName, paneName, width
   };
 }
 
-function buildWindowModel(productLineName, frameColor, brickmould, paneConfig, sections, frameWidth, frameHeight, outsideWidth, outsideHeight) {
+function buildWindowModel(productLineName, frameColor, brickmould, paneConfig, sections, brickmouldWidth, brickmouldHeight, outsideWidth, outsideHeight) {
   return {
     productLine: {
       manufacturerName: "All Weather Windows",
@@ -164,8 +164,8 @@ function buildWindowModel(productLineName, frameColor, brickmould, paneConfig, s
     frameColor: { name: frameColor },
     brickmouldStyle: { name: brickmould },
     paneConfiguration: { name: paneConfig },
-    width: measurement(frameWidth),
-    height: measurement(frameHeight),
+    width: measurement(brickmouldWidth),
+    height: measurement(brickmouldHeight),
     osmWidth: measurement(outsideWidth),
     osmHeight: measurement(outsideHeight),
     sections
@@ -226,6 +226,8 @@ function buildSingleSectionCases(productLine, cases) {
                   past,
                   fw: size.w,
                   fh: size.h,
+                  bw: size.w,
+                  bh: size.h,
                   ow: size.w,
                   oh: size.h,
                   fc: frameColor.name,
@@ -279,6 +281,8 @@ function buildSingleSectionCases(productLine, cases) {
           past,
           fw: size.w,
           fh: size.h,
+          bw: size.w,
+          bh: size.h,
           ow: size.w,
           oh: size.h,
           fc: white,
@@ -390,6 +394,8 @@ function buildMultiSectionCases(productLine, sectionCount, cases) {
             past,
             fw: outsideWidth,
             fh: outsideHeight,
+            bw: outsideWidth,
+            bh: outsideHeight,
             ow: outsideWidth,
             oh: outsideHeight,
             fc: frameColor.name,
@@ -412,6 +418,62 @@ function buildMultiSectionCases(productLine, sectionCount, cases) {
   }
 }
 
+function addSubmittedBrickmouldSizingRegression(cases) {
+  const sections = [
+    buildSection("Picture", "None", "None", "None", "Dual", 22.1875, 44.0625),
+    buildSection("Picture", "None", "None", "None", "Dual", 22.1875, 44.0625)
+  ];
+
+  const model = buildWindowModel(
+    "EnergySaver 2500",
+    "White",
+    "2 Inch",
+    "Dual",
+    sections,
+    46,
+    46.0625,
+    45,
+    43.375
+  );
+
+  addCase(cases, {
+    id: "EnergySaver 2500|submitted-regression|two-section|brickmould-sizing-dimensions",
+    pl: "EnergySaver 2500",
+    sc: 2,
+    past: false,
+    fw: 66.5625,
+    fh: 42.375,
+    bw: 46,
+    bh: 46.0625,
+    ow: 45,
+    oh: 43.375,
+    fc: "White",
+    bm: "2 Inch",
+    pn: "Dual",
+    s: [
+      {
+        st: "Picture",
+        cr: "None",
+        gr: "None",
+        sd: "None",
+        pn: "Dual",
+        w: 22.1875,
+        h: 44.0625
+      },
+      {
+        st: "Picture",
+        cr: "None",
+        gr: "None",
+        sd: "None",
+        pn: "Dual",
+        w: 22.1875,
+        h: 44.0625
+      }
+    ],
+    e: expectedPrice(model)
+  });
+}
+
 const manufacturer = priceInfo.manufacturers.find(x => x.name === "All Weather Windows");
 const cases = [];
 
@@ -420,6 +482,8 @@ for (const productLine of manufacturer.productLines) {
   buildMultiSectionCases(productLine, 2, cases);
   buildMultiSectionCases(productLine, 3, cases);
 }
+
+addSubmittedBrickmouldSizingRegression(cases);
 
 const inRange = cases.filter(x => !x.past).length;
 const pastRange = cases.filter(x => x.past).length;

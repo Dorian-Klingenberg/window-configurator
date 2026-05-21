@@ -42,8 +42,8 @@ namespace WindowConfigurator.Data.Webhooks
         public int ItemCount { get; set; }
 
         /// <summary>
-        /// Sum of all item authoritative prices. Null until server-side pricing is implemented
-        /// (Phase 4). Until then, use individual item prices for estimates.
+        /// Sum of all item authoritative prices. Null only when aggregate pricing has not
+        /// been computed yet.
         /// </summary>
         public decimal? TotalAuthoritativePrice { get; set; }
     }
@@ -60,7 +60,7 @@ namespace WindowConfigurator.Data.Webhooks
 
         public List<QuoteCompletedItem> Items { get; set; } = new();
 
-        /// <summary>Sum of authoritative prices for items in this group. Null until Phase 4.</summary>
+        /// <summary>Sum of authoritative prices for items in this group.</summary>
         public decimal? GroupAuthoritativePrice { get; set; }
     }
 
@@ -80,7 +80,7 @@ namespace WindowConfigurator.Data.Webhooks
         public int SectionCount { get; set; }
 
         /// <summary>
-        /// Server-computed price for this item. Null until Phase 4 (server-side pricing).
+        /// Server-computed price for this item. Null until completion pricing has run.
         /// </summary>
         public decimal? AuthoritativePrice { get; set; }
 

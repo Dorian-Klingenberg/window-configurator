@@ -112,6 +112,54 @@ namespace WindowConfigurator.Tests.Pricing
             Assert.Equal(351.12m, csharpPrice);
         }
 
+        [Fact]
+        public void SubmittedTwoSectionBrickmouldSizingPayload_MatchesJavaScript()
+        {
+            // Captures a real browser/server discrepancy:
+            // browser estimate $447.75, previous C# authoritative price $467.72.
+            // The legacy JavaScript prices brickmould from top-level width/height,
+            // not frameWidth/frameHeight.
+            var input = new WindowPricingInput
+            {
+                ManufacturerName = "All Weather Windows",
+                ProductLineName = "EnergySaver 2500",
+                FrameWidthDecimal = 66.5625m,
+                FrameHeightDecimal = 42.375m,
+                BrickmouldPricingWidthDecimal = 46m,
+                BrickmouldPricingHeightDecimal = 46.0625m,
+                OutsideWidthDecimal = 45m,
+                OutsideHeightDecimal = 43.375m,
+                FrameColorName = "White",
+                BrickmouldStyleName = "2 Inch"
+            };
+
+            input.Sections.Add(new SectionPricingInput
+            {
+                WidthDecimal = 22.1875m,
+                HeightDecimal = 44.0625m,
+                StyleName = "Picture",
+                GrillePatternName = "None",
+                SdlPatternName = "None",
+                CrankName = "None",
+                PaneConfigurationName = "Dual"
+            });
+
+            input.Sections.Add(new SectionPricingInput
+            {
+                WidthDecimal = 22.1875m,
+                HeightDecimal = 44.0625m,
+                StyleName = "Picture",
+                GrillePatternName = "None",
+                SdlPatternName = "None",
+                CrankName = "None",
+                PaneConfigurationName = "Dual"
+            });
+
+            var csharpPrice = _pricingService.CalculatePrice(input);
+
+            Assert.Equal(447.75m, csharpPrice);
+        }
+
         private static PriceInfoRoot LoadPriceInfo()
         {
             var path = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "WindowConfigurator", "AppData", "priceInfo.json");

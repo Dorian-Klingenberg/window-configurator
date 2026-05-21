@@ -16,6 +16,14 @@ public class WindowPricingInput
     public decimal FrameHeightDecimal { get; set; }
 
     /// <summary>
+    /// Dimensions used by the legacy JavaScript brickmould calculator. In brickmould sizing
+    /// mode these are the payload's top-level width/height values, which differ from frame
+    /// width/height.
+    /// </summary>
+    public decimal BrickmouldPricingWidthDecimal { get; set; }
+    public decimal BrickmouldPricingHeightDecimal { get; set; }
+
+    /// <summary>
     /// Outside measurement width in decimal inches.
     /// The legacy JavaScript pricing engine uses outside dimensions for frame color pricing.
     /// </summary>

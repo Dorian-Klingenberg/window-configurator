@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using WindowConfigurator.Controllers;
 using WindowConfigurator.Data;
 using WindowConfigurator.Data.Catalog;
 using WindowConfigurator.Data.Entities;
 using WindowConfigurator.Data.Pricing;
 using WindowConfigurator.Data.Repositories;
+using WindowConfigurator.Data.Validation;
 using WindowConfigurator.Web.Service;
 
 namespace WindowConfigurator.Tests.Controllers
@@ -17,8 +19,10 @@ namespace WindowConfigurator.Tests.Controllers
         private readonly SqliteConnection _connection;
         private readonly WindowConfiguratorDbContext _context;
         private readonly IQuoteSessionRepository _sessionRepo;
+        private readonly ITenantRepository _tenantRepo;
         private readonly ICatalogService _catalog;
         private readonly IPricingService _pricingService;
+        private readonly ICompletionValidationService _completionValidation;
         private readonly FakeTemplateReader _fakeReader;
         private readonly OrderItemController _controller;
 
@@ -33,15 +37,31 @@ namespace WindowConfigurator.Tests.Controllers
             _context.Database.EnsureCreated();
 
             _sessionRepo = new EfQuoteSessionRepository(_context);
+            _tenantRepo = new EfTenantRepository(_context);
             _catalog = new CatalogService();
-            _pricingService = new PricingService(LoadPriceInfo());
+            var priceInfo = LoadPriceInfo();
+            _pricingService = new PricingService(priceInfo);
+            _completionValidation = new CompletionValidationService(priceInfo);
             _fakeReader = new FakeTemplateReader();
-            _controller = new OrderItemController(_sessionRepo, _catalog, _fakeReader, _pricingService);
+            _controller = new OrderItemController(
+                _sessionRepo,
+                _catalog,
+                _fakeReader,
+                _pricingService,
+                _tenantRepo,
+                _completionValidation);
         }
 
-        private async Task<QuoteSessionEntity> SeedSessionWithProductLine(string productLineKey)
+        private async Task<QuoteSessionEntity> SeedSessionWithProductLine(
+            string productLineKey,
+            List<string>? allowedProductLineKeys = null)
         {
-            var tenant = new TenantEntity { Name = "Test Dealer", ApiKey = Guid.NewGuid().ToString() };
+            var tenant = new TenantEntity
+            {
+                Name = "Test Dealer",
+                ApiKey = Guid.NewGuid().ToString(),
+                AllowedProductLineKeys = allowedProductLineKeys ?? []
+            };
             _context.Tenants.Add(tenant);
             await _context.SaveChangesAsync();
 
@@ -149,45 +169,12 @@ namespace WindowConfigurator.Tests.Controllers
         [Fact]
         public async Task Complete_WithExistingSession_ComputesAuthoritativePriceAndMarksSessionComplete()
         {
+            _fakeReader.UseRealFiles = true;
             var session = await SeedSessionWithProductLine("energysaver-2500");
             var persisted = await _sessionRepo.GetByIdAsync(session.Id);
             var existingItemId = Assert.Single(persisted!.Items).Id;
 
-            var payload = JsonSerializer.SerializeToElement(new
-            {
-                id = existingItemId,
-                orderId = session.Id,
-                location = "Bedroom Left",
-                lineItemNumber = "101",
-                meetsEgress = true,
-                productLine = new
-                {
-                    key = "energysaver-2500",
-                    name = "EnergySaver 2500",
-                    manufacturerName = "All Weather Windows"
-                },
-                frameWidth = new { sign = 1, whole = 24, numerator = 0, denominator = 1 },
-                frameHeight = new { sign = 1, whole = 36, numerator = 0, denominator = 1 },
-                roWidth = new { sign = 1, whole = 25, numerator = 0, denominator = 1 },
-                roHeight = new { sign = 1, whole = 37, numerator = 0, denominator = 1 },
-                osmWidth = new { sign = 1, whole = 24, numerator = 0, denominator = 1 },
-                osmHeight = new { sign = 1, whole = 36, numerator = 0, denominator = 1 },
-                frameColor = new { name = "White" },
-                brickmouldStyle = new { name = "None" },
-                paneConfiguration = new { name = "Dual" },
-                sections = new[]
-                {
-                    new
-                    {
-                        width = new { sign = 1, whole = 24, numerator = 0, denominator = 1 },
-                        height = new { sign = 1, whole = 36, numerator = 0, denominator = 1 },
-                        style = new { name = "Casement" },
-                        grillePattern = new { name = "None" },
-                        sdlPattern = new { name = "None" },
-                        crank = new { name = "None" }
-                    }
-                }
-            });
+            var payload = BuildValidCompletionPayload(session.Id, existingItemId);
 
             var result = await _controller.Complete(session.Id.ToString(), payload);
 
@@ -207,6 +194,90 @@ namespace WindowConfigurator.Tests.Controllers
             Assert.NotNull(reloaded.CompletedAt);
         }
 
+        [Fact]
+        public async Task Complete_WithFrameWidthBelowCatalogMinimum_ReturnsValidationError()
+        {
+            _fakeReader.UseRealFiles = true;
+            var session = await SeedSessionWithProductLine("energysaver-2500");
+            var itemId = Assert.Single((await _sessionRepo.GetByIdAsync(session.Id))!.Items).Id;
+            var payload = BuildValidCompletionPayload(
+                session.Id,
+                itemId,
+                frameWidthWhole: 10,
+                sectionWidthWhole: 10);
+
+            var result = await _controller.Complete(session.Id.ToString(), payload);
+
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Contains("frameWidth", JsonSerializer.Serialize(badRequest.Value));
+
+            var reloaded = await _sessionRepo.GetByIdAsync(session.Id);
+            Assert.Equal(QuoteSessionStatus.Draft, reloaded!.Status);
+            Assert.Null(Assert.Single(reloaded.Items).AuthoritativePrice);
+        }
+
+        [Fact]
+        public async Task Complete_WithUnsupportedStyle_ReturnsValidationError()
+        {
+            _fakeReader.UseRealFiles = true;
+            var session = await SeedSessionWithProductLine("energysaver-2500");
+            var itemId = Assert.Single((await _sessionRepo.GetByIdAsync(session.Id))!.Items).Id;
+            var payload = BuildValidCompletionPayload(session.Id, itemId, styleName: "Imaginary Style");
+
+            var result = await _controller.Complete(session.Id.ToString(), payload);
+
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Contains("style", JsonSerializer.Serialize(badRequest.Value));
+        }
+
+        [Fact]
+        public async Task Complete_WithUnsupportedFrameColor_ReturnsValidationError()
+        {
+            _fakeReader.UseRealFiles = true;
+            var session = await SeedSessionWithProductLine("energysaver-2500");
+            var itemId = Assert.Single((await _sessionRepo.GetByIdAsync(session.Id))!.Items).Id;
+            var payload = BuildValidCompletionPayload(session.Id, itemId, frameColorName: "Invisible");
+
+            var result = await _controller.Complete(session.Id.ToString(), payload);
+
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Contains("frameColor", JsonSerializer.Serialize(badRequest.Value));
+        }
+
+        [Fact]
+        public async Task Complete_WithProductLineOutsideTenantCatalog_ReturnsValidationError()
+        {
+            _fakeReader.UseRealFiles = true;
+            var session = await SeedSessionWithProductLine(
+                "energysaver-2500",
+                ["energysaver-2500"]);
+            var itemId = Assert.Single((await _sessionRepo.GetByIdAsync(session.Id))!.Items).Id;
+            var payload = BuildValidCompletionPayload(
+                session.Id,
+                itemId,
+                productLineKey: "apex",
+                productLineName: "Apex");
+
+            var result = await _controller.Complete(session.Id.ToString(), payload);
+
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Contains("productLine", JsonSerializer.Serialize(badRequest.Value));
+        }
+
+        [Fact]
+        public async Task Complete_WithSubmittedTwoSectionPayload_PricesBrickmouldFromTopLevelSizing()
+        {
+            _fakeReader.UseRealFiles = true;
+            var session = await SeedSessionWithProductLine("energysaver-2500");
+            var itemId = Assert.Single((await _sessionRepo.GetByIdAsync(session.Id))!.Items).Id;
+            var payload = LoadSubmittedPricingPayload(session.Id, itemId);
+
+            var result = await _controller.Complete(session.Id.ToString(), payload);
+
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(447.75m, GetDecimalProperty(okResult.Value!, "authoritativePrice"));
+        }
+
         public void Dispose()
         {
             _context.Dispose();
@@ -218,8 +289,15 @@ namespace WindowConfigurator.Tests.Controllers
         /// </summary>
         internal class FakeTemplateReader : ITemplateReader
         {
-            public Task<string> ReadTemplateAsync(string filename)
-                => Task.FromResult($"{filename} content");
+            public bool UseRealFiles { get; set; }
+
+            public async Task<string> ReadTemplateAsync(string filename)
+            {
+                var path = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "WindowConfigurator", "AppData", filename);
+                return UseRealFiles && File.Exists(path)
+                    ? await File.ReadAllTextAsync(path)
+                    : $"{filename} content";
+            }
         }
 
         private static PriceInfoRoot LoadPriceInfo()
@@ -243,6 +321,87 @@ namespace WindowConfigurator.Tests.Controllers
             var prop = value.GetType().GetProperty(propertyName);
             Assert.NotNull(prop);
             return Convert.ToString(prop!.GetValue(value))!;
+        }
+
+        private static JsonElement BuildValidCompletionPayload(
+            Guid sessionId,
+            Guid itemId,
+            string productLineKey = "energysaver-2500",
+            string productLineName = "EnergySaver 2500",
+            int frameWidthWhole = 24,
+            int frameHeightWhole = 36,
+            int sectionWidthWhole = 24,
+            int sectionHeightWhole = 36,
+            string styleName = "Casement",
+            string frameColorName = "White")
+        {
+            return JsonSerializer.SerializeToElement(new
+            {
+                id = itemId,
+                orderId = sessionId,
+                location = "Bedroom Left",
+                lineItemNumber = "101",
+                meetsEgress = true,
+                productLine = new
+                {
+                    key = productLineKey,
+                    name = productLineName,
+                    manufacturerName = "All Weather Windows"
+                },
+                frameWidth = Measurement(frameWidthWhole),
+                frameHeight = Measurement(frameHeightWhole),
+                roWidth = Measurement(frameWidthWhole + 1),
+                roHeight = Measurement(frameHeightWhole + 1),
+                osmWidth = Measurement(frameWidthWhole),
+                osmHeight = Measurement(frameHeightWhole),
+                frameColor = new { name = frameColorName },
+                brickmouldStyle = new { name = "None" },
+                paneConfiguration = new { name = "Dual" },
+                sections = new[]
+                {
+                    new
+                    {
+                        width = Measurement(sectionWidthWhole),
+                        height = Measurement(sectionHeightWhole),
+                        style = new { name = styleName },
+                        grillePattern = new { name = "None" },
+                        sdlPattern = new { name = "None" },
+                        crank = new { name = "None" }
+                    }
+                }
+            });
+        }
+
+        private static object Measurement(int whole)
+            => new { sign = 1, whole, numerator = 0, denominator = 1 };
+
+        private static JsonElement LoadSubmittedPricingPayload(Guid sessionId, Guid itemId)
+        {
+            var path = Path.Combine(
+                FindSolutionRoot(),
+                "WindowConfigurator.Tests",
+                "Pricing",
+                "fixtures",
+                "submitted-44775-payload.json");
+
+            var node = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+            node["id"] = itemId.ToString();
+            node["orderId"] = sessionId.ToString();
+            return JsonSerializer.SerializeToElement(node);
+        }
+
+        private static string FindSolutionRoot()
+        {
+            var current = new DirectoryInfo(AppContext.BaseDirectory);
+            while (current != null)
+            {
+                if (File.Exists(Path.Combine(current.FullName, "WindowConfigurator.sln")))
+                    return current.FullName;
+
+                current = current.Parent;
+            }
+
+            return Directory.GetCurrentDirectory();
         }
     }
 }

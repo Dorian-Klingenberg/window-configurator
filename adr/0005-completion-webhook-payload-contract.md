@@ -37,8 +37,8 @@ These fields are always present and non-null when the event fires:
 - `session.externalReferenceId` — present for CRM-initiated sessions; null for website-initiated unless the CRM provided it
 - `session.customerEmail` — present for website-initiated sessions; null for CRM-initiated unless provided
 - `measurements.roughOpening` — null until the contractor performs a remeasure visit; a null rough opening means the window is not yet ready to order
-- `authoritativePrice` (item and group level) — null until Phase 4 (server-side pricing) is implemented
-- `session.totalAuthoritativePrice` — null until Phase 4
+- `authoritativePrice` (item and group level) — present after server-side pricing has run; null only when a session/item has not yet been priced
+- `session.totalAuthoritativePrice` — present after server-side pricing has run; null only when aggregate pricing has not yet been computed
 
 ### Order Groups
 
@@ -59,14 +59,14 @@ Items are grouped by product line in `orderGroups`. Most quotes will have one gr
     "customerEmail": null,
     "completedAt": "2026-05-17T21:44:58Z",
     "itemCount": 2,
-    "totalAuthoritativePrice": null
+    "totalAuthoritativePrice": 1066.75
   },
   "orderGroups": [
     {
       "productLineKey": "energysaver-2500",
       "productLineName": "EnergySaver 2500",
       "manufacturerName": "All Weather Windows",
-      "groupAuthoritativePrice": null,
+      "groupAuthoritativePrice": 1066.75,
       "items": [
         {
           "id": "i1000000-0000-0000-0000-000000000001",
@@ -74,7 +74,7 @@ Items are grouped by product line in `orderGroups`. Most quotes will have one gr
           "location": "Master Bedroom Left",
           "meetsEgress": false,
           "sectionCount": 2,
-          "authoritativePrice": null,
+          "authoritativePrice": 544.10,
           "measurements": {
             "frame": {
               "widthInches": 70.25,
@@ -98,7 +98,7 @@ Items are grouped by product line in `orderGroups`. Most quotes will have one gr
           "location": "Kitchen",
           "meetsEgress": true,
           "sectionCount": 1,
-          "authoritativePrice": null,
+          "authoritativePrice": 522.65,
           "measurements": {
             "frame": {
               "widthInches": 36.0,
@@ -141,5 +141,5 @@ Fire one webhook per product line group. Rejected because most sessions have one
 
 - The `configuration` blob inside each item is the full Knockout payload. Consumers should treat it as opaque unless they specifically need section-level detail.
 - `roughOpening: null` is a meaningful signal — the CRM integration should check for null rough openings before treating a quote as order-ready.
-- Pricing fields will be null for all early deployments. Consumers must handle null prices gracefully.
+- Consumers must still handle null prices gracefully for draft or unpriced records, but completed sessions are expected to include server-computed authoritative prices.
 - This contract is versioned implicitly by the platform version. Future breaking changes will be introduced via a versioned API path, not by modifying this payload in place.

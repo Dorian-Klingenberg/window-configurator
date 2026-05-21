@@ -169,7 +169,7 @@ The price-per-inch value is multiplied against a measure of the window (perimete
 - Pane count (Dual vs Triple)
 - Pane configuration
 
-Currently the pricing engine lives in JavaScript in the browser and is **not server-authoritative**. A contractor or technically savvy user can manipulate the browser-computed price. Making pricing server-authoritative is Phase 4 of the implementation roadmap.
+The browser still computes a live estimate for responsiveness, but the server now computes the authoritative completion price and persists it. The remaining pricing work is policy-oriented: server validation must reject unsupported/out-of-range payloads before pricing, and past-final-breakpoint legacy extrapolation behavior is intentionally tracked by tests rather than treated as normal supported pricing.
 
 ---
 
@@ -290,21 +290,21 @@ A `QuoteSession` contains one or more `ConfiguredWindowItem` entries. Each item 
 - Client-side validation (size restrictions)
 - Product catalog data (three product lines fully configured)
 - ASP.NET Core MVC shell
+- EF Core persistence for tenants, quote sessions, and configured window items
+- Server-owned catalog resolution for item and section templates
+- Server-authoritative pricing at completion, including persisted authoritative item prices
+- Server-side completion validation for tenant product-line access, frame/style constraints, option availability, and pricing-grid limits
 
 ### Stubbed / placeholder
-- `OrderItemEntity` is replaced by `ConfiguredWindowItemEntity` (new, not yet wired in)
-- Controller always returns EnergySaver template regardless of session context
-- No save flow — configured data never POSTs to the server
-- Salesforce user IDs hardcoded in controller
+- The current MVC completion endpoint is a bridge until the versioned API surface exists
+- `/` falls back to the first development session when no explicit session ID is provided
+- Draft save is intentionally deferred until the UI supports adding and switching between multiple items
 
 ### Not yet built
-- Persistence (in-memory only)
 - External API layer (`/api/v1/...`)
 - Authentication (API keys, magic links)
 - Webhook dispatch system
-- Multi-tenant configuration
-- Server-side pricing (Phase 4)
-- Server-side validation (Phase 5)
+- Full multi-tenant hardening
 - Email delivery
 
 ---
@@ -312,11 +312,11 @@ A `QuoteSession` contains one or more `ConfiguredWindowItem` entries. Each item 
 ## Implementation Roadmap Summary
 
 0. Stabilize demo surface — remove fake UI affordances ✅
-1. Define real backend shape — domain models and session contracts *(in progress)*
-2. Introduce session persistence (EF Core + database)
-3. Move catalog resolution server-side
-4. Port authoritative pricing to C#
-5. Add server-side validation at completion
+1. Define real backend shape — domain models and session contracts ✅
+2. Introduce session persistence (EF Core + database) ✅
+3. Move catalog resolution server-side ✅
+4. Port authoritative pricing to C# ✅
+5. Add server-side validation at completion 🚧
 6. Add minimal REST API surface
 7. Add CRM handoff and webhook dispatch
 8. Harden for real multi-tenant use
