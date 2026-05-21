@@ -301,9 +301,9 @@ A `QuoteSession` contains one or more `ConfiguredWindowItem` entries. Each item 
 - Draft save is intentionally deferred until the UI supports adding and switching between multiple items
 
 ### Not yet built
-- External API layer (`/api/v1/...`)
+- Secured external API layer (`/api/v1/...`) — minimal quote-session create/get/update, item add/update, and submit endpoints are present, but auth and production contract hardening remain
 - Authentication (API keys, magic links)
-- Webhook dispatch system
+- Full webhook dispatch system (retry/backoff and durable delivery tracking remain)
 - Full multi-tenant hardening
 - Email delivery
 
@@ -316,9 +316,9 @@ A `QuoteSession` contains one or more `ConfiguredWindowItem` entries. Each item 
 2. Introduce session persistence (EF Core + database) ✅
 3. Move catalog resolution server-side ✅
 4. Port authoritative pricing to C# ✅
-5. Add server-side validation at completion 🚧
-6. Add minimal REST API surface
-7. Add CRM handoff and webhook dispatch
+5. Add server-side validation at completion ✅
+6. Add minimal REST API surface ✅
+7. Add CRM handoff and webhook dispatch 🚧
 8. Harden for real multi-tenant use
 9. (Optional) Frontend modernization
 

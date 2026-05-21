@@ -168,6 +168,21 @@ namespace WindowConfigurator.Tests.Controllers
         }
 
         [Fact]
+        public async Task PriceInfo_ReturnsAlignedBrickmouldGridPastPreviousEdge()
+        {
+            var result = await _controller.PriceInfo(Guid.NewGuid().ToString());
+            var ok = Assert.IsType<OkObjectResult>(result);
+            var root = Assert.IsType<PriceInfoRoot>(ok.Value);
+
+            var manufacturer = Assert.Single(root.PriceInfo.Manufacturers, m => m.Name == "All Weather Windows");
+            var energySaver = Assert.Single(manufacturer.ProductLines, pl => pl.Name == "EnergySaver 2500");
+            var twoInchBrickmould = Assert.Single(energySaver.BrickmouldStyles, b => b.Name == "2 Inch");
+
+            Assert.True(twoInchBrickmould.WidthBreakpoints[^1].Width >= 90m);
+            Assert.True(twoInchBrickmould.WidthBreakpoints[^1].HeightBreakpoints[^1].Height >= 46.0625m);
+        }
+
+        [Fact]
         public async Task Complete_WithExistingSession_ComputesAuthoritativePriceAndMarksSessionComplete()
         {
             _fakeReader.UseRealFiles = true;
@@ -266,6 +281,65 @@ namespace WindowConfigurator.Tests.Controllers
         }
 
         [Fact]
+        public async Task Complete_WithMixedProductLinesDisallowed_ReturnsValidationError()
+        {
+            _fakeReader.UseRealFiles = true;
+            var session = await SeedSessionWithProductLine(
+                "energysaver-2500",
+                ["energysaver-2500", "apex"]);
+
+            var tenant = await _tenantRepo.GetByIdAsync(session.TenantId);
+            Assert.NotNull(tenant);
+            tenant!.MixedProductLinesAllowed = false;
+            await _sessionRepo.SaveChangesAsync();
+
+            await _sessionRepo.AddItemAsync(session.Id, new ConfiguredWindowItemEntity
+            {
+                ProductLineKey = "apex",
+                Location = "Upstairs"
+            });
+            await _sessionRepo.SaveChangesAsync();
+
+            var updated = await _sessionRepo.GetByIdAsync(session.Id);
+            var apexItemId = updated!.Items.Single(i => i.ProductLineKey == "apex").Id;
+            var payload = BuildValidCompletionPayload(
+                session.Id,
+                apexItemId,
+                productLineKey: "apex",
+                productLineName: "Apex");
+
+            var result = await _controller.Complete(session.Id.ToString(), payload);
+
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Contains("mixed product lines", JsonSerializer.Serialize(badRequest.Value), StringComparison.OrdinalIgnoreCase);
+        }
+
+        [Fact]
+        public async Task Complete_WithSectionWidthAboveStyleMaximum_ReturnsValidationError()
+        {
+            _fakeReader.UseRealFiles = true;
+            var session = await SeedSessionWithProductLine("energysaver-2500");
+            var itemId = Assert.Single((await _sessionRepo.GetByIdAsync(session.Id))!.Items).Id;
+            var payload = BuildValidCompletionPayload(
+                session.Id,
+                itemId,
+                styleName: "Casement");
+
+            var payloadObject = JsonNode.Parse(payload.GetRawText())!.AsObject();
+            var sections = payloadObject["sections"]!.AsArray();
+            var section = sections[0]!.AsObject();
+            section["width"] = JsonSerializer.SerializeToNode(new { sign = 1, whole = 38, numerator = 0, denominator = 1 });
+            section["height"] = JsonSerializer.SerializeToNode(new { sign = 1, whole = 36, numerator = 0, denominator = 1 });
+            payloadObject["frameWidth"] = JsonSerializer.SerializeToNode(new { sign = 1, whole = 38, numerator = 0, denominator = 1 });
+            payloadObject["osmWidth"] = JsonSerializer.SerializeToNode(new { sign = 1, whole = 38, numerator = 0, denominator = 1 });
+
+            var result = await _controller.Complete(session.Id.ToString(), JsonSerializer.SerializeToElement(payloadObject));
+
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Contains("sections[0].width", JsonSerializer.Serialize(badRequest.Value));
+        }
+
+        [Fact]
         public async Task Complete_WithSubmittedTwoSectionPayload_PricesBrickmouldFromTopLevelSizing()
         {
             _fakeReader.UseRealFiles = true;
@@ -303,11 +377,14 @@ namespace WindowConfigurator.Tests.Controllers
 
         private static PriceInfoRoot LoadPriceInfo()
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "WindowConfigurator", "AppData", "priceInfo.json");
+            var appDataPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "WindowConfigurator", "AppData");
+            var path = Path.Combine(appDataPath, "priceInfo.json");
             var json = File.ReadAllText(path);
-            return JsonSerializer.Deserialize<PriceInfoRoot>(
+            var root = JsonSerializer.Deserialize<PriceInfoRoot>(
                 json,
                 new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
+            PricingGridAligner.AlignToCatalogTemplates(root, appDataPath);
+            return root;
         }
 
         private static decimal GetDecimalProperty(object value, string propertyName)

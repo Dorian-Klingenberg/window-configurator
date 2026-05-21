@@ -97,6 +97,17 @@ namespace WindowConfigurator.Controllers
             }
 
             var tenant = await _tenantRepository.GetByIdAsync(session.TenantId);
+            if (!ValidateMixedProductLinePolicy(session, item, productLineKey, tenant, out var mixedPolicyError))
+            {
+                return BadRequest(new
+                {
+                    validationErrors = new[]
+                    {
+                        new CompletionValidationError("productLine", mixedPolicyError)
+                    }
+                });
+            }
+
             var itemTemplateJson = await _templateReader.ReadTemplateAsync(catalogEntry.ItemTemplateFile);
             var validation = _completionValidation.Validate(payload, productLineKey, tenant, itemTemplateJson);
             if (!validation.IsValid)
@@ -328,6 +339,36 @@ namespace WindowConfigurator.Controllers
                 return item.ProductLineKey;
 
             return session.DefaultProductLineKey ?? string.Empty;
+        }
+
+        private static bool ValidateMixedProductLinePolicy(
+            QuoteSessionEntity session,
+            ConfiguredWindowItemEntity currentItem,
+            string requestedProductLineKey,
+            TenantEntity? tenant,
+            out string error)
+        {
+            error = string.Empty;
+            if (tenant?.MixedProductLinesAllowed == true)
+                return true;
+
+            var existingDistinctProductLines = session.Items
+                .Where(i => i.Id != currentItem.Id)
+                .Select(i => i.ProductLineKey)
+                .Where(k => !string.IsNullOrWhiteSpace(k))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            if (existingDistinctProductLines.Count == 0)
+                return true;
+
+            if (existingDistinctProductLines.Any(k => !string.Equals(k, requestedProductLineKey, StringComparison.OrdinalIgnoreCase)))
+            {
+                error = "This tenant does not allow mixed product lines in a single quote session.";
+                return false;
+            }
+
+            return true;
         }
 
         private static string? TryReadString(JsonElement payload, string propertyName)

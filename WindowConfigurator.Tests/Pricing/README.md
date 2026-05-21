@@ -8,7 +8,9 @@ Current verification:
 
 - `PricingComparisonMatrixTests` -> JavaScript-generated fixture compared against C# pricing service
 - `PricingCrossValidationTests` -> hand-curated JavaScript vs C# regression cases
-- Full suite -> 152 passing
+- Full suite -> 157 passing
+
+Note: when overriding build output during local debugging, use an absolute repo-root `BaseOutputPath` (for example `-p:BaseOutputPath=<repo>\artifacts\testbin\`). Some pricing tests resolve `AppData` fixtures relative to runtime output structure, and relative output overrides can produce false `DirectoryNotFoundException` failures.
 
 The earlier `$1812.33` expectation was resolved as a stale screenshot narrative, not an actual result from executing the legacy JavaScript engine against the same payload. The verified JavaScript result for that disputed large two-section case is `$1066.75`, and the C# service now matches it.
 

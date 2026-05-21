@@ -150,7 +150,7 @@ Effort: medium to high.
 
 This is the first phase that makes the system commercially trustworthy.
 
-## Phase 5: Add Server-Side Validation At Completion 🚧 Active
+## Phase 5: Add Server-Side Validation At Completion ✅ Complete
 
 Risk reduced: invalid configurations being accepted, inconsistent catalog usage, pricing computed from unsupported states.
 Effort: medium to high.
@@ -177,7 +177,7 @@ Effort: medium to high.
 
 Pricing and validation should share the same authoritative catalog context. Porting them together is safer than trying to validate against still-placeholder catalog logic.
 
-## Phase 6: Add The Minimal API Surface
+## Phase 6: Add The Minimal API Surface ✅ Complete
 
 Risk reduced: inability to integrate cleanly with CRM or website flows, reliance on ad hoc MVC endpoints.
 Effort: medium.
@@ -206,7 +206,7 @@ Effort: medium.
 
 An API built before the session, catalog, pricing, and validation models stabilize will likely have to be redesigned.
 
-## Phase 7: Add CRM Handoff And Tenant Integration Features
+## Phase 7: Add CRM Handoff And Tenant Integration Features 🚧 Active
 
 Risk reduced: inability to operationalize completed quotes with clients.
 Effort: medium to high.
@@ -269,7 +269,7 @@ Effort: high.
 ### Changes
 
 1. Keep the current UX and workflows as the reference behavior.
-2. Port the frontend to a newer stack only if it provides real maintenance benefits.
+2. Port the frontend to a newer stack only if it provides real maintenance benefits. (I think the benifit of porting pricing to c# and using blazor is good)
 3. Consume the now-stable server APIs instead of duplicating authority in the client.
 
 ### Why this is last
@@ -285,9 +285,9 @@ If work needs to start immediately, do the next items in this order:
 3. Implement persistence from Phase 2.
 4. Implement server-owned catalog resolution from Phase 3.
 5. Port authoritative pricing from Phase 4. ✅ Complete
-6. Add authoritative validation from Phase 5. 🚧 Active
-7. Stabilize the session API from Phase 6.
-8. Add CRM handoff from Phase 7.
+6. Add authoritative validation from Phase 5. ✅ Complete
+7. Stabilize the session API from Phase 6. ✅ Complete
+8. Add CRM handoff from Phase 7. 🚧 Active
 
 ## Definition Of A Meaningfully Real Product
 

@@ -6,6 +6,7 @@ using WindowConfigurator.Data.Entities;
 using WindowConfigurator.Data.Pricing;
 using WindowConfigurator.Data.Repositories;
 using WindowConfigurator.Data.Validation;
+using WindowConfigurator.Data.Webhooks;
 using WindowConfigurator.Web.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ builder.Services.AddScoped<ITenantRepository, EfTenantRepository>();
 builder.Services.AddSingleton<ICatalogService, CatalogService>();
 builder.Services.AddSingleton<WindowConfiguratorDataHelper>();
 builder.Services.AddSingleton<ITemplateReader>(sp => sp.GetRequiredService<WindowConfiguratorDataHelper>());
+builder.Services.AddHttpClient<IQuoteCompletionWebhookDispatcher, QuoteCompletionWebhookDispatcher>();
 
 // Load priceInfo.json once at startup and share it with server pricing and validation.
 builder.Services.AddSingleton(sp =>

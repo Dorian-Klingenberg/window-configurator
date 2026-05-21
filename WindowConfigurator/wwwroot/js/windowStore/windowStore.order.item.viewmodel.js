@@ -2304,9 +2304,23 @@ windowStore.order.item.ItemViewModel = function () {
                 var price = result && typeof result.authoritativePrice === "number"
                     ? result.authoritativePrice.toFixed(2)
                     : "0.00";
+                self.price("$" + price);
                 alert("Window submitted. Authoritative price: $" + price);
             })
             .fail(function (jqXHR, textStatus, errorThrown) {
+                var response = jqXHR && jqXHR.responseJSON ? jqXHR.responseJSON : null;
+                var validationErrors = response && response.validationErrors ? response.validationErrors : null;
+                if (validationErrors && validationErrors.length > 0) {
+                    var lines = [];
+                    for (var i = 0; i < validationErrors.length; i++) {
+                        var error = validationErrors[i];
+                        var message = error && error.message ? error.message : "Validation failed.";
+                        lines.push((i + 1) + ". " + message);
+                    }
+                    alert("Window could not be submitted:\n" + lines.join("\n"));
+                    return;
+                }
+
                 alert(errorThrown || textStatus || "Submit failed.");
             });
     };
