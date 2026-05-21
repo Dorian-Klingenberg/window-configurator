@@ -18,7 +18,7 @@ This roadmap is ordered by risk reduction first, then by implementation effort. 
 4. Keep the API CRM-agnostic.
 5. Treat browser-side pricing and validation as convenience, not authority.
 
-## Phase 0: Stabilize The Demo Surface
+## Phase 0: Stabilize The Demo Surface ✅ Complete
 
 Risk reduced: misleading product behavior, confusing demos, false expectations.
 Effort: low.
@@ -40,7 +40,7 @@ Effort: low.
 
 These changes are cheap and immediately reduce confusion for demos, planning, and architecture work.
 
-## Phase 1: Define The Real Backend Shape
+## Phase 1: Define The Real Backend Shape ✅ Complete
 
 Risk reduced: wrong architecture, wrong product boundary, wasted implementation effort.
 Effort: low to medium.
@@ -68,7 +68,7 @@ Effort: low to medium.
 
 This is the lowest-effort work that prevents major rework later. Without these definitions, pricing, persistence, and API design will drift.
 
-## Phase 2: Introduce Session Persistence
+## Phase 2: Introduce Session Persistence ✅ Complete
 
 Risk reduced: loss of state, inability to support draft/resume, inability to support multi-window website flow.
 Effort: medium.
@@ -95,7 +95,7 @@ Effort: medium.
 
 Persistence is foundational for both serious CRM integration and the website prospect flow.
 
-## Phase 3: Move Catalog Resolution Behind The Server
+## Phase 3: Move Catalog Resolution Behind The Server ✅ Complete
 
 Risk reduced: wrong template selection, fragile product-line behavior, client-controlled catalog access.
 Effort: medium.

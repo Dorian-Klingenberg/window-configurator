@@ -4,8 +4,7 @@ windowStore.order.item = windowStore.order.item || {};
 
 windowStore.order.item.ItemViewModel = function () {
     var self = this;
-    self.orderId = "b8b55bf1-8c58-4b94-ab89-0b6390df3f34";
-    self.itemId = "48a0019f-ecb3-480c-b3b3-6f9d77b167eb";
+    self.orderId = "";
     self.frameSelected = ko.observable(true);
     self.priceCalc = new windowStore.order.item.PriceCalculator();
 
@@ -2018,8 +2017,9 @@ windowStore.order.item.ItemViewModel = function () {
 
 
 
-    self.loadItem = function (templateName, success) {
-        var url = "OrderItem/GetOverview"; //templateName;
+    self.loadItem = function (templateName, sessionId, success) {
+        self.orderId = sessionId;
+        var url = "OrderItem/GetOverview/" + sessionId;
         return $.ajax({
             cache: false,
             type: "GET",
@@ -2027,8 +2027,13 @@ windowStore.order.item.ItemViewModel = function () {
             url: url
         })
             .done(function (data, textStatus, jqXHR) {
-
+                // The template JSON is legacy demo data and still carries stale root IDs.
+                // Strip those fields so the live session id stays authoritative.
+                delete data.id;
+                delete data.orderId;
                 ko.mapping.fromJS(data, {}, self);
+                self.orderId = sessionId;
+
                 for (var i = 0; i < self.productLine.cranks().length; i++) {
                     if (self.productLine.cranks()[i].name() === "None") {
                         self.productLine.cranks.splice(i, 1);
@@ -2269,6 +2274,42 @@ windowStore.order.item.ItemViewModel = function () {
         };
     };
     self.contactInfo = ko.observable("");
+    self.save = function () {
+        var url = "OrderItem/Save/" + self.orderId;
+        return $.ajax({
+            cache: false,
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: url,
+            data: JSON.stringify(ko.mapping.toJS(self))
+        })
+            .done(function () {
+                alert("Window saved.");
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown || textStatus || "Save failed.");
+            });
+    };
+    self.complete = function () {
+        var url = "OrderItem/Complete/" + self.orderId;
+        return $.ajax({
+            cache: false,
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: url,
+            data: JSON.stringify(ko.mapping.toJS(self))
+        })
+            .done(function (result) {
+                var price = result && typeof result.authoritativePrice === "number"
+                    ? result.authoritativePrice.toFixed(2)
+                    : "0.00";
+                alert("Window submitted. Authoritative price: $" + price);
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown || textStatus || "Submit failed.");
+            });
+    };
     self.getSpec = function () {
         var res = "";
         res += "Contact Info: " + self.contactInfo() + "\r\n";

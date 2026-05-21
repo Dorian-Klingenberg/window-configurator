@@ -1,17 +1,73 @@
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using WindowConfigurator.Data;
+using WindowConfigurator.Data.Catalog;
+using WindowConfigurator.Data.Entities;
+using WindowConfigurator.Data.Pricing;
 using WindowConfigurator.Data.Repositories;
 using WindowConfigurator.Web.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Single for in memory repo so new data persists across requests
-// use Transient for db i think
-builder.Services.AddSingleton<IOrderRepository, InMemoryOrderRepository>();
+builder.Services.AddDbContext<WindowConfiguratorDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IQuoteSessionRepository, EfQuoteSessionRepository>();
+builder.Services.AddScoped<ITenantRepository, EfTenantRepository>();
+builder.Services.AddSingleton<ICatalogService, CatalogService>();
 builder.Services.AddSingleton<WindowConfiguratorDataHelper>();
+builder.Services.AddSingleton<ITemplateReader>(sp => sp.GetRequiredService<WindowConfiguratorDataHelper>());
+
+// Load priceInfo.json once at startup and register PricingService as a singleton.
+// The service itself has no file I/O — all pricing data is passed in via the constructor.
+builder.Services.AddSingleton<IPricingService>(sp =>
+{
+    var env = sp.GetRequiredService<IWebHostEnvironment>();
+    var path = Path.Combine(env.ContentRootPath, "AppData", "priceInfo.json");
+    var json = File.ReadAllText(path);
+    var priceInfoRoot = JsonSerializer.Deserialize<PriceInfoRoot>(
+        json,
+        new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
+    return new PricingService(priceInfoRoot);
+});
 
 var app = builder.Build();
+
+// Ensure the database schema exists and, in Development, seed a demo session.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<WindowConfiguratorDbContext>();
+    db.Database.EnsureCreated();
+
+    if (app.Environment.IsDevelopment() && !db.QuoteSessions.Any())
+    {
+        var demoTenantId = new Guid("00000000-0000-0000-0000-000000000002");
+        var demoSessionId = new Guid("00000000-0000-0000-0000-000000000001");
+
+        db.Tenants.Add(new TenantEntity
+        {
+            Id = demoTenantId,
+            Name = "Demo Dealer",
+            ApiKey = "demo-api-key",
+            WebhookCallbackUrl = "http://localhost/webhook",
+            AllowedProductLineKeys = ["energysaver-2500", "apex", "carriage"],
+            MixedProductLinesAllowed = true
+        });
+
+        db.QuoteSessions.Add(new QuoteSessionEntity
+        {
+            Id = demoSessionId,
+            TenantId = demoTenantId,
+            DefaultProductLineKey = "energysaver-2500",
+            Status = QuoteSessionStatus.Draft,
+            ExternalReferenceId = "DEMO-001"
+        });
+
+        db.SaveChanges();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -36,6 +92,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{id?}",
     defaults: new { controller = "orderitem", action = "index"});
+
+app.MapControllerRoute(
+    name: "createSession",
+    pattern: "new",
+    defaults: new { controller = "orderitem", action = "CreateDevSession"});
 
 app.MapControllerRoute(
     name: "api",

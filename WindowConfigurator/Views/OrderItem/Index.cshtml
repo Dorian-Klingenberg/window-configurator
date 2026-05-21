@@ -22,15 +22,15 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/configurator.css" asp-append-version="true" />
 
-    <script src="~/js/knockout-3.4.1.debug.js"></script>
-    <script src="~/js/knockout.mapping-latest.debug.js"></script>
-    <script src="~/js/windowStore/fraction.js"></script>
-    <script src="~/js/windowStore/windowStore.measurement.js"></script>
-    <script src="~/js/windowStore/windowStore.order.item.preview.viewModel.js"></script>
-    <script src="~/js/windowStore/windowStore.order.item.validator.js"></script>
-    <script src="~/js/windowStore/windowStore.order.item.viewmodel.js"></script>
-    <script src="~/js/windowStore/windowStore.preview.sectionOptions.js"></script>
-    <script src="~/js/windowStore/pricing.js"></script>
+    <script src="~/js/knockout-3.4.1.debug.js" asp-append-version="true"></script>
+    <script src="~/js/knockout.mapping-latest.debug.js" asp-append-version="true"></script>
+    <script src="~/js/windowStore/fraction.js" asp-append-version="true"></script>
+    <script src="~/js/windowStore/windowStore.measurement.js" asp-append-version="true"></script>
+    <script src="~/js/windowStore/windowStore.order.item.preview.viewModel.js" asp-append-version="true"></script>
+    <script src="~/js/windowStore/windowStore.order.item.validator.js" asp-append-version="true"></script>
+    <script src="~/js/windowStore/windowStore.order.item.viewmodel.js" asp-append-version="true"></script>
+    <script src="~/js/windowStore/windowStore.preview.sectionOptions.js" asp-append-version="true"></script>
+    <script src="~/js/windowStore/pricing.js" asp-append-version="true"></script>
 
     @*@Scripts.Render("~/bundles/windowStore")*@
 
@@ -841,7 +841,9 @@
                     </div>
                     <div class="col-xs-6 price">
                         <div><span>Estimated Price:&nbsp;&nbsp;&nbsp;</span><span data-bind="text: price">$1600</span></div>
-                        @*<div><button class="btn btn-default" data-toggle="modal" data-target="#quote-modal">Get A Quote!</button></div>*@
+                        <div class="text-right" style="margin-top: 10px;">
+                            <button id="window-submit-btn" type="button" class="btn btn-success">Submit Window</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row preview-display" id="preview">
@@ -1306,9 +1308,12 @@
         });
 
         var itemViewModel = new windowStore.order.item.ItemViewModel();
-        //  itemViewModel.loadItem("energySaverItemTemplate", function() {
-        itemViewModel.loadItem("energySaverItemTemplate", function () {
+        itemViewModel.loadItem("energySaverItemTemplate", "@Model.Id", function () {
           ko.applyBindings(itemViewModel, $("body")[0]);
+        });
+
+        $("#window-submit-btn").click(function () {
+          itemViewModel.complete();
         });
 
         $(window).on('resize', function () {
