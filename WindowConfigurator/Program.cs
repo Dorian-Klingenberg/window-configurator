@@ -25,11 +25,13 @@ builder.Services.AddSingleton<ITemplateReader>(sp => sp.GetRequiredService<Windo
 builder.Services.AddSingleton(sp =>
 {
     var env = sp.GetRequiredService<IWebHostEnvironment>();
-    var path = Path.Combine(env.ContentRootPath, "AppData", "priceInfo.json");
+    var appDataPath = Path.Combine(env.ContentRootPath, "AppData");
+    var path = Path.Combine(appDataPath, "priceInfo.json");
     var json = File.ReadAllText(path);
     var priceInfoRoot = JsonSerializer.Deserialize<PriceInfoRoot>(
         json,
         new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
+    PricingGridAligner.AlignToCatalogTemplates(priceInfoRoot, appDataPath);
     return priceInfoRoot;
 });
 builder.Services.AddSingleton<IPricingService>(sp => new PricingService(sp.GetRequiredService<PriceInfoRoot>()));

@@ -49,7 +49,8 @@ namespace WindowConfigurator.Tests.Controllers
                 _fakeReader,
                 _pricingService,
                 _tenantRepo,
-                _completionValidation);
+                _completionValidation,
+                priceInfo);
         }
 
         private async Task<QuoteSessionEntity> SeedSessionWithProductLine(

@@ -12,7 +12,7 @@ public class CompletionValidationServiceTests
         Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "WindowConfigurator", "AppData", "energySaverItemTemplate.json"));
 
     [Fact]
-    public void Validate_WhenPaneConfigurationExceedsPricingBreakpoint_ReturnsError()
+    public void Validate_WhenPaneConfigurationIsWithinCatalogMax_DoesNotReturnPricingGridError()
     {
         var payload = BuildPayload(
             frameWidth: 72.5m,
@@ -25,12 +25,11 @@ public class CompletionValidationServiceTests
             UnrestrictedTenant(),
             _energySaverTemplate);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, error => error.Field.Contains("paneConfiguration"));
+        Assert.DoesNotContain(result.Errors, error => error.Field.Contains("paneConfiguration"));
     }
 
     [Fact]
-    public void Validate_WhenBrickmouldExceedsPricingBreakpoint_ReturnsError()
+    public void Validate_WhenBrickmouldIsWithinCatalogMax_DoesNotReturnPricingGridError()
     {
         var payload = BuildPayload(
             frameWidth: 73.5m,
@@ -44,8 +43,7 @@ public class CompletionValidationServiceTests
             UnrestrictedTenant(),
             _energySaverTemplate);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, error => error.Field == "brickmouldStyle");
+        Assert.DoesNotContain(result.Errors, error => error.Field == "brickmouldStyle");
     }
 
     private static TenantEntity UnrestrictedTenant()
@@ -107,10 +105,13 @@ public class CompletionValidationServiceTests
 
     private static PriceInfoRoot LoadPriceInfo()
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "WindowConfigurator", "AppData", "priceInfo.json");
+        var appDataPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "WindowConfigurator", "AppData");
+        var path = Path.Combine(appDataPath, "priceInfo.json");
         var json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<PriceInfoRoot>(
+        var root = JsonSerializer.Deserialize<PriceInfoRoot>(
             json,
             new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })!;
+        PricingGridAligner.AlignToCatalogTemplates(root, appDataPath);
+        return root;
     }
 }

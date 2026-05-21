@@ -40,6 +40,7 @@ namespace WindowConfigurator.Controllers
         private readonly IPricingService _pricingService;
         private readonly ITenantRepository _tenantRepository;
         private readonly ICompletionValidationService _completionValidation;
+        private readonly PriceInfoRoot _priceInfoRoot;
 
         public OrderItemController(
             IQuoteSessionRepository sessionRepository,
@@ -47,7 +48,8 @@ namespace WindowConfigurator.Controllers
             ITemplateReader templateReader,
             IPricingService pricingService,
             ITenantRepository tenantRepository,
-            ICompletionValidationService completionValidation)
+            ICompletionValidationService completionValidation,
+            PriceInfoRoot priceInfoRoot)
         {
             _sessionRepository = sessionRepository;
             _catalog = catalog;
@@ -55,6 +57,7 @@ namespace WindowConfigurator.Controllers
             _pricingService = pricingService;
             _tenantRepository = tenantRepository;
             _completionValidation = completionValidation;
+            _priceInfoRoot = priceInfoRoot;
         }
 
         public async Task<IActionResult> Index(string id)
@@ -149,8 +152,8 @@ namespace WindowConfigurator.Controllers
         [HttpGet]
         public async Task<IActionResult> PriceInfo(string id)
         {
-            var json = await _templateReader.ReadTemplateAsync("priceInfo.json");
-            return Ok(json);
+            await Task.CompletedTask;
+            return Ok(_priceInfoRoot);
         }
 
         [HttpGet]
