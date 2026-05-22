@@ -234,7 +234,7 @@ Effort: medium to high.
 
 A callback mechanism is only useful once the completed payload is authoritative and stable.
 
-## Phase 8: Harden For Real Multi-Tenant Use 🚧 Active
+## Phase 8: Harden For Real Multi-Tenant Use ✅ Complete
 
 Risk reduced: tenant leakage, wrong branding/catalog access, operational issues at scale.
 Effort: high.
@@ -256,7 +256,7 @@ Effort: high.
 
 The earlier phases create the core trust boundary first. Tenant hardening should build on that core rather than complicating early implementation.
 
-## Phase 9: Optional UI Port Or Technical Modernization
+## Phase 9: Optional UI Port Or Technical Modernization 🚧 Active
 
 Risk reduced: long-term maintainability, aging frontend stack.
 Effort: high.

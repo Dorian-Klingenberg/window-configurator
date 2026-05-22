@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WindowConfigurator.Controllers.Api.V1.Models;
+using WindowConfigurator.Controllers.Api.V1.Security;
 using WindowConfigurator.Data.Catalog;
 using WindowConfigurator.Data.Entities;
 using WindowConfigurator.Data.Repositories;
@@ -8,6 +9,7 @@ using WindowConfigurator.Data.Webhooks;
 namespace WindowConfigurator.Controllers.Api.V1
 {
     [ApiController]
+    [ApiKeyAuthorize]
     [Route("api/v1/quote-sessions")]
     public class QuoteSessionsController : ControllerBase
     {
@@ -34,6 +36,12 @@ namespace WindowConfigurator.Controllers.Api.V1
         [HttpPost]
         public async Task<ActionResult<QuoteSessionResponse>> Create([FromBody] CreateQuoteSessionRequest request)
         {
+            if (!TryGetAuthenticatedTenantId(out var authenticatedTenantId))
+                return Unauthorized(ApiErrorResponse.Validation("Authentication required.", new ApiValidationError { Field = "x-api-key", Message = "Missing or invalid API key." }));
+
+            if (request.TenantId != authenticatedTenantId)
+                return StatusCode(StatusCodes.Status403Forbidden, ApiErrorResponse.Validation("Forbidden.", new ApiValidationError { Field = "tenantId", Message = "Tenant scope mismatch." }));
+
             var tenant = await _tenantRepository.GetByIdAsync(request.TenantId);
             if (tenant == null)
                 return BadRequest(ApiErrorResponse.Validation(
@@ -92,9 +100,14 @@ namespace WindowConfigurator.Controllers.Api.V1
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<QuoteSessionResponse>> GetById(Guid id)
         {
+            if (!TryGetAuthenticatedTenantId(out var authenticatedTenantId))
+                return Unauthorized(ApiErrorResponse.Validation("Authentication required.", new ApiValidationError { Field = "x-api-key", Message = "Missing or invalid API key." }));
+
             var session = await _sessionRepository.GetByIdAsync(id);
             if (session == null)
                 return NotFound(ApiErrorResponse.NotFound("Quote session not found."));
+            if (session.TenantId != authenticatedTenantId)
+                return StatusCode(StatusCodes.Status403Forbidden, ApiErrorResponse.Validation("Forbidden.", new ApiValidationError { Field = "tenantId", Message = "Tenant scope mismatch." }));
 
             return Ok(ToResponse(session));
         }
@@ -102,9 +115,14 @@ namespace WindowConfigurator.Controllers.Api.V1
         [HttpPut("{id:guid}")]
         public async Task<ActionResult<QuoteSessionResponse>> Update(Guid id, [FromBody] UpdateQuoteSessionRequest request)
         {
+            if (!TryGetAuthenticatedTenantId(out var authenticatedTenantId))
+                return Unauthorized(ApiErrorResponse.Validation("Authentication required.", new ApiValidationError { Field = "x-api-key", Message = "Missing or invalid API key." }));
+
             var session = await _sessionRepository.GetByIdAsync(id);
             if (session == null)
                 return NotFound(ApiErrorResponse.NotFound("Quote session not found."));
+            if (session.TenantId != authenticatedTenantId)
+                return StatusCode(StatusCodes.Status403Forbidden, ApiErrorResponse.Validation("Forbidden.", new ApiValidationError { Field = "tenantId", Message = "Tenant scope mismatch." }));
 
             var tenant = await _tenantRepository.GetByIdAsync(session.TenantId);
             if (tenant == null)
@@ -144,9 +162,14 @@ namespace WindowConfigurator.Controllers.Api.V1
         [HttpPost("{id:guid}/items")]
         public async Task<ActionResult<QuoteSessionItemResponse>> AddItem(Guid id, [FromBody] AddQuoteSessionItemRequest request)
         {
+            if (!TryGetAuthenticatedTenantId(out var authenticatedTenantId))
+                return Unauthorized(ApiErrorResponse.Validation("Authentication required.", new ApiValidationError { Field = "x-api-key", Message = "Missing or invalid API key." }));
+
             var session = await _sessionRepository.GetByIdAsync(id);
             if (session == null)
                 return NotFound(ApiErrorResponse.NotFound("Quote session not found."));
+            if (session.TenantId != authenticatedTenantId)
+                return StatusCode(StatusCodes.Status403Forbidden, ApiErrorResponse.Validation("Forbidden.", new ApiValidationError { Field = "tenantId", Message = "Tenant scope mismatch." }));
 
             var tenant = await _tenantRepository.GetByIdAsync(session.TenantId);
             if (tenant == null)
@@ -191,9 +214,14 @@ namespace WindowConfigurator.Controllers.Api.V1
             Guid itemId,
             [FromBody] UpdateQuoteSessionItemRequest request)
         {
+            if (!TryGetAuthenticatedTenantId(out var authenticatedTenantId))
+                return Unauthorized(ApiErrorResponse.Validation("Authentication required.", new ApiValidationError { Field = "x-api-key", Message = "Missing or invalid API key." }));
+
             var session = await _sessionRepository.GetByIdAsync(id);
             if (session == null)
                 return NotFound(ApiErrorResponse.NotFound("Quote session not found."));
+            if (session.TenantId != authenticatedTenantId)
+                return StatusCode(StatusCodes.Status403Forbidden, ApiErrorResponse.Validation("Forbidden.", new ApiValidationError { Field = "tenantId", Message = "Tenant scope mismatch." }));
 
             var item = session.Items.FirstOrDefault(i => i.Id == itemId);
             if (item == null)
@@ -241,9 +269,14 @@ namespace WindowConfigurator.Controllers.Api.V1
             Guid id,
             [FromBody] CompleteQuoteSessionRequest? request)
         {
+            if (!TryGetAuthenticatedTenantId(out var authenticatedTenantId))
+                return Unauthorized(ApiErrorResponse.Validation("Authentication required.", new ApiValidationError { Field = "x-api-key", Message = "Missing or invalid API key." }));
+
             var session = await _sessionRepository.GetByIdAsync(id);
             if (session == null)
                 return NotFound(ApiErrorResponse.NotFound("Quote session not found."));
+            if (session.TenantId != authenticatedTenantId)
+                return StatusCode(StatusCodes.Status403Forbidden, ApiErrorResponse.Validation("Forbidden.", new ApiValidationError { Field = "tenantId", Message = "Tenant scope mismatch." }));
 
             var allItemsCompleted = session.Items.Count > 0 &&
                                     session.Items.All(i => i.Status == ConfiguredWindowItemStatus.Completed);
@@ -314,6 +347,15 @@ namespace WindowConfigurator.Controllers.Api.V1
                     .Select(i => ToItemResponse(session.Id, i))
                     .ToList()
             };
+        }
+
+        private bool TryGetAuthenticatedTenantId(out Guid tenantId)
+        {
+            tenantId = Guid.Empty;
+            if (HttpContext == null || !HttpContext.Items.TryGetValue(ApiKeyAuthorizeFilter.TenantIdItemKey, out var raw) || raw is not Guid parsed)
+                return false;
+            tenantId = parsed;
+            return true;
         }
 
         private string? ValidateAndNormalizeProductLineKey(string? requestedProductLineKey, TenantEntity tenant)

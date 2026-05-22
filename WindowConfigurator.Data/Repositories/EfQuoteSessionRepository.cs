@@ -17,6 +17,11 @@ namespace WindowConfigurator.Data.Repositories
                 .Include(s => s.Items)
                 .FirstOrDefaultAsync(s => s.Id == id);
 
+        public async Task<QuoteSessionEntity?> GetByMagicLinkTokenAsync(string token)
+            => await _context.QuoteSessions
+                .Include(s => s.Items)
+                .FirstOrDefaultAsync(s => s.MagicLinkToken == token);
+
         public async Task<QuoteSessionEntity?> GetFirstAsync()
             => await _context.QuoteSessions
                 .Include(s => s.Items)

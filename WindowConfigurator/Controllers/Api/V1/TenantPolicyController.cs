@@ -8,17 +8,17 @@ namespace WindowConfigurator.Controllers.Api.V1
     [ApiController]
     [ApiKeyAuthorize]
     [Route("api/v1/tenants")]
-    public class TenantIntegrationController : ControllerBase
+    public class TenantPolicyController : ControllerBase
     {
         private readonly ITenantRepository _tenantRepository;
 
-        public TenantIntegrationController(ITenantRepository tenantRepository)
+        public TenantPolicyController(ITenantRepository tenantRepository)
         {
             _tenantRepository = tenantRepository;
         }
 
-        [HttpGet("{id:guid}/integration")]
-        public async Task<ActionResult<TenantIntegrationSettingsResponse>> GetIntegration(Guid id)
+        [HttpGet("{id:guid}/policy")]
+        public async Task<ActionResult<TenantPolicySettingsResponse>> GetPolicy(Guid id)
         {
             if (!TryGetAuthenticatedTenantId(out var authenticatedTenantId))
                 return Unauthorized(ApiErrorResponse.Validation("Authentication required.", new ApiValidationError { Field = "x-api-key", Message = "Missing or invalid API key." }));
@@ -29,17 +29,11 @@ namespace WindowConfigurator.Controllers.Api.V1
             if (tenant == null)
                 return NotFound(ApiErrorResponse.NotFound("Tenant not found."));
 
-            return Ok(new TenantIntegrationSettingsResponse
-            {
-                TenantId = tenant.Id,
-                WebhookCallbackUrl = tenant.WebhookCallbackUrl
-            });
+            return Ok(ToResponse(tenant));
         }
 
-        [HttpPut("{id:guid}/integration")]
-        public async Task<ActionResult<TenantIntegrationSettingsResponse>> UpdateIntegration(
-            Guid id,
-            [FromBody] TenantIntegrationSettingsRequest request)
+        [HttpPut("{id:guid}/policy")]
+        public async Task<ActionResult<TenantPolicySettingsResponse>> UpdatePolicy(Guid id, [FromBody] TenantPolicySettingsRequest request)
         {
             if (!TryGetAuthenticatedTenantId(out var authenticatedTenantId))
                 return Unauthorized(ApiErrorResponse.Validation("Authentication required.", new ApiValidationError { Field = "x-api-key", Message = "Missing or invalid API key." }));
@@ -50,25 +44,31 @@ namespace WindowConfigurator.Controllers.Api.V1
             if (tenant == null)
                 return NotFound(ApiErrorResponse.NotFound("Tenant not found."));
 
-            if (!Uri.TryCreate(request.WebhookCallbackUrl, UriKind.Absolute, out _))
-            {
-                return BadRequest(ApiErrorResponse.Validation(
-                    "The request is invalid.",
-                    new ApiValidationError
-                    {
-                        Field = "webhookCallbackUrl",
-                        Message = "Webhook callback URL must be an absolute URL."
-                    }));
-            }
+            tenant.AllowedProductLineKeys = request.AllowedProductLineKeys
+                .Where(k => !string.IsNullOrWhiteSpace(k))
+                .Select(k => k.Trim().ToLowerInvariant())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+            tenant.MixedProductLinesAllowed = request.MixedProductLinesAllowed;
+            tenant.Branding.LogoUrl = request.BrandingLogoUrl ?? tenant.Branding.LogoUrl;
+            tenant.Branding.PrimaryColor = request.BrandingPrimaryColor ?? tenant.Branding.PrimaryColor;
+            tenant.Branding.AccentColor = request.BrandingAccentColor ?? tenant.Branding.AccentColor;
 
-            tenant.WebhookCallbackUrl = request.WebhookCallbackUrl.Trim();
             await _tenantRepository.SaveChangesAsync();
+            return Ok(ToResponse(tenant));
+        }
 
-            return Ok(new TenantIntegrationSettingsResponse
+        private static TenantPolicySettingsResponse ToResponse(Data.Entities.TenantEntity tenant)
+        {
+            return new TenantPolicySettingsResponse
             {
                 TenantId = tenant.Id,
-                WebhookCallbackUrl = tenant.WebhookCallbackUrl
-            });
+                AllowedProductLineKeys = tenant.AllowedProductLineKeys.ToList(),
+                MixedProductLinesAllowed = tenant.MixedProductLinesAllowed,
+                BrandingLogoUrl = tenant.Branding.LogoUrl,
+                BrandingPrimaryColor = tenant.Branding.PrimaryColor,
+                BrandingAccentColor = tenant.Branding.AccentColor
+            };
         }
 
         private bool TryGetAuthenticatedTenantId(out Guid tenantId)

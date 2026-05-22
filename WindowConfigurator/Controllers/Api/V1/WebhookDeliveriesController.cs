@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using WindowConfigurator.Controllers.Api.V1.Models;
+using WindowConfigurator.Controllers.Api.V1.Security;
 using WindowConfigurator.Data.Webhooks;
 
 namespace WindowConfigurator.Controllers.Api.V1
 {
     [ApiController]
+    [ApiKeyAuthorize]
     [Route("api/v1/webhook-deliveries")]
     public class WebhookDeliveriesController : ControllerBase
     {

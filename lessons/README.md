@@ -12,6 +12,7 @@ These lesson documents are written as teach-through build notes for the phases c
 6. [Phase 5 — Add Server-Side Validation At Completion](./phase-05-server-side-completion-validation.md)
 7. [Phase 6 — Add The Minimal API Surface](./phase-06-minimal-versioned-api.md)
 8. [Phase 7 Kickoff — Webhook Dispatch On Submit](./phase-07-webhook-dispatch-kickoff.md)
+9. [Phase 8 — Multi-Tenant Hardening](./phase-08-multi-tenant-hardening.md)
 
 ## How To Use These
 

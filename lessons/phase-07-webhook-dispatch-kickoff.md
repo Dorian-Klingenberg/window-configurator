@@ -54,6 +54,39 @@ return Ok(new CompleteQuoteSessionResponse
 });
 ```
 
+## How Testing Works (And What Is Mocked)
+
+We are **not** calling a real CRM in tests yet.
+
+We test webhook behavior at two levels:
+
+1. **Controller level** (`QuoteSessionsControllerTests`)
+   - uses a fake `IQuoteCompletionWebhookDispatcher`
+   - verifies that submit calls dispatch and persists delivery-attempt records
+   - verifies success/failure state mapping in API responses
+
+2. **Dispatcher level** (`QuoteCompletionWebhookDispatcherTests`)
+   - uses a custom fake `HttpMessageHandler` injected into `HttpClient`
+   - captures the outgoing JSON body and returns controlled HTTP status codes
+   - verifies payload event type and success/failure handling without network calls
+
+Example fake HTTP handler pattern:
+
+```csharp
+private class RecordingHandler : HttpMessageHandler
+{
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
+    {
+        // Capture request.Content here for assertions.
+        return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK));
+    }
+}
+```
+
+What we still do **not** have:
+- full end-to-end test against a running external webhook receiver process
+- operational retry worker hosting tests (service loop/lifecycle)
+
 ## What Comes Next
 
 - Background retry worker orchestration

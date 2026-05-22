@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using WindowConfigurator.Controllers.Api.V1;
 using WindowConfigurator.Controllers.Api.V1.Models;
+using WindowConfigurator.Controllers.Api.V1.Security;
 using WindowConfigurator.Data;
 using WindowConfigurator.Data.Entities;
 using WindowConfigurator.Data.Repositories;
@@ -45,6 +47,18 @@ namespace WindowConfigurator.Tests.Controllers
         }
 
         [Fact]
+        public async Task GetIntegration_WithMismatchedTenantScope_ReturnsForbidden()
+        {
+            var tenant = await SeedTenantAsync();
+            SetAuthenticatedTenant(Guid.NewGuid());
+
+            var result = await _controller.GetIntegration(tenant.Id);
+
+            var forbidden = Assert.IsType<ObjectResult>(result.Result);
+            Assert.Equal(StatusCodes.Status403Forbidden, forbidden.StatusCode);
+        }
+
+        [Fact]
         public async Task UpdateIntegration_WithRelativeUrl_ReturnsValidationError()
         {
             var tenant = await SeedTenantAsync();
@@ -69,7 +83,15 @@ namespace WindowConfigurator.Tests.Controllers
             };
             await _tenantRepository.AddAsync(tenant);
             await _tenantRepository.SaveChangesAsync();
+            SetAuthenticatedTenant(tenant.Id);
             return tenant;
+        }
+
+        private void SetAuthenticatedTenant(Guid tenantId)
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items[ApiKeyAuthorizeFilter.TenantIdItemKey] = tenantId;
+            _controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
         }
 
         public void Dispose()

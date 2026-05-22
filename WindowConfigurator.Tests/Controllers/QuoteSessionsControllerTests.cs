@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using WindowConfigurator.Data;
 using WindowConfigurator.Data.Catalog;
 using WindowConfigurator.Data.Entities;
@@ -8,6 +9,7 @@ using WindowConfigurator.Data.Repositories;
 using WindowConfigurator.Data.Webhooks;
 using WindowConfigurator.Controllers.Api.V1;
 using WindowConfigurator.Controllers.Api.V1.Models;
+using WindowConfigurator.Controllers.Api.V1.Security;
 
 namespace WindowConfigurator.Tests.Controllers
 {
@@ -42,6 +44,7 @@ namespace WindowConfigurator.Tests.Controllers
                 new CatalogService(),
                 _webhookDispatcher,
                 _deliveryAttemptRepository);
+            SetAuthenticatedTenant(Guid.NewGuid());
         }
 
         [Fact]
@@ -74,9 +77,11 @@ namespace WindowConfigurator.Tests.Controllers
         [Fact]
         public async Task Create_WhenTenantDoesNotExist_ReturnsBadRequest()
         {
+            var tenantId = Guid.NewGuid();
+            SetAuthenticatedTenant(tenantId);
             var result = await _controller.Create(new CreateQuoteSessionRequest
             {
-                TenantId = Guid.NewGuid(),
+                TenantId = tenantId,
                 ExternalReferenceId = "CRM-404"
             });
 
@@ -281,13 +286,56 @@ namespace WindowConfigurator.Tests.Controllers
 
             await _tenantRepository.AddAsync(tenant);
             await _tenantRepository.SaveChangesAsync();
+            SetAuthenticatedTenant(tenant.Id);
             return tenant;
+        }
+
+        [Fact]
+        public async Task GetById_WithMismatchedAuthenticatedTenant_ReturnsForbidden()
+        {
+            var tenant = await SeedTenantAsync(["energysaver-2500"]);
+            var created = await _controller.Create(new CreateQuoteSessionRequest
+            {
+                TenantId = tenant.Id,
+                DefaultProductLineKey = "energysaver-2500"
+            });
+            var session = Assert.IsType<QuoteSessionResponse>(Assert.IsType<CreatedAtActionResult>(created.Result).Value);
+
+            SetAuthenticatedTenant(Guid.NewGuid());
+            var result = await _controller.GetById(session.SessionId);
+
+            Assert.IsType<ObjectResult>(result.Result);
+            Assert.Equal(StatusCodes.Status403Forbidden, ((ObjectResult)result.Result!).StatusCode);
+        }
+
+        [Fact]
+        public async Task GetById_WithoutAuthenticatedTenant_ReturnsUnauthorized()
+        {
+            var tenant = await SeedTenantAsync(["energysaver-2500"]);
+            var created = await _controller.Create(new CreateQuoteSessionRequest
+            {
+                TenantId = tenant.Id,
+                DefaultProductLineKey = "energysaver-2500"
+            });
+            var session = Assert.IsType<QuoteSessionResponse>(Assert.IsType<CreatedAtActionResult>(created.Result).Value);
+
+            _controller.ControllerContext = new ControllerContext { HttpContext = new DefaultHttpContext() };
+            var result = await _controller.GetById(session.SessionId);
+
+            Assert.IsType<UnauthorizedObjectResult>(result.Result);
         }
 
         public void Dispose()
         {
             _context.Dispose();
             _connection.Dispose();
+        }
+
+        private void SetAuthenticatedTenant(Guid tenantId)
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items[ApiKeyAuthorizeFilter.TenantIdItemKey] = tenantId;
+            _controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
         }
 
         private class FakeQuoteCompletionWebhookDispatcher : IQuoteCompletionWebhookDispatcher

@@ -72,6 +72,9 @@ The platform is the **source of truth for order item configuration data**. The C
 - **Webhook dispatch kickoff** — session submit now triggers a `quote.completed` webhook attempt and returns delivery attempt metadata
 - **Webhook delivery tracking + retry processing** — each submit attempt is persisted, failed attempts receive retry scheduling metadata, and due retries can be processed via API
 - **Tenant integration settings API** — tenant webhook callback URL can be queried/updated at `/api/v1/tenants/{id}/integration`
+- **Tenant policy and branding API** — per-tenant product-line allow-list, mixed-product policy, and branding settings are manageable via `/api/v1/tenants/{id}/policy`
+- **API key tenant authorization** — `/api/v1/*` endpoints enforce API-key authentication and tenant-scope checks (`401/403` behavior)
+- **Prospect session start/resume flow** — magic-link-backed prospect sessions are available via `/api/v1/prospect-sessions`
 
 ### What's Stubbed / Placeholder
 - The MVC completion path is still a pragmatic bridge, not the final versioned `/api/v1/...` surface
@@ -80,10 +83,8 @@ The platform is the **source of truth for order item configuration data**. The C
 - Draft save is intentionally absent until the UI supports adding and switching between multiple items
 
 ### What Doesn't Exist Yet
-- Secured external API layer (authentication/authorization and production integration hardening for CRM workflows)
-- Authentication / authorization (no JWT validation, no API keys, no magic link system)
-- Full webhook delivery system hardening (background worker orchestration, advanced backoff policy controls, and operations dashboards)
-- Full multi-tenant hardening (per-client auth, tenant isolation at every entry point, production branding/admin workflows)
+- Advanced auth options (OAuth client credentials, key rotation lifecycle, and permission scopes)
+- Full webhook operations layer (background service orchestration, dashboards, and alerting)
 - Email delivery
 - Any outbound CRM calls (intentionally — by design)
 
