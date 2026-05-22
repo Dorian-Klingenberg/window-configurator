@@ -63,6 +63,73 @@ namespace WindowConfigurator.Tests.Controllers
             Assert.Equal(tenant.Id, context.HttpContext.Items[ApiKeyAuthorizeFilter.TenantIdItemKey]);
         }
 
+        [Fact]
+        public async Task OnActionExecutionAsync_WithRevokedApiKey_ReturnsUnauthorized()
+        {
+            var tenant = new TenantEntity
+            {
+                Name = "Revoked",
+                ApiKey = "revoked-key",
+                ApiKeyRevokedAt = DateTime.UtcNow.AddHours(-1)
+            };
+            await _tenantRepository.AddAsync(tenant);
+            await _tenantRepository.SaveChangesAsync();
+
+            var filter = new ApiKeyAuthorizeFilter(_tenantRepository);
+            var context = BuildContext();
+            context.HttpContext.Request.Headers["X-Api-Key"] = "revoked-key";
+
+            await filter.OnActionExecutionAsync(context, () => Task.FromResult<ActionExecutedContext>(null!));
+
+            Assert.IsType<UnauthorizedObjectResult>(context.Result);
+        }
+
+        [Fact]
+        public async Task OnActionExecutionAsync_WithExpiredApiKey_ReturnsUnauthorized()
+        {
+            var tenant = new TenantEntity
+            {
+                Name = "Expired",
+                ApiKey = "expired-key",
+                ApiKeyExpiresAtUtc = DateTime.UtcNow.AddHours(-1)
+            };
+            await _tenantRepository.AddAsync(tenant);
+            await _tenantRepository.SaveChangesAsync();
+
+            var filter = new ApiKeyAuthorizeFilter(_tenantRepository);
+            var context = BuildContext();
+            context.HttpContext.Request.Headers["X-Api-Key"] = "expired-key";
+
+            await filter.OnActionExecutionAsync(context, () => Task.FromResult<ActionExecutedContext>(null!));
+
+            Assert.IsType<UnauthorizedObjectResult>(context.Result);
+        }
+
+        [Fact]
+        public async Task OnActionExecutionAsync_WithKeyExpiringInFuture_Proceeds()
+        {
+            var tenant = new TenantEntity
+            {
+                Name = "Future Expiry",
+                ApiKey = "future-expiry-key",
+                ApiKeyExpiresAtUtc = DateTime.UtcNow.AddDays(30)
+            };
+            await _tenantRepository.AddAsync(tenant);
+            await _tenantRepository.SaveChangesAsync();
+
+            var filter = new ApiKeyAuthorizeFilter(_tenantRepository);
+            var context = BuildContext();
+            context.HttpContext.Request.Headers["X-Api-Key"] = "future-expiry-key";
+
+            await filter.OnActionExecutionAsync(context, () =>
+            {
+                var executed = new ActionExecutedContext(context, new List<IFilterMetadata>(), context.Controller);
+                return Task.FromResult(executed);
+            });
+
+            Assert.Null(context.Result);
+        }
+
         private static ActionExecutingContext BuildContext()
         {
             var httpContext = new DefaultHttpContext();

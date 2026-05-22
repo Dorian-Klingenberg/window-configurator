@@ -294,18 +294,21 @@ A `QuoteSession` contains one or more `ConfiguredWindowItem` entries. Each item 
 - Server-owned catalog resolution for item and section templates
 - Server-authoritative pricing at completion, including persisted authoritative item prices
 - Server-side completion validation for tenant product-line access, frame/style constraints, option availability, and pricing-grid limits
+- Versioned REST API (`/api/v1/quote-sessions/...`) with shared error envelope
+- Webhook dispatch on session submit with durable delivery attempt tracking and exponential backoff retry
+- API key authentication and tenant scope enforcement across `/api/v1/` controllers
+- Tenant policy/branding API and prospect magic-link start/resume flow
+- E2E webhook delivery harness proving the full dispatch loop under real HTTP transport
+- API key rotation/revocation lifecycle (`POST /api-key/rotate`, `DELETE /api-key`, expiry + revocation fields)
+- Webhook background retry orchestrator (`WebhookRetryBackgroundService`) running on configurable interval
+- Webhook delivery stats endpoint (`GET /api/v1/webhook-deliveries/stats`)
 
 ### Stubbed / placeholder
-- The current MVC completion endpoint is a bridge until the versioned API surface exists
 - `/` falls back to the first development session when no explicit session ID is provided
 - Draft save is intentionally deferred until the UI supports adding and switching between multiple items
 
 ### Not yet built
-- Secured external API layer (`/api/v1/...`) — minimal quote-session create/get/update, item add/update, and submit endpoints are present, but auth and production contract hardening remain
-- Authentication (API keys, magic links)
-- Full webhook dispatch system (retry/backoff and durable delivery tracking remain)
-- Full multi-tenant hardening
-- Email delivery
+- Email delivery for magic links
 
 ---
 
@@ -320,6 +323,7 @@ A `QuoteSession` contains one or more `ConfiguredWindowItem` entries. Each item 
 6. Add minimal REST API surface ✅
 7. Add CRM handoff and webhook dispatch ✅
 8. Harden for real multi-tenant use ✅
-9. (Optional) Frontend modernization 🚧
+9. Production backend hardening (E2E harness, key lifecycle, background retry) ✅
+10. (Optional) Frontend modernization
 
 The guiding principle: **backend-first**. The configurator UI works. Make the server authoritative before touching the frontend.

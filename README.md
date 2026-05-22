@@ -75,16 +75,19 @@ The platform is the **source of truth for order item configuration data**. The C
 - **Tenant policy and branding API** — per-tenant product-line allow-list, mixed-product policy, and branding settings are manageable via `/api/v1/tenants/{id}/policy`
 - **API key tenant authorization** — `/api/v1/*` endpoints enforce API-key authentication and tenant-scope checks (`401/403` behavior)
 - **Prospect session start/resume flow** — magic-link-backed prospect sessions are available via `/api/v1/prospect-sessions`
+- **API key rotation/revocation lifecycle** — `POST /api/v1/tenants/{id}/api-key/rotate` and `DELETE /api/v1/tenants/{id}/api-key`; keys support optional expiry and permanent revocation
+- **Webhook background retry orchestrator** — `WebhookRetryBackgroundService` runs on a configurable interval (default 5 min) using `IServiceScopeFactory` to avoid singleton/scoped DbContext issues
+- **Webhook delivery stats endpoint** — `GET /api/v1/webhook-deliveries/stats` returns delivered/failed/total counts
+- **E2E webhook delivery harness** — `WebhookE2EHarnessTests` exercises the full loop: real controller → real dispatcher → stub HTTP receiver → delivery attempt persisted
 
 ### What's Stubbed / Placeholder
 - The MVC completion path is still a pragmatic bridge, not the final versioned `/api/v1/...` surface
-- The versioned API surface now includes quote-session create/get/update, item add/update, and session submit, but authentication, payload hardening, and full integration contracts are still in progress
 - `/` falls back to the first available development session; production entry points must pass explicit session IDs
 - Draft save is intentionally absent until the UI supports adding and switching between multiple items
 
 ### What Doesn't Exist Yet
-- Advanced auth options (OAuth client credentials, key rotation lifecycle, and permission scopes)
-- Full webhook operations layer (background service orchestration, dashboards, and alerting)
+- Advanced auth options (OAuth client credentials, permission scopes)
+- Webhook dashboards and alerting
 - Email delivery
 - Any outbound CRM calls (intentionally — by design)
 
@@ -148,40 +151,6 @@ Manufacturer → Product Line → Style → Width Breakpoints → Height Breakpo
 ```
 
 The price-per-inch value is multiplied against some measure of the window (perimeter or area). Additional multipliers exist conceptually for grille, SDL, pane count, and pane configuration but were not fully implemented.
-
----
-
-## What Needs To Be Built (Priority Order)
-
-### 1. External API Layer
-Versioned REST API (`/api/v1/...`) with proper request/response DTOs. Key endpoints:
-- `POST /api/v1/quote-sessions` — CRM creates a configurator session, gets back a URL
-- `GET /api/v1/quote-sessions/{id}` — retrieve session state
-- `PUT /api/v1/quote-sessions/{id}` — update draft state
-- `POST /api/v1/quote-sessions/{id}/items` — add an item
-- `PUT /api/v1/quote-sessions/{id}/items/{itemId}` — update an item
-- `POST /api/v1/quote-sessions/{id}/complete` — complete a session
-
-### 2. Authentication
-- **API key or OAuth client credentials** for CRM-to-API authentication (B2B flow)
-- **Magic link / passwordless token** for prospect authentication (B2C flow)
-- ASP.NET Core's built-in token generation handles the magic link cleanly without needing full Identity
-
-### 3. Webhook Dispatch
-When a session completes, fire a POST to the tenant's registered callback URL with the configured item payload. Needs retry logic (exponential backoff), failure logging, and ideally a dead letter queue for failed deliveries.
-
-### 4. Multi-Tenancy
-Each client (window dealer) gets a tenant record with:
-- API credentials
-- Registered webhook callback URL(s)
-- Branding config (logo, colors for white-label embedding)
-- Which product lines they have access to
-
-### 5. Continue Validation Hardening
-Server-side validation is now authoritative at completion. Continue adding deeper compatibility rules and richer error modeling as needed while API and integration work proceeds.
-
-### 6. Configurator Modernization
-The Knockout.js / Bootstrap 3 frontend works but is dated. Long-term this probably moves to a modern JS framework after backend contracts stabilize.
 
 ---
 

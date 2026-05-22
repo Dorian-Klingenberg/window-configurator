@@ -24,6 +24,7 @@ builder.Services.AddSingleton<ICatalogService, CatalogService>();
 builder.Services.AddSingleton<WindowConfiguratorDataHelper>();
 builder.Services.AddSingleton<ITemplateReader>(sp => sp.GetRequiredService<WindowConfiguratorDataHelper>());
 builder.Services.AddHttpClient<IQuoteCompletionWebhookDispatcher, QuoteCompletionWebhookDispatcher>();
+builder.Services.AddHostedService<WebhookRetryBackgroundService>();
 
 // Load priceInfo.json once at startup and share it with server pricing and validation.
 builder.Services.AddSingleton(sp =>

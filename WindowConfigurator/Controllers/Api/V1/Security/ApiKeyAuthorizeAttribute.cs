@@ -51,6 +51,22 @@ namespace WindowConfigurator.Controllers.Api.V1.Security
                 return;
             }
 
+            if (tenant.ApiKeyRevokedAt.HasValue)
+            {
+                context.Result = new UnauthorizedObjectResult(ApiErrorResponse.Validation(
+                    "Authentication required.",
+                    new ApiValidationError { Field = "x-api-key", Message = "API key has been revoked." }));
+                return;
+            }
+
+            if (tenant.ApiKeyExpiresAtUtc.HasValue && tenant.ApiKeyExpiresAtUtc.Value < DateTime.UtcNow)
+            {
+                context.Result = new UnauthorizedObjectResult(ApiErrorResponse.Validation(
+                    "Authentication required.",
+                    new ApiValidationError { Field = "x-api-key", Message = "API key has expired." }));
+                return;
+            }
+
             context.HttpContext.Items[TenantIdItemKey] = tenant.Id;
             await next();
         }

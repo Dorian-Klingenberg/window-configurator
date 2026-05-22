@@ -10,6 +10,12 @@ namespace WindowConfigurator.Data.Entities
         /// <summary>API key used by the tenant's CRM to authenticate with this platform.</summary>
         public string ApiKey { get; set; } = string.Empty;
 
+        /// <summary>When set, the API key is rejected after this UTC timestamp.</summary>
+        public DateTime? ApiKeyExpiresAtUtc { get; set; }
+
+        /// <summary>When set, the API key has been explicitly revoked and is permanently invalid.</summary>
+        public DateTime? ApiKeyRevokedAt { get; set; }
+
         /// <summary>URL this platform POSTs completed quote payloads to.</summary>
         public string WebhookCallbackUrl { get; set; } = string.Empty;
 

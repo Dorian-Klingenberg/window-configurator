@@ -256,7 +256,49 @@ Effort: high.
 
 The earlier phases create the core trust boundary first. Tenant hardening should build on that core rather than complicating early implementation.
 
-## Phase 9: Optional UI Port Or Technical Modernization 🚧 Active
+## Phase 9: Production Backend Hardening ✅ Complete
+
+Risk reduced: integration testing gaps, API key lifecycle exposure, manual retry dependency.
+Effort: medium.
+
+### Goals
+
+- Prove the full webhook delivery loop end-to-end under a real HTTP call.
+- Give API keys a lifecycle (expiry, rotation, revocation) safe for production multi-tenant use.
+- Promote the manual retry trigger to a hands-free background orchestrator.
+
+### Slices
+
+1. ✅ E2E webhook delivery harness — `WebhookE2EHarnessTests`, ADR 0012.
+2. ✅ API key rotation/revocation lifecycle — `TenantApiKeyController`, ADR 0013.
+3. ✅ Webhook operations hardening — `WebhookRetryBackgroundService`, stats endpoint, ADR 0014.
+
+### Why before UI modernization
+
+These items directly reduce operational and security risk. UI modernization improves maintainability but does not remove any current production risk.
+
+## Phase 9.5: Portable Agent Skills (Side Mission) ✅ Complete
+
+Risk reduced: repeated manual re-explanation of lesson format to new agent sessions; agents reading outside the workspace.
+Effort: low.
+
+### Goals
+
+- Encode the lesson-writing process as a reusable skill all three agent runtimes can invoke
+- Add a hard workspace scope constraint to prevent agents from reading outside `D:\Repos\renonerd\`
+
+### Deliverables
+
+1. ✅ `skills/create-lesson-core.md` — single source of truth for the create-lesson skill
+2. ✅ `.claude/commands/create-lesson.md` — Claude Code wrapper (`/create-lesson <topic>`)
+3. ✅ `.github/CreateLesson.agent.md` — GitHub Copilot wrapper
+4. ✅ `AGENTS.md` — skill registry section added for Codex
+5. ✅ `.claude/settings.json` — deny rules blocking reads outside the workspace
+6. ✅ `lessons/phase-09.5-creating-portable-skills.md`
+
+---
+
+## Phase 10: Optional UI Port Or Technical Modernization
 
 Risk reduced: long-term maintainability, aging frontend stack.
 Effort: high.
@@ -269,7 +311,7 @@ Effort: high.
 ### Changes
 
 1. Keep the current UX and workflows as the reference behavior.
-2. Port the frontend to a newer stack only if it provides real maintenance benefits. (I think the benifit of porting pricing to c# and using blazor is good)
+2. Port the frontend to a newer stack only if it provides real maintenance benefits. (I think the benefit of porting pricing to c# and using blazor is good)
 3. Consume the now-stable server APIs instead of duplicating authority in the client.
 
 ### Why this is last
