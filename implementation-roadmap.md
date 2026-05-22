@@ -331,6 +331,13 @@ If work needs to start immediately, do the next items in this order:
 7. Stabilize the session API from Phase 6. ✅ Complete
 8. Add CRM handoff from Phase 7. ✅ Complete
 
+### Execution Note — May 22, 2026
+
+- HubSpot live-tenant testing is temporarily deferred due to portal responsiveness issues.
+- Active implementation focus is the customer-facing demo path, while keeping backend authority and existing phase discipline intact.
+- HubSpot setup remains script-driven via `tools/hubspot_org_config.py` and can be resumed once tenant responsiveness stabilizes.
+- Demo execution strategy is now explicitly two-surface: a mock contractor website plus a mock contractor CRM portal, with real CRM kept as an integration-validation track rather than a demo dependency.
+
 ## Definition Of A Meaningfully Real Product
 
 The system becomes meaningfully real when all of the following are true:

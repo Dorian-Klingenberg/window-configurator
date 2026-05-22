@@ -182,6 +182,25 @@ Phase-by-phase teaching documents (with code snippets and Mermaid diagrams) live
 
 ---
 
+## HubSpot Org Config Tool
+
+For HubSpot demo/org metadata setup, use:
+
+```powershell
+python tools/hubspot_org_config.py --config tools/hubspot_org_config.example.json --dry-run
+python tools/hubspot_org_config.py --config tools/hubspot_org_config.example.json --apply
+python tools/hubspot_org_config.py --config tools/hubspot_org_config.example.json --render-demo-plan
+```
+
+Requirements:
+- `HUBSPOT_ACCESS_TOKEN` environment variable (HubSpot Private App access token)
+- JSON config file (example provided at `tools/hubspot_org_config.example.json`)
+
+The tool writes a JSON report to `artifacts/hubspot-org-config-report.json` by default.
+In demo-plan mode, it writes markdown to `artifacts/hubspot-demo-plan.md` by default.
+
+---
+
 ## Portfolio Notes
 
 This project demonstrates several sophisticated, real-world engineering concepts:

@@ -1,0 +1,73 @@
+{
+  "demoPlan": {
+    "title": "WindowConfigurator Contractor Demo",
+    "hubspotChecklist": [
+      "Create a HubSpot private app token with required CRM scopes",
+      "Apply this config with --dry-run, then --apply",
+      "Confirm contact/deal properties exist in HubSpot",
+      "Prepare one contractor user and one demo pipeline/deal record"
+    ],
+    "scenarios": [
+      {
+        "name": "Single Order, Multiple Item Lifecycle",
+        "steps": [
+          "Create order/session and add item 1",
+          "Configure item 1 and save",
+          "Add item 2",
+          "Edit item 1 and save again",
+          "Edit item 2 and save again"
+        ]
+      },
+      {
+        "name": "Separate Order, Different Product Line",
+        "steps": [
+          "Create new order/session",
+          "Select a different product line",
+          "Add item 1",
+          "Edit/configure item and save"
+        ]
+      }
+    ]
+  },
+  "properties": [
+    {
+      "objectType": "contacts",
+      "name": "window_product_line",
+      "label": "Window Product Line",
+      "description": "Selected product line from Window Configurator quote flow.",
+      "type": "enumeration",
+      "fieldType": "select",
+      "groupName": "contactinformation",
+      "displayOrder": 5,
+      "formField": false,
+      "options": [
+        {
+          "label": "EnergySaver 2500",
+          "value": "energysaver-2500",
+          "displayOrder": 0
+        },
+        {
+          "label": "Apex",
+          "value": "apex",
+          "displayOrder": 1
+        },
+        {
+          "label": "Carriage",
+          "value": "carriage",
+          "displayOrder": 2
+        }
+      ]
+    },
+    {
+      "objectType": "deals",
+      "name": "window_quote_session_id",
+      "label": "Window Quote Session Id",
+      "description": "Identifier from the WindowConfigurator quote session.",
+      "type": "string",
+      "fieldType": "text",
+      "groupName": "dealinformation",
+      "displayOrder": 12,
+      "formField": false
+    }
+  ]
+}

@@ -25,6 +25,7 @@ At each phase handoff (closeout or kickoff), do a quick documentation sanity che
 - latest journal accuracy
 - any same-day ADR consistency
 - README/test-note freshness (counts, commands, paths)
+- if branch focus changed, latest journal + handoff reflect the new priority
 
 Keep this quick unless the user explicitly asks for a deep documentation review.
 
@@ -32,6 +33,11 @@ At each phase handoff, also create or update lessons in `lessons/`:
 - maintain one lesson per phase touched and keep `lessons/README.md` current
 - include actionable build steps, code snippets, and at least one Mermaid diagram per lesson
 - run a quick consistency check so lessons match roadmap/ADRs/journal and current endpoint/code names
+
+When asked for current project status, phase, or progress:
+- do not answer from memory/context alone
+- verify against `implementation-roadmap.md`, latest `journal/` entries, and recent ADRs/handoff docs
+- report the documented truth; if documents conflict, resolve and state that before answering
 
 ## Available Skills
 
@@ -49,3 +55,20 @@ At each phase handoff, also create or update lessons in `lessons/`:
 **Core instructions:** `skills/create-lesson-core.md`
 
 **What it produces:** A `lessons/phase-N-title.md` file with build steps, a Mermaid diagram, representative code snippets, and a test table. Updates `lessons/README.md`.
+
+### hubspot-org-config
+
+**Purpose:** Applies declarative HubSpot organization configuration from source-controlled JSON using a Python tool with dry-run and apply modes.
+
+**When to invoke:** When setting up or updating HubSpot CRM metadata (currently custom property upserts) for demo/integration environments, especially contractor-initiated demo flows.
+
+**How to invoke:**
+- Codex / any agent: read `skills/hubspot-org-config-core.md` and follow its workflow
+- Run dry-run first:
+  - `python tools/hubspot_org_config.py --config tools/hubspot_org_config.example.json --dry-run`
+- Then apply:
+  - `python tools/hubspot_org_config.py --config tools/hubspot_org_config.example.json --apply`
+
+**Core instructions:** `skills/hubspot-org-config-core.md`
+
+**What it produces:** HubSpot config action output in console plus JSON report (`artifacts/hubspot-org-config-report.json` by default), plus a minimal contractor-demo runbook (multi-item edit/save cycle and multi-order, multi-product-line flow).
