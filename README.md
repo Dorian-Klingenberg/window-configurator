@@ -182,6 +182,18 @@ Phase-by-phase teaching documents (with code snippets and Mermaid diagrams) live
 
 ---
 
+## Branching
+
+Active branch lanes and merge policy are defined in [`BRANCHING.md`](./BRANCHING.md).
+
+Current working model:
+- `main` for stable integration
+- `feature/phase10-ui-*` for customer-facing UI work
+- `feature/phase10-demo-*` for demo orchestration slices
+- `feature/hubspot-tooling-*` for HubSpot support tooling
+
+---
+
 ## HubSpot Org Config Tool
 
 For HubSpot demo/org metadata setup, use:

@@ -17,6 +17,7 @@ Read `../AGENTS.md` for Dorian's full working preferences, then read:
 2. `window-domain-knowledge.md`
 3. the most recent file in `journal/`
 4. any relevant ADRs in `adr/`
+5. `BRANCHING.md`
 
 Current phase discipline still applies: verify prior phases and tests before starting a new phase, and use TDD for non-trivial implementation work.
 
