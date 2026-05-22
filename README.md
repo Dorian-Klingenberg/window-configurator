@@ -164,7 +164,20 @@ The price-per-inch value is multiplied against some measure of the window (perim
 Open `WindowConfigurator.sln` and press F5.
 
 ### VS Code
-Open the solution root folder and press F5. Choose **C# + JS (Edge)** or **C# + JS (Chrome)** from the debug panel. The browser will open automatically when the app is ready.
+Open the solution root folder and press F5, then select one of the standardized profiles:
+
+Current standardized profiles:
+- `WindowConfigurator: Debug Configurator`
+- `WindowConfigurator: Debug Slice B (CRM + Configurator)` (on Slice B branch)
+
+If VS Code is opened at `D:\Repos\renonerd` instead of `D:\Repos\renonerd\WindowConfigurator`, it uses a different `.vscode` folder. Keep both aligned when debug profiles change.
+
+Expected ports for the Slice B profile:
+- Configurator API: `http://localhost:5149`
+- Mock CRM: `http://localhost:5152`
+
+Note:
+- `5151` is associated with Slice A host-site debug flow, not Slice B.
 
 ### CLI
 ```bash

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowConfigurator.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowConfigurator.Tests", "WindowConfigurator.Tests\WindowConfigurator.Tests.csproj", "{653EDD43-514A-4C50-8EFE-5FC975614CEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockContractorCrm", "MockContractorCrm\MockContractorCrm.csproj", "{B89220D1-5608-472D-82B7-C05ADA97F9E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{653EDD43-514A-4C50-8EFE-5FC975614CEC}.Release|x64.Build.0 = Release|Any CPU
 		{653EDD43-514A-4C50-8EFE-5FC975614CEC}.Release|x86.ActiveCfg = Release|Any CPU
 		{653EDD43-514A-4C50-8EFE-5FC975614CEC}.Release|x86.Build.0 = Release|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Debug|x64.Build.0 = Debug|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Debug|x86.Build.0 = Debug|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Release|x64.ActiveCfg = Release|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Release|x64.Build.0 = Release|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Release|x86.ActiveCfg = Release|Any CPU
+		{B89220D1-5608-472D-82B7-C05ADA97F9E1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
