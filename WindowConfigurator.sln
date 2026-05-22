@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowConfigurator.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowConfigurator.Tests", "WindowConfigurator.Tests\WindowConfigurator.Tests.csproj", "{653EDD43-514A-4C50-8EFE-5FC975614CEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockContractorSite", "MockContractorSite\MockContractorSite.csproj", "{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{653EDD43-514A-4C50-8EFE-5FC975614CEC}.Release|x64.Build.0 = Release|Any CPU
 		{653EDD43-514A-4C50-8EFE-5FC975614CEC}.Release|x86.ActiveCfg = Release|Any CPU
 		{653EDD43-514A-4C50-8EFE-5FC975614CEC}.Release|x86.Build.0 = Release|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Debug|x64.Build.0 = Debug|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Debug|x86.Build.0 = Debug|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Release|x64.ActiveCfg = Release|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Release|x64.Build.0 = Release|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Release|x86.ActiveCfg = Release|Any CPU
+		{C47286DF-9F84-4D3F-985F-CBF42D23EB6E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

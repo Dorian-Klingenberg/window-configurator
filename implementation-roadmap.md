@@ -337,6 +337,7 @@ If work needs to start immediately, do the next items in this order:
 - Active implementation focus is the customer-facing demo path, while keeping backend authority and existing phase discipline intact.
 - HubSpot setup remains script-driven via `tools/hubspot_org_config.py` and can be resumed once tenant responsiveness stabilizes.
 - Demo execution strategy is now explicitly two-surface: a mock contractor website plus a mock contractor CRM portal, with real CRM kept as an integration-validation track rather than a demo dependency.
+- Multi-window continuation/add-item UX is assigned to configurator-phase UI work (not host website shell), since backend multi-item session support already exists.
 
 ## Definition Of A Meaningfully Real Product
 

@@ -26,6 +26,7 @@ At each phase handoff (closeout or kickoff), do a quick documentation sanity che
 - any same-day ADR consistency
 - README/test-note freshness (counts, commands, paths)
 - if branch focus changed, latest journal + handoff reflect the new priority
+- decision notes include both what changed and why it changed
 
 Keep this quick unless the user explicitly asks for a deep documentation review.
 
