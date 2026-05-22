@@ -58,6 +58,80 @@ Examples:
 HubSpot lane continues in parallel when available:
 - `feature/hubspot-tooling-*`
 
+## Active Branch Briefs
+
+### `feature/phase10-ui-slice-a-contractor-landing-shell`
+
+Builds the mock contractor website landing experience for customer demos.
+
+Planned content:
+- branded landing shell
+- primary CTA into configurator flow
+- host-side launch strategy for configurator (iframe preferred, redirect fallback)
+
+Success outcome:
+- deterministic demo entrypoint with no dependency on live CRM responsiveness.
+
+### `feature/phase10-ui-slice-b-mock-crm-portal`
+
+Builds a mock contractor CRM portal surface to simulate contractor workflow context.
+
+Planned content:
+- mock record/context view
+- quote/session start controls
+- launch into configurator with relevant session context
+
+Success outcome:
+- realistic CRM-initiated narrative for demos without external CRM dependency.
+
+### `feature/phase10-ui-slice-c-completion-confirmation`
+
+Builds completion return/confirmation surfaces in host experience.
+
+Planned content:
+- authoritative completion summary
+- session/item identifiers
+- authoritative price visibility and submission status cues
+
+Success outcome:
+- clear customer-facing evidence of successful end-to-end completion flow.
+
+### `feature/phase10-ui-slice-d-demo-ux-hardening`
+
+Hardens the end-to-end demo UX for reliability and presenter confidence.
+
+Planned content:
+- loading/empty/error states
+- retry messaging and recovery affordances
+- mobile/responsive polish for host + launch flow
+
+Success outcome:
+- low-friction demo execution under variable local/network conditions.
+
+### `feature/phase10-demo-host-flow-wiring`
+
+Covers orchestration glue where host/demo wiring is shared or cross-cutting.
+
+Planned content:
+- environment/config switches for demo mode
+- host-to-configurator parameter wiring
+- non-UI flow integration points that do not belong in pure UI slices
+
+Success outcome:
+- stable orchestration foundation reused by UI and mock CRM surfaces.
+
+### `feature/hubspot-tooling-private-app-bootstrap`
+
+Maintains HubSpot org bootstrap/support automation as a non-blocking track.
+
+Planned content:
+- private-app-token-based setup docs/tooling
+- repeatable property/bootstrap configuration
+- deterministic dry-run/apply/report outputs
+
+Success outcome:
+- HubSpot setup can resume quickly when portal responsiveness is acceptable, without blocking Phase 10 demo progress.
+
 ## Documentation Requirements Per Branch Pivot
 
 When priorities change between lanes, update all three:
