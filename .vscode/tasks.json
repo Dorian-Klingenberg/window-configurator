@@ -9,13 +9,6 @@
       "presentation": { "reveal": "never", "panel": "shared" }
     },
     {
-      "label": "reset-dev-db-windowconfigurator-temporary",
-      "type": "shell",
-      "command": "Remove-Item \"${workspaceFolder}/WindowConfigurator/windowconfigurator.db\",\"${workspaceFolder}/WindowConfigurator/windowconfigurator.db-shm\",\"${workspaceFolder}/WindowConfigurator/windowconfigurator.db-wal\" -ErrorAction SilentlyContinue; exit 0",
-      "problemMatcher": [],
-      "presentation": { "reveal": "never", "panel": "shared" }
-    },
-    {
       "label": "kill-port-5151",
       "type": "shell",
       "command": "try { $p = (netstat -ano | Select-String ':5151 .*LISTENING' | ForEach-Object { ($_ -split '\\s+')[-1] } | Select-Object -First 1); if ($p) { Stop-Process -Id $p -Force -ErrorAction SilentlyContinue } } catch {}; exit 0",
@@ -23,9 +16,30 @@
       "presentation": { "reveal": "never", "panel": "shared" }
     },
     {
+      "label": "kill-port-5152",
+      "type": "shell",
+      "command": "try { $p = (netstat -ano | Select-String ':5152 .*LISTENING' | ForEach-Object { ($_ -split '\\s+')[-1] } | Select-Object -First 1); if ($p) { Stop-Process -Id $p -Force -ErrorAction SilentlyContinue } } catch {}; exit 0",
+      "problemMatcher": [],
+      "presentation": { "reveal": "never", "panel": "shared" }
+    },
+    {
+      "label": "reset-dev-db-windowconfigurator-temporary",
+      "type": "shell",
+      "command": "Remove-Item \"${workspaceFolder}/WindowConfigurator/windowconfigurator.db\",\"${workspaceFolder}/WindowConfigurator/windowconfigurator.db-shm\",\"${workspaceFolder}/WindowConfigurator/windowconfigurator.db-wal\" -ErrorAction SilentlyContinue; exit 0",
+      "problemMatcher": [],
+      "presentation": { "reveal": "never", "panel": "shared" }
+    },
+    {
       "label": "wait-port-5151",
       "type": "shell",
       "command": "$max=60; for($i=0;$i -lt $max;$i++){ if((Test-NetConnection -ComputerName localhost -Port 5151 -WarningAction SilentlyContinue).TcpTestSucceeded){ exit 0 }; Start-Sleep -Milliseconds 500 }; Write-Error 'Port 5151 did not open in time.'; exit 1",
+      "problemMatcher": [],
+      "presentation": { "reveal": "never", "panel": "shared" }
+    },
+    {
+      "label": "wait-port-5152",
+      "type": "shell",
+      "command": "$max=60; for($i=0;$i -lt $max;$i++){ if((Test-NetConnection -ComputerName localhost -Port 5152 -WarningAction SilentlyContinue).TcpTestSucceeded){ exit 0 }; Start-Sleep -Milliseconds 500 }; Write-Error 'Port 5152 did not open in time.'; exit 1",
       "problemMatcher": [],
       "presentation": { "reveal": "never", "panel": "shared" }
     },
@@ -62,6 +76,30 @@
       ],
       "problemMatcher": "$msCompile",
       "dependsOn": "kill-port-5151"
+    },
+    {
+      "label": "build-slice-b-demo",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/WindowConfigurator.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": [
+        "kill-port-5149",
+        "kill-port-5152"
+      ],
+      "dependsOrder": "parallel"
+    },
+    {
+      "label": "watch-and-open-crm-chrome",
+      "type": "shell",
+      "command": "Start-Process powershell -WindowStyle Hidden -ArgumentList '-NoProfile','-Command',\"$max=120; for($i=0;$i -lt $max;$i++){ if((Test-NetConnection -ComputerName localhost -Port 5152 -WarningAction SilentlyContinue).TcpTestSucceeded){ Start-Process 'chrome.exe' 'http://localhost:5152/'; exit 0 }; Start-Sleep -Milliseconds 500 }\"; exit 0",
+      "problemMatcher": [],
+      "presentation": { "reveal": "never", "panel": "shared" }
     },
     {
       "label": "build",

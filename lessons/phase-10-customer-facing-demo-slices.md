@@ -68,19 +68,71 @@ This keeps the mock host behavior protocol-accurate to a real CRM caller while r
 |---|---|
 | `CreateSessionLaunchAsync_UsesConfiguredApiKeyAndReturnsAbsoluteLaunchUrl` | API-key header, create-session target URL, and relative-to-absolute launch URL transformation |
 
-**ADR**
-
-No new ADR for this kickoff slice.
-
 **Debug Runtime Notes**
 
 - VS Code `serverReadyAction.uriFormat` must include exactly one `%s` placeholder; fixed to `%s/00000000-0000-0000-0000-000000000001`.
 - Workspace had two `.vscode` roots (`renonerd/.vscode` and `WindowConfigurator/.vscode`); both were aligned so launch options are consistent regardless of which folder is opened in VS Code.
 - Added temporary `reset-dev-db-windowconfigurator-temporary` prelaunch task to avoid stale SQLite schema crashes during branch iteration.
 
+## Slice B: Mock CRM Portal Kickoff
+
+**The Gap We Closed**
+
+No CRM-like operator surface existed to create opportunities and start quote sessions with API-authenticated behavior matching real CRM callers.
+
+**What We Built**
+
+- `MockContractorCrm/MockContractorCrm.csproj`
+- `MockContractorCrm/Program.cs`
+- `MockContractorCrm/Services/MockCrmOptions.cs`
+- `MockContractorCrm/Services/CrmQuoteSessionClient.cs`
+- `MockContractorCrm/Services/CrmOpportunityStore.cs`
+- `MockContractorCrm/wwwroot/index.html`
+- `MockContractorCrm/wwwroot/site.js`
+- `WindowConfigurator.Tests/Services/CrmQuoteSessionClientTests.cs`
+
+**Build Steps**
+
+1. Add failing test for CRM quote-session client auth + URL behavior.
+2. Implement authenticated `CrmQuoteSessionClient`.
+3. Add minimal in-memory opportunity endpoints and UI.
+
+**Slice B Diagram**
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant CRM as MockContractorCrm
+    participant WC as WindowConfigurator API
+    User->>CRM: Create opportunity
+    User->>CRM: Start quote
+    CRM->>WC: POST /api/v1/quote-sessions (X-Api-Key)
+    WC-->>CRM: sessionId + sessionUrl
+    CRM-->>User: launchUrl
+```
+
+**Representative Snippet**
+
+```csharp
+request.Headers.Add("X-Api-Key", _options.ApiKey);
+request.Content = JsonContent.Create(new
+{
+    tenantId = _options.TenantId,
+    externalReferenceId = opportunityNumber,
+    customerEmail
+});
+```
+
+**Tests Added**
+
+| Test | Asserts |
+|---|---|
+| `StartQuoteSessionAsync_UsesApiKeyAuthAndReturnsAbsoluteLaunchUrl` | API-key auth, quote-session endpoint target, and resolved absolute launch URL |
+
 ## What To Teach In A Video
 
-- Why a mock host site should call authoritative APIs server-side instead of from browser JS.
+- Why host/demo shells should call authoritative APIs server-side rather than from browser JS.
 - How fixed CTA variants allow controlled copy experiments before analytics instrumentation.
 - Why iframe-first launch reduces context switching in demos.
 - How to keep CRM simulation realistic without coupling to a real CRM vendor runtime.
+- Why mock CRM + mock website improve demo reliability while preserving integration truth.

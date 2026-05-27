@@ -24,10 +24,10 @@
       }
     },
     {
-      "name": "Run Configurator Only (Chrome)",
+      "name": "WindowConfigurator: API (5149)",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build-configurator",
+      "preLaunchTask": "build-slice-b-demo",
       "program": "${workspaceFolder}/WindowConfigurator/bin/Debug/net10.0/WindowConfigurator.Web.dll",
       "args": [],
       "cwd": "${workspaceFolder}/WindowConfigurator",
@@ -40,6 +40,20 @@
         "action": "openExternally",
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
         "uriFormat": "%s/00000000-0000-0000-0000-000000000001"
+      }
+    },
+    {
+      "name": "WindowConfigurator: Mock CRM (5152)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "watch-and-open-crm-chrome",
+      "program": "${workspaceFolder}/MockContractorCrm/bin/Debug/net10.0/MockContractorCrm.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/MockContractorCrm",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5152"
       }
     },
     {
@@ -72,9 +86,17 @@
   ],
   "compounds": [
     {
+      "name": "WindowConfigurator: Debug Slice B (CRM + Configurator)",
+      "configurations": [
+        "WindowConfigurator: API (5149)",
+        "WindowConfigurator: Mock CRM (5152)"
+      ],
+      "stopAll": true
+    },
+    {
       "name": "Run Slice A Demo (Both Sites in Chrome)",
       "configurations": [
-        "Run Configurator Only (Chrome)",
+        "WindowConfigurator: API (5149)",
         "_Internal: Mock Contractor Site Server",
         "_Internal: Open Mock Contractor Site (Chrome)"
       ],

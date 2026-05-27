@@ -139,3 +139,47 @@ When priorities change between lanes, update all three:
 1. `journal/YYYY-MM-DD.md`
 2. latest `HANDOFF-YYYY-MM-DD.md` (or create a new same-day handoff)
 3. `implementation-roadmap.md` execution note (if direction materially changed)
+
+## Cross-Branch Rollout Checklist (Shared Tooling/Docs)
+
+Use this when a change is meant to exist across multiple branches (example: debug launch standardization skill).
+
+1. Commit the source branch changes first.
+2. For each target branch:
+   - switch branch
+   - cherry-pick the commit (or merge if appropriate)
+   - resolve conflicts
+   - validate the changed files
+3. Push each updated branch.
+4. Update this tracker table and latest handoff/journal note.
+
+Recommended command flow (from `D:\Repos\renonerd\WindowConfigurator`):
+
+```powershell
+git switch <source-branch>
+git commit -m "<message>"
+
+git switch <target-branch>
+git cherry-pick <commit-sha>
+git push -u origin <target-branch>
+```
+
+If conflicts occur, prefer the branch-local slice app/port values while preserving:
+- `%s` `uriFormat` rule in `launch.json`
+- both `.vscode` locations aligned
+- skill registration in `AGENTS.md`
+
+### Rollout Tracker: VS Code Debug Launch Skill
+
+| Branch | Needed | Applied | Verified |
+|---|---|---|---|
+| `main` | Yes | No | No |
+| `feature/phase10-ui-slice-a-contractor-landing-shell` | Yes | No | No |
+| `feature/phase10-ui-slice-b-mock-crm-portal` | Yes | Yes | No |
+| `feature/phase10-ui-slice-c-completion-confirmation` | Yes | No | No |
+| `feature/phase10-ui-slice-d-demo-ux-hardening` | Yes | No | No |
+
+Verification means:
+- `launch.json` and `tasks.json` parse in both `.vscode` locations
+- no stale slice app paths
+- no `uriFormat` placeholder error at debug launch
