@@ -15,10 +15,9 @@
         "ASPNETCORE_URLS": "http://localhost:5149"
       },
       "serverReadyAction": {
-        "action": "debugWithEdge",
+        "action": "openExternally",
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "%s/00000000-0000-0000-0000-000000000001",
-        "webRoot": "${workspaceFolder}/WindowConfigurator/wwwroot"
+        "uriFormat": "%s/00000000-0000-0000-0000-000000000001"
       },
       "presentation": {
         "hidden": true
@@ -38,10 +37,9 @@
         "ASPNETCORE_URLS": "http://localhost:5149"
       },
       "serverReadyAction": {
-        "action": "debugWithChrome",
+        "action": "openExternally",
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "%s/00000000-0000-0000-0000-000000000001",
-        "webRoot": "${workspaceFolder}/WindowConfigurator/wwwroot"
+        "uriFormat": "%s/00000000-0000-0000-0000-000000000001"
       }
     },
     {
