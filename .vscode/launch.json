@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "WindowConfigurator: Debug Configurator",
+      "name": "_Internal: Configurator (Edge)",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build-configurator",
@@ -13,6 +13,15 @@
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_URLS": "http://localhost:5149"
+      },
+      "serverReadyAction": {
+        "action": "debugWithEdge",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s/00000000-0000-0000-0000-000000000001",
+        "webRoot": "${workspaceFolder}/WindowConfigurator/wwwroot"
+      },
+      "presentation": {
+        "hidden": true
       }
     },
     {
@@ -42,6 +51,33 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_URLS": "http://localhost:5152"
       }
+    },
+    {
+      "name": "_Internal: Mock Contractor Site Server",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-mock-contractor-site",
+      "program": "${workspaceFolder}/MockContractorSite/bin/Debug/net10.0/MockContractorSite.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/MockContractorSite",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5151"
+      },
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "_Internal: Open Mock Contractor Site (Chrome)",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "preLaunchTask": "wait-port-5151",
+      "url": "http://localhost:5151/",
+      "presentation": {
+        "hidden": true
+      }
     }
   ],
   "compounds": [
@@ -50,7 +86,17 @@
       "configurations": [
         "WindowConfigurator: API (5149)",
         "WindowConfigurator: Mock CRM (5152)"
-      ]
+      ],
+      "stopAll": true
+    },
+    {
+      "name": "Run Slice A Demo (Both Sites in Chrome)",
+      "configurations": [
+        "WindowConfigurator: API (5149)",
+        "_Internal: Mock Contractor Site Server",
+        "_Internal: Open Mock Contractor Site (Chrome)"
+      ],
+      "stopAll": true
     }
   ]
 }

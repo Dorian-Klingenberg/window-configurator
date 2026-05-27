@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WindowConfigurator.Data\WindowConfigurator.Data.csproj" />
     <ProjectReference Include="..\WindowConfigurator\WindowConfigurator.Web.csproj" />
+    <ProjectReference Include="..\MockContractorSite\MockContractorSite.csproj" />
     <ProjectReference Include="..\MockContractorCrm\MockContractorCrm.csproj" />
   </ItemGroup>
 

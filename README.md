@@ -179,6 +179,14 @@ Expected ports for the Slice B profile:
 Note:
 - `5151` is associated with Slice A host-site debug flow, not Slice B.
 
+For Phase 10 Slice A branch debug profiles, `.vscode/tasks.json` currently includes a **temporary** dev-database reset task (`reset-dev-db-windowconfigurator-temporary`) to avoid stale SQLite schema errors during rapid branch iteration.
+
+Why this exists:
+- the local SQLite file can lag behind current model shape and trigger runtime errors (for example missing `ApiKeyExpiresAtUtc`).
+- this keeps local debug startup deterministic while branch-level phase work is in motion.
+
+Do not treat this as a long-term production migration strategy.
+
 ### CLI
 ```bash
 cd WindowConfigurator
