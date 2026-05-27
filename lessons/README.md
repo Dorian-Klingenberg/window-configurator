@@ -15,6 +15,7 @@ These lesson documents are written as teach-through build notes for the phases c
 9. [Phase 8 — Multi-Tenant Hardening](./phase-08-multi-tenant-hardening.md)
 10. [Phase 9 — Production Backend Hardening](./phase-09-production-backend-hardening.md)
 11. [Phase 9.5 — Creating Portable Agent Skills](./phase-09.5-creating-portable-skills.md)
+12. [Phase 10 — Customer-Facing Demo Slices](./phase-10-customer-facing-demo-slices.md)
 
 ## How To Use These
 

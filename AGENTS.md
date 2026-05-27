@@ -18,6 +18,7 @@ Read `../AGENTS.md` for Dorian's full working preferences, then read:
 3. the most recent file in `journal/`
 4. any relevant ADRs in `adr/`
 5. `BRANCHING.md`
+6. All `HANDOFF-*.md` files in this directory — including branch-specific ones (e.g. `HANDOFF-2026-05-22-slice-a.md`). Each active feature branch may have its own handoff with progress state not yet on main. Run `git branch -a` and `git show <branch>:HANDOFF-*.md` to check branches for handoff docs that have not been merged yet.
 
 Current phase discipline still applies: verify prior phases and tests before starting a new phase, and use TDD for non-trivial implementation work.
 
@@ -27,6 +28,7 @@ At each phase handoff (closeout or kickoff), do a quick documentation sanity che
 - any same-day ADR consistency
 - README/test-note freshness (counts, commands, paths)
 - if branch focus changed, latest journal + handoff reflect the new priority
+- decision notes include both what changed and why it changed
 
 Keep this quick unless the user explicitly asks for a deep documentation review.
 
