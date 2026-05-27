@@ -17,7 +17,7 @@
       "serverReadyAction": {
         "action": "debugWithEdge",
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "http://localhost:5149/00000000-0000-0000-0000-000000000001",
+        "uriFormat": "%s/00000000-0000-0000-0000-000000000001",
         "webRoot": "${workspaceFolder}/WindowConfigurator/wwwroot"
       }
     },
@@ -37,7 +37,7 @@
       "serverReadyAction": {
         "action": "debugWithChrome",
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "http://localhost:5149/00000000-0000-0000-0000-000000000001",
+        "uriFormat": "%s/00000000-0000-0000-0000-000000000001",
         "webRoot": "${workspaceFolder}/WindowConfigurator/wwwroot"
       }
     }
