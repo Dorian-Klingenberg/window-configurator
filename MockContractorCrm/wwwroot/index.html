@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mock Contractor CRM</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <main class="page">
+    <h1>Mock Contractor CRM</h1>
+    <section class="panel">
+      <h2>Create Opportunity</h2>
+      <form id="opportunityForm">
+        <label>
+          Customer Name
+          <input id="customerName" required>
+        </label>
+        <label>
+          Customer Email
+          <input id="customerEmail" type="email" required>
+        </label>
+        <button type="submit">Create Opportunity</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Open Opportunities</h2>
+      <table>
+        <thead>
+          <tr><th>Opportunity</th><th>Customer</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody id="opportunityRows"></tbody>
+      </table>
+    </section>
+    <p id="status"></p>
+  </main>
+  <script src="site.js"></script>
+</body>
+</html>
