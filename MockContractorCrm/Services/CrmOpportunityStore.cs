@@ -6,6 +6,7 @@ public interface ICrmOpportunityStore
     Task<IReadOnlyList<CrmOpportunity>> ListAsync();
     Task<CrmOpportunity?> GetAsync(Guid id);
     Task MarkQuoteStartedAsync(Guid id, string launchUrl, Guid sessionId);
+    Task MarkQuoteSubmittedAsync(Guid id, DateTime submittedAt, int itemCount, decimal? totalPrice);
 }
 
 public sealed class InMemoryCrmOpportunityStore : ICrmOpportunityStore
@@ -57,6 +58,27 @@ public sealed class InMemoryCrmOpportunityStore : ICrmOpportunityStore
                 Status = "Quote Started",
                 LaunchUrl = launchUrl,
                 QuoteSessionId = sessionId
+            };
+        }
+
+        return Task.CompletedTask;
+    }
+
+    public Task MarkQuoteSubmittedAsync(Guid id, DateTime submittedAt, int itemCount, decimal? totalPrice)
+    {
+        lock (_items)
+        {
+            var index = _items.FindIndex(i => i.Id == id);
+            if (index < 0)
+                return Task.CompletedTask;
+
+            var existing = _items[index];
+            _items[index] = existing with
+            {
+                Status = "Quote Submitted",
+                SubmittedAt = submittedAt,
+                CompletedItemCount = itemCount,
+                AuthoritativeTotalPrice = totalPrice
             };
         }
 

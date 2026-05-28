@@ -2305,6 +2305,20 @@ windowStore.order.item.ItemViewModel = function () {
                     ? result.authoritativePrice.toFixed(2)
                     : "0.00";
                 self.price("$" + price);
+
+                if (result && result.sessionStatus === "Completed") {
+                    try {
+                        window.parent.postMessage({
+                            type: "window.configurator.session.completed",
+                            sessionId: result.sessionId,
+                            authoritativePrice: result.authoritativePrice,
+                            completedAt: result.completedAt
+                        }, "*");
+                    } catch (e) {
+                        // not in an iframe — ignore
+                    }
+                }
+
                 alert("Window submitted. Authoritative price: $" + price);
             })
             .fail(function (jqXHR, textStatus, errorThrown) {

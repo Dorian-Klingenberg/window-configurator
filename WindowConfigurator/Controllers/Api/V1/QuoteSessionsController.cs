@@ -391,7 +391,9 @@ namespace WindowConfigurator.Controllers.Api.V1
                 ProductLineKey = item.ProductLineKey,
                 Location = item.Location,
                 LineItemNumber = item.LineItemNumber,
-                MeetsEgress = item.MeetsEgress
+                MeetsEgress = item.MeetsEgress,
+                AuthoritativePrice = item.AuthoritativePrice,
+                CompletedAt = item.CompletedAt
             };
         }
     }

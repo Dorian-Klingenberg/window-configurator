@@ -325,6 +325,37 @@ namespace WindowConfigurator.Tests.Controllers
             Assert.IsType<UnauthorizedObjectResult>(result.Result);
         }
 
+        [Fact]
+        public async Task GetById_WhenItemIsCompleted_IncludesAuthoritativePriceAndCompletedAt()
+        {
+            var tenant = await SeedTenantAsync(["energysaver-2500"]);
+            var completedAt = new DateTime(2026, 5, 27, 12, 0, 0, DateTimeKind.Utc);
+            var session = new QuoteSessionEntity
+            {
+                TenantId = tenant.Id,
+                Status = QuoteSessionStatus.Completed,
+                DefaultProductLineKey = "energysaver-2500"
+            };
+            await _sessionRepository.AddAsync(session);
+            await _sessionRepository.AddItemAsync(session.Id, new ConfiguredWindowItemEntity
+            {
+                ProductLineKey = "energysaver-2500",
+                Status = ConfiguredWindowItemStatus.Completed,
+                Location = "Living Room",
+                AuthoritativePrice = 1234.56m,
+                CompletedAt = completedAt
+            });
+            await _sessionRepository.SaveChangesAsync();
+
+            var result = await _controller.GetById(session.Id);
+
+            var ok = Assert.IsType<OkObjectResult>(result.Result);
+            var response = Assert.IsType<QuoteSessionResponse>(ok.Value);
+            var item = Assert.Single(response.Items);
+            Assert.Equal(1234.56m, item.AuthoritativePrice);
+            Assert.Equal(completedAt, item.CompletedAt);
+        }
+
         public void Dispose()
         {
             _context.Dispose();

@@ -9,5 +9,7 @@ namespace WindowConfigurator.Controllers.Api.V1.Models
         public string Location { get; set; } = string.Empty;
         public int LineItemNumber { get; set; }
         public bool MeetsEgress { get; set; }
+        public decimal? AuthoritativePrice { get; set; }
+        public DateTime? CompletedAt { get; set; }
     }
 }

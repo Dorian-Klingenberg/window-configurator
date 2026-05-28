@@ -21,6 +21,23 @@
     <section class="embed-wrap">
       <iframe id="configuratorFrame" title="Window configurator"></iframe>
     </section>
+
+    <section id="completionPanel" class="completion-panel hidden" aria-live="polite">
+      <div class="completion-inner">
+        <div class="completion-check">&#10003;</div>
+        <h2>Quote Complete!</h2>
+        <p>Your window configuration has been submitted successfully.</p>
+        <dl class="completion-details">
+          <dt>Session ID</dt>
+          <dd id="completionSessionId">—</dd>
+          <dt>Authoritative Price</dt>
+          <dd id="completionPrice">—</dd>
+          <dt>Completed</dt>
+          <dd id="completionTime">—</dd>
+        </dl>
+        <p class="completion-note">A contractor will follow up with your final quote within 24 hours.</p>
+      </div>
+    </section>
   </main>
   <script src="site.js"></script>
 </body>

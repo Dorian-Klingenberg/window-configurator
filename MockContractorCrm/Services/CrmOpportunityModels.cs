@@ -8,4 +8,7 @@ public sealed record CrmOpportunity(
     string Status,
     Guid? QuoteSessionId,
     string? LaunchUrl,
-    DateTime CreatedAtUtc);
+    DateTime CreatedAtUtc,
+    DateTime? SubmittedAt = null,
+    int? CompletedItemCount = null,
+    decimal? AuthoritativeTotalPrice = null);
