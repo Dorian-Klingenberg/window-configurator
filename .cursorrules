@@ -1,0 +1,34 @@
+# Cursor Rules — WindowConfigurator
+
+Read these two files first. They contain the full working preferences, TDD rules, code conventions, architecture principles, and documentation requirements:
+
+1. `AGENTS.md` (repo root) — project-specific bootstrap and skill registry
+2. `../AGENTS.md` — Dorian's full working preferences (TDD, backend-first, naming, testing, interaction patterns)
+
+Do not start any task before reading both.
+
+---
+
+## Required Reading Before Any Work
+
+After reading the two AGENTS files above, read these in order:
+
+1. `implementation-roadmap.md` — active phase, deliverables, history
+2. `window-domain-knowledge.md` — window industry domain reference
+3. Most recent file in `journal/` — current state, recent decisions
+4. `BRANCHING.md` — active branch lanes and merge rules
+5. All `HANDOFF-*.md` files in this directory — including branch-specific ones
+6. Run `git branch -a` and `git log --oneline -10` — confirm which branch you are on before writing any code
+
+---
+
+## Non-Negotiable Rules (Short Form)
+
+- **TDD always.** Write the failing test before writing implementation code.
+- **Backend first.** Don't touch the frontend unless the backend contract changed or the task explicitly requires it.
+- **No CRM API calls from this codebase. Ever.**
+- **No floating-point for prices or measurements.**
+- **Verify the current branch before starting.** Check `git branch` — do not assume you are on main.
+- **Do not work outside `D:\Repos\renonerd\`.** Other repos in `D:\Repos\` are unrelated.
+
+Full rules and rationale: `../AGENTS.md`
