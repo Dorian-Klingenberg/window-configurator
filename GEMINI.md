@@ -16,9 +16,10 @@ After reading the two AGENTS files above, read these in order:
 1. `implementation-roadmap.md` — active phase, deliverables, history
 2. `window-domain-knowledge.md` — window industry domain reference
 3. Most recent file in `journal/` — current state, recent decisions
-4. `BRANCHING.md` — active branch lanes and merge rules
-5. All `HANDOFF-*.md` files in this directory — including branch-specific ones
-6. Run `git branch -a` and `git log --oneline -10` — confirm which branch you are on before writing any code
+4. All files in `adr/` — architectural decisions, constraints, and rationale that govern the codebase
+5. `BRANCHING.md` — active branch lanes and merge rules
+6. All `HANDOFF-*.md` files in this directory — including branch-specific ones
+7. Run `git branch -a` and `git log --oneline -10` — confirm which branch you are on before writing any code
 
 ---
 
