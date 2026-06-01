@@ -44,6 +44,10 @@ When asked for current project status, phase, or progress:
 - verify against `implementation-roadmap.md`, latest `journal/` entries, and recent ADRs/handoff docs
 - report the documented truth; if documents conflict, resolve and state that before answering
 
+## Secret scan reminder
+
+Before starting substantive work, read `SECRET_SCAN_REPORT.md` if it exists and remind the user to review or resolve any open secret-scan findings. This reminder applies regardless of whether you are Codex, Claude Code, or GitHub Copilot.
+
 ## Available Skills
 
 ### create-lesson
@@ -76,13 +80,13 @@ When asked for current project status, phase, or progress:
 
 **Core instructions:** `skills/hubspot-org-config-core.md`
 
-**What it produces:** HubSpot config action output in console plus JSON report (`artifacts/hubspot-org-config-report.json` by default), plus a minimal contractor-demo runbook (multi-item edit/save cycle and multi-order, multi-product-line flow).
+**What it produces:** HubSpot config action output in console plus JSON report (`artifacts/hubspot-org-config-report.json` by default), plus a minimal contractor-demo runbook (multi-item edit/save flows).
 
 ### vscode-debug-launch
 
 **Purpose:** Standardizes VS Code `launch.json`/`tasks.json` for this workspace so debug startup is repeatable across branches/slices and avoids stale-path and `uriFormat` placeholder errors.
 
-**When to invoke:** When starting a new slice branch, when demo app projects/ports change, or when debug startup fails (`MSB1009`, wrong project path, or `uriFormat must contain exactly one substitution placeholder`).
+**When to invoke:** When starting a new slice branch, when demo app projects/ports change, or when debug startup fails (`MSB1009`, wrong project path, or `uriFormat must contain exactly one substitution`).
 
 **How to invoke:**
 - Codex / any agent: read `skills/vscode-debug-launch-core.md` and follow its workflow.
@@ -92,4 +96,4 @@ When asked for current project status, phase, or progress:
 
 **Core instructions:** `skills/vscode-debug-launch-core.md`
 
-**What it produces:** A stable, slice-aware debug profile set (plus one configurator-only profile), validated JSON task/launch files, and consistent startup behavior regardless of whether VS Code is opened at workspace root or repo root.
+**What it produces:** A stable, slice-aware debug profile set (plus one configurator-only profile), validated JSON task/launch files, and consistent startup behavior regardless of whether VS Code is opened at workspace root or project root.
