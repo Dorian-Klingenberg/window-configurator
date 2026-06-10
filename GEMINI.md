@@ -23,6 +23,13 @@ After reading the two AGENTS files above, read these in order:
 
 ---
 
+## Environment & Tool Constraints
+
+- Never use visual or GUI tools (such as File Explorer, native application windows, or browser screenshots) if a command-line alternative is available.
+- Always prefer executing commands within Windows Subsystem for Linux (WSL) over any other interface.
+- If a task cannot be handled within WSL, fall back to standard CLI tools or PowerShell commands.
+- Use text-based terminal utilities (e.g., `ls`, `grep`, `find`, `cat`, `Get-ChildItem`) exclusively for navigating file systems and managing project tasks.
+
 ## Non-Negotiable Rules (Short Form)
 
 - **TDD always.** Write the failing test before writing implementation code.

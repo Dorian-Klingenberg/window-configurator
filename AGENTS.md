@@ -20,6 +20,13 @@ Read `../AGENTS.md` for Dorian's full working preferences, then read:
 5. `BRANCHING.md`
 6. All `HANDOFF-*.md` files in this directory — including branch-specific ones (e.g. `HANDOFF-2026-05-22-slice-a.md`). Each active feature branch may have its own handoff with progress state not yet on main. Run `git branch -a` and `git show <branch>:HANDOFF-*.md` to check branches for handoff docs that have not been merged yet.
 
+## Environment & Tool Constraints
+
+- Never use visual or GUI tools (such as File Explorer, native application windows, or browser screenshots) if a command-line alternative is available.
+- Always prefer executing commands within Windows Subsystem for Linux (WSL) over any other interface.
+- If a task cannot be handled within WSL, fall back to standard CLI tools or PowerShell commands.
+- Use text-based terminal utilities (e.g., `ls`, `grep`, `find`, `cat`, `Get-ChildItem`) exclusively for navigating file systems and managing project tasks.
+
 Current phase discipline still applies: verify prior phases and tests before starting a new phase, and use TDD for non-trivial implementation work.
 
 At each phase handoff (closeout or kickoff), do a quick documentation sanity check:
