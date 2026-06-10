@@ -246,3 +246,13 @@ This project demonstrates several sophisticated, real-world engineering concepts
 - **Event-driven decoupling** — the system fires events, consumers decide what to do
 
 The domain is real (window manufacturing has genuine complexity), the problem is real (CRM integration for trades businesses is a genuine pain point), and the architecture decisions are defensible and interesting to explain.
+
+### AI Extension Notes
+
+Potential future AI work should preserve the server-authoritative boundary. The strongest product wedge is **Field Measure Voice Capture**: a contractor dictates room, dimensions, glass package, and style sequence during an on-site measure-up; AI converts the transcript into a draft configuration; the server validates and prices it.
+
+The strongest engineering wedge is a **Pricing Capture Harness**: deterministic browser automation and combinatorial test generation exercise authorized manufacturer/dealer configurators, capture prices and evidence, and infer pricing-grid behavior. AI may help with label mapping, error classification, and report summaries, but it should not own exact measurements, pricing, validation, order readiness, or CRM behavior.
+
+Portfolio sentence:
+
+> AI-assisted field intake and pricing-evidence workflows around deterministic validation, exact measurement math, and server-authoritative pricing.

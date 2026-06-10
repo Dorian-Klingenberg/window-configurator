@@ -246,6 +246,79 @@ A `QuoteSession` contains one or more `ConfiguredWindowItem` entries. Each item 
 
 ---
 
+## AI-Adjacent Workflow Opportunities
+
+These are product opportunity notes, not implemented features. They should respect the existing architecture principles:
+
+- server-authoritative pricing and validation
+- exact fractional measurement handling
+- CRM-agnostic, unidirectional integration
+- no CRM API calls from this platform
+- rough opening remains null until contractor remeasure
+- AI can propose, summarize, classify, and prepare evidence, but it must not own installation-critical truth
+
+### Field Measure Voice Capture
+
+The strongest AI wedge is contractor measure-up intake.
+
+Typical workflow:
+
+1. Contractor opens a job or quote session on a phone during an on-site measure-up.
+2. Contractor walks room to room and speaks each opening:
+   - "living room, 150 inches by 48 inches, triple-glazed casement picture casement"
+   - "kitchen sink, 36 by 42, awning, white, no grille"
+3. Speech-to-text plus a constrained parser or LLM converts the transcript into a draft configured item.
+4. The backend validates the draft against tenant policy, product-line rules, frame/style limits, option availability, and pricing-grid support.
+5. The UI shows a preview and asks the contractor to confirm or correct uncertain fields.
+6. The session can later send the homeowner a magic link to review customer-editable choices.
+
+AI is useful because the input is messy human language. The backend remains authoritative because dimensions, pricing, eligibility, and order-readiness are high-risk.
+
+Fields that should stay contractor/server controlled for homeowner review:
+
+- frame dimensions
+- rough opening and remeasure fields
+- product line unless contractor explicitly permits alternatives
+- section count when it affects manufacturing or installation
+- any field marked contractor-verified
+
+Fields that may be reasonable homeowner preferences:
+
+- grille / SDL choices
+- colors
+- glass package within contractor-approved options
+- opening behavior or handedness when safe under the product/style constraints
+- upgrade preferences and notes/questions
+
+### Pricing Capture Harness
+
+Manufacturer and dealer pricing tools can be slow and painful, but contractors may have authorized access to them. A future pricing-capture harness could configure hundreds or thousands of valid window combinations through an authorized external configurator and capture:
+
+- submitted configuration
+- returned price
+- warnings and validation errors
+- screenshots or page evidence
+- timing and run identity
+- inferred breakpoint/multiplier behavior
+- anomalies against the internal pricing model
+
+The core of this feature should be deterministic:
+
+1. Generate candidate configurations.
+2. Drive the external configurator with browser automation.
+3. Capture output and evidence.
+4. Store run artifacts.
+5. Infer pricing-grid updates or validation boundaries.
+6. Produce a human-reviewable report.
+
+AI can help with ambiguous form labels, error-message classification, option mapping, anomaly summarization, and proposing the next batch of configurations. AI should not be the authority for the captured prices.
+
+Professional framing:
+
+> Automated price-book reconstruction and validation for dealers using their authorized manufacturer quoting tools.
+
+---
+
 ## Key Entities
 
 ### TenantEntity
