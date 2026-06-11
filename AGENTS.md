@@ -40,7 +40,7 @@ At each phase handoff (closeout or kickoff), do a quick documentation sanity che
 Keep this quick unless the user explicitly asks for a deep documentation review.
 
 At each phase handoff, also create or update lessons in `lessons/`:
-- maintain one lesson per phase touched and keep `lessons/README.md` current
+- maintain one lesson per phase touched and keep `lessons/LESSON_CATALOG.md` current
 - include actionable build steps, code snippets, and at least one Mermaid diagram per lesson
 - run a quick consistency check so lessons match roadmap/ADRs/journal and current endpoint/code names
 
@@ -66,7 +66,7 @@ When asked for current project status, phase, or progress:
 
 **Core instructions:** `skills/create-lesson-core.md`
 
-**What it produces:** A `lessons/phase-N-title.md` file with build steps, a Mermaid diagram, representative code snippets, and a test table. Updates `lessons/README.md`.
+**What it produces:** A `lessons/YYYY-MM-DD_kebab-topic.md` file with chapters, Mermaid diagrams, research references where applicable, and a "What We Learned" summary. Updates `lessons/LESSON_CATALOG.md`. See `lessons/LESSON_TEMPLATE.md` for the format.
 
 ### hubspot-org-config
 
