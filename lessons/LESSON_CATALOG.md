@@ -21,5 +21,5 @@ Skill: `skills/create-lesson-core.md` · Slash command: `/create-lesson`
 
 | Lesson | Date | Sandbox | Status |
 |---|---|---|---|
-| *(pending)* | — | [001-interview-me](../sandboxes/001-interview-me/README.md) | ⬜ Open |
+| [lesson_2026-06-12_sandbox-001-interview-me.md](lesson_2026-06-12_sandbox-001-interview-me.md) | 2026-06-12 | [001-interview-me](../sandboxes/001-interview-me/README.md) | ✅ Closed |
 | *(pending)* | — | [002-idea-refine](../sandboxes/002-idea-refine/README.md) | ⬜ Open |
