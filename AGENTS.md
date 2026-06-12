@@ -55,18 +55,32 @@ When asked for current project status, phase, or progress:
 
 ### create-lesson
 
-**Purpose:** Produces a structured lesson document from completed phase, slice, or step work.
+**Purpose:** Produces a structured lesson document from completed phase, slice, step, experiment, or planning session.
 
-**When to invoke:** After completing any phase, slice, or step where new files were created, tests were written, and at least one design decision was made.
+**When to invoke:** After completing any phase, slice, or step where new files were created, tests were written, and at least one design decision was made. Also invoke after planning or framework-adoption sessions.
 
 **How to invoke:**
-- Claude Code: `/create-lesson <phase or step name>`
+- Claude Code: `/create-lesson <topic>`
 - Copilot: activate the `CreateLesson` agent
 - Codex / any agent: read `skills/create-lesson-core.md` and follow its instructions for the described work
 
 **Core instructions:** `skills/create-lesson-core.md`
 
-**What it produces:** A `lessons/YYYY-MM-DD_kebab-topic.md` file with chapters, Mermaid diagrams, research references where applicable, and a "What We Learned" summary. Updates `lessons/LESSON_CATALOG.md`. See `lessons/LESSON_TEMPLATE.md` for the format.
+**What it produces:** A `lessons/YYYY-MM-DD_kebab-topic.md` file with numbered prose chapters, a "What We Learned" bullet summary, "What Comes Next" list, Mermaid Sequence Interaction Diagram, Mermaid Concept Diagram, and optional Research References. Updates `lessons/LESSON_CATALOG.md`. See `lessons/LESSON_TEMPLATE.md` for the skeleton.
+
+### write-journal-entry
+
+**Purpose:** Writes or updates the daily journal entry for the current session.
+
+**When to invoke:** At the end of any working session where code was written, decisions were made, or project state changed. Also at the kickoff of a new phase or slice.
+
+**How to invoke:**
+- Claude Code: `/write-journal-entry`
+- Codex / any agent: read `skills/write-journal-entry.md` and follow its instructions for the current session
+
+**Core instructions:** `skills/write-journal-entry.md`
+
+**What it produces:** An entry in `journal/YYYY-MM-DD.md` with a narrative summary, per-work-stream sections (prose), a Current State table, optional Validation Performed commands, and Notes for the incoming agent.
 
 ### hubspot-org-config
 

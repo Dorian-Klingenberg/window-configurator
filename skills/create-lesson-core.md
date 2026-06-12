@@ -6,16 +6,16 @@ This file is the single source of truth for the `create-lesson` skill. Runtime-s
 
 ## Purpose
 
-Produce a structured lesson document from recently completed work — a phase, a slice, or a discrete implementation step. The lesson captures what was built, why, and how, in a format that can be used as a teaching script, video outline, or onboarding reference.
+Produce a structured lesson document from recently completed work — a phase, a slice, a step, an experiment, or a planning/framework-adoption session. The lesson captures what happened, why, and what was learned, in a format usable as a teaching reference, onboarding material, or portfolio evidence.
 
 ---
 
 ## When To Invoke
 
-After completing any phase, slice, or step where:
-- New files were created or existing files were significantly changed
-- At least one ADR or design decision was made
-- Tests were written
+After any phase, slice, step, or session where:
+- New files were created or significantly changed
+- At least one non-trivial design decision was made
+- Tests were written (implementation lessons) OR a significant framework/approach was adopted (planning lessons)
 
 ---
 
@@ -25,117 +25,154 @@ Before writing anything, read the following in order:
 
 1. The most recent journal entry (or the journal entry matching the phase/step name provided)
 2. Each new or changed source file mentioned in that journal entry
-3. The test file(s) for the new code
+3. The test file(s) for the new code (for implementation lessons)
 4. The ADR(s) written for this work, if any
-5. The existing `lessons/README.md` to find the next available phase number
+5. `lessons/LESSON_CATALOG.md` — to confirm the file does not already exist for this topic
 
-Do not make up code snippets. Every snippet in the lesson must come from the actual source files you read.
-
----
-
-## Lesson File Location and Name
-
-Place the lesson file in `lessons/` using the naming convention:
-
-```
-lessons/phase-{N}-{kebab-case-title}.md
-```
-
-If a lesson file for this phase already exists, update it rather than creating a duplicate.
+Do not invent code snippets. Every snippet in the lesson must come from actual source files you read.
 
 ---
 
-## Required Structure
-
-Every lesson must contain all of the following sections in this order.
-
-### 1. Title
+## File Naming
 
 ```
-# Phase N Lesson: [Human-readable title]
+lessons/YYYY-MM-DD_kebab-topic.md
 ```
 
-### 2. Why This Phase Exists
+Examples:
+- `lessons/2026-06-11_agile-v-experiment-design.md`
+- `lessons/2026-07-01_slice-d-requirements-first.md`
 
-One paragraph. Answer:
-- What gap existed before this work?
-- What risk does this work reduce?
-- Why does this come at this point in the sequence (not earlier, not later)?
+If a lesson file for this topic already exists, update it rather than creating a duplicate.
 
-### 3. One Section Per Slice or Feature
+---
 
-If the work had multiple slices, repeat this block for each one. If it was a single unit of work, one block is fine.
+## Format
 
-Each block must contain:
+Every lesson uses numbered prose chapters. See `lessons/LESSON_TEMPLATE.md` for the skeleton and `lessons/lesson_2026-06-11_agile-v-experiment-design.md` for a worked planning-session example.
 
-**The Gap We Closed**
-One or two sentences: what was incomplete or unsafe before this slice.
+### Title and dateline
 
-**What We Built**
-A bullet list of new or significantly changed files and classes. Include the file path and one-line description of its role.
+```
+# Lesson: [Descriptive Topic Title]
 
-**Build Steps**
-A numbered list in TDD order:
+*YYYY-MM-DD — one-line summary of what this lesson covers*
+```
+
+### Content chapters
+
+Numbered chapters with descriptive titles. The number and titles are up to you — adapt them to the material.
+
+**Rule: prose only in content chapters.** No bullet lists, no numbered lists inside chapters. Code blocks and tables are welcome.
+
+Each chapter's opening sentence should name the *why* before the *what*. Chapter titles should name the concept being explained, not a generic ordinal ("Why requirements come first" not "Chapter 3").
+
+For implementation lessons, the content chapters typically cover:
+- Why this phase/slice exists (gap closed, risk reduced)
+- The design decision made and the alternatives considered
+- The TDD sequence (red → green → wire)
+- Key code patterns introduced
+- ADR written
+
+For planning/experiment lessons, the content chapters typically cover:
+- The problem or opportunity that triggered the decision
+- The framework or approach adopted
+- The design of the experiment or measurement system
+- What the first step looks like in practice
+- Cost/tradeoff considerations
+
+### "What We Learned" chapter
+
+The last numbered chapter. **This is the only chapter that uses bullet points.**
+
+- Each bullet is one complete sentence.
+- Focus on transferable insight. "X is true" is weaker than "X matters because Y."
+- Aim for 5–10 bullets.
+
+### "What Comes Next"
+
+After the final numbered chapter. Numbered list of concrete, immediate next steps only.
+
+### Research References (when applicable)
+
+Optional section. Include when papers, frameworks, or external sources informed decisions in the lesson.
+
+Citation style:
+```
+Author, A. (YYYY). Title. *Venue*. One sentence on relevance.
+```
+
+### Mermaid diagrams
+
+**Both diagrams are required in every lesson.** Place them at the end of the file, after Research References.
+
+**Sequence Interaction Diagram:** models runtime or process flow — who calls what, in what order. Use participant names that match real names in the code or process. These are the most valuable diagram type for multi-step or multi-agent flows.
+
+```mermaid
+sequenceDiagram
+    participant A as ActorA
+    participant B as ActorB
+    A->>B: action
+    B-->>A: result
+```
+
+**Concept Diagram:** models structural relationships between concepts, files, components, or decisions.
+
+```mermaid
+flowchart TB
+    A["Node A"] --> B["Node B"]
+```
+
+---
+
+## Implementation Lesson — Additional Elements
+
+For implementation lessons (slices, phases, TDD work), add these elements inside the relevant content chapters:
+
+**Build steps** (inside the implementation chapter):
 1. Write the failing test (red)
-2. Implement the minimum code to pass (green)
-3. Any wiring steps (DI registration, migration, etc.)
+2. Implement minimum code to pass (green)
+3. Wire up (DI registration, migration, etc.)
 
-**[Descriptive Name] Diagram**
-A Mermaid diagram appropriate to the work:
-- `sequenceDiagram` for request/response flows
-- `flowchart TD` for decision trees or state machines
-- Use real class/method names from the code
+**Representative snippet** — one code block, actual code from source files. Add one line of comment explaining *why* this approach was chosen (not what it does).
 
-**Representative Snippet**
-One code block showing the key pattern introduced. Use the actual code from the source files. Add a one-line comment explaining what makes this interesting — not what it does (the code shows that), but why this specific approach was chosen.
-
-**Tests Added**
-A markdown table:
+**Tests table** (inside or after the implementation chapter):
 
 | Test | Asserts |
 |---|---|
 | `TestMethodName` | What behavior it proves |
 
-**ADR**
-If an ADR was written, include:
-```
-`adr/XXXX-name.md`
-```
-
----
-
-### 4. What To Teach In A Video
-
-A bullet list of 3–6 concepts from this work that are worth teaching explicitly — things a reader might not infer from just reading the code. Focus on:
-- Non-obvious design decisions
-- Patterns with broad applicability beyond this project
-- "Why not the simpler thing" moments
+**ADR reference** — if an ADR was written, call it out: `` `adr/XXXX-name.md` ``
 
 ---
 
 ## After Writing the Lesson
 
-1. Open `lessons/README.md` and add an entry for the new lesson in the numbered list, keeping the list in phase order.
-2. Confirm the lesson filename matches the `lessons/README.md` link.
+1. Add an entry to `lessons/LESSON_CATALOG.md`:
+   - Linked filename
+   - Date
+   - Topic (one line)
+   - "Recorded result" if there is a measured or validated outcome
+
+2. Quick consistency check: does the lesson match what is in the journal, ADRs, and roadmap for the same day/phase? Correct any drift before committing.
 
 ---
 
 ## Rules
 
 - Do not read or reference files outside `D:\Repos\renonerd\`
-- Do not invent code snippets — every snippet must be read from an actual file
-- Do not skip the Mermaid diagram
-- Do not skip the Tests Added table
-- Do not create a new lesson file if one already exists for this phase — update the existing one
+- Do not invent code snippets — every snippet must be read from an actual source file
+- Do not skip either Mermaid diagram
+- Do not create a new lesson file if one already exists for this topic — update the existing one
 - Do not add commentary about the lesson-writing process inside the lesson itself
-- One lesson file per phase — multiple slices go in the same file as separate sections
+- Prose in content chapters. Bullets only in "What We Learned"
 
 ---
 
 ## Acceptance Checks
 
-- Can a developer follow the Build Steps section to recreate the work from scratch?
-- Does the Mermaid diagram use actual class and method names from the code?
+- Does each chapter title name the concept, not just a number?
 - Is every code snippet present verbatim in a source file in the repo?
-- Does `lessons/README.md` have an entry pointing to this file?
-- Would the "What To Teach In A Video" section work as a standalone script outline?
+- Are both Mermaid diagrams present?
+- Does `lessons/LESSON_CATALOG.md` have an entry pointing to this file?
+- Does "What We Learned" use bullets and no other chapter does?

@@ -45,4 +45,5 @@ Full rules and rationale: `../AGENTS.md`
 
 ## Available Custom Agents
 
-- **CreateLesson** — invoke after completing any phase or slice to produce a structured lesson document. See `skills/create-lesson-core.md`.
+- **CreateLesson** — invoke after completing any phase, slice, or planning session to produce a structured lesson document. See `skills/create-lesson-core.md`.
+- **WriteJournalEntry** — invoke at the end of any working session to write or update the daily journal entry. See `skills/write-journal-entry.md`.
