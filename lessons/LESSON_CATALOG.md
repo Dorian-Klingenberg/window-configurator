@@ -19,4 +19,7 @@ Skill: `skills/create-lesson-core.md` · Slash command: `/create-lesson`
 
 ## Sandboxes
 
-*(none yet — entries added when a sandbox closes with a lesson)*
+| Lesson | Date | Sandbox | Status |
+|---|---|---|---|
+| *(pending)* | — | [001-interview-me](../sandboxes/001-interview-me/README.md) | ⬜ Open |
+| *(pending)* | — | [002-idea-refine](../sandboxes/002-idea-refine/README.md) | ⬜ Open |
