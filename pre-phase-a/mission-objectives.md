@@ -59,6 +59,7 @@ These are the high-level system needs derived from the mission and objectives. T
 | N-02b | The system shall accept voice input from the contractor and parse spoken window specifications into structured configuration fields (type, style, finish, grille pattern, etc.). |
 | N-10 | The customer-facing configurator shall respond to configuration changes without server round-trips. The pricing grid shall be preloaded at session open; all pricing calculations shall execute client-side. |
 | N-11 | The customer-facing configuration interface shall be operable by a homeowner with no window industry expertise. No jargon, no expert-required inputs. |
+| N-12 | The production-adjacent implementation shall be Blazor-based. JavaScript shall be eliminated and replaced with C#. The existing Knockout.js + Bootstrap 3 frontend is the migration target. |
 | N-03 | The system shall maintain a measurement source record for each dimension (customer-entered, image-estimate, physical-confirmed). |
 | N-04 | The system shall compute and display pricing at all measurement confidence tiers, with labels appropriate to each tier. |
 | N-05 | The system shall prevent order placement until a physical remeasure has been recorded for all items in the session. |
