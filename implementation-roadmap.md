@@ -343,9 +343,9 @@ All five artifact types must be complete before any implementation slice opens:
 |---|---|---|
 | Concept of Operations (ConOps) | `pre-phase-a/conops.md` | ✅ Complete (v1.1) |
 | Mission Objectives & Needs | `pre-phase-a/mission-objectives.md` | ✅ Complete (v1.1) |
-| System Architecture Diagrams | `pre-phase-a/architecture-diagrams.md` | ⬜ Not started |
-| Draft Requirements (Level 1/2) | `pre-phase-a/draft-requirements.md` | ⬜ Not started |
-| Preliminary Validation Plan | `pre-phase-a/validation-plan.md` | ⬜ Not started |
+| System Architecture Diagrams | `pre-phase-a/architecture-diagrams.md` | ✅ Complete |
+| Draft Requirements (Level 1/2) | `pre-phase-a/draft-requirements.md` | ✅ Complete |
+| Preliminary Validation Plan | `pre-phase-a/validation-plan.md` | ✅ Complete |
 
 ### Agile V Experiment Baseline
 
