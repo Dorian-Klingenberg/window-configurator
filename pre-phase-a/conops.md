@@ -93,7 +93,9 @@ When the contractor provides an image estimate or physical remeasure, it superse
 ## 6. Key Operational Constraints
 
 - **Contractor-locked sizing:** Once a contractor has provided a measurement (image estimate or physical), the customer cannot modify sizing. The contractor is the authoritative measurement source.
+- **Physical remeasure is mandatory:** 3/32" accuracy is required for order placement. Image processing cannot achieve this. Every job requires a second contractor visit to pull casing and measure the interior frame and exterior brick mold.
 - **No CRM API calls:** The platform fires outbound webhooks. It never calls a CRM directly.
 - **No floating-point measurements:** All window dimensions use exact fractional arithmetic (sign, whole, numerator, denominator). A 1/16" error is a manufacturing defect.
 - **One manufacturer order per product line:** Mixed product lines in a session produce separate orders at conversion.
-- **Rough opening null until contractor measures:** Order placement requires a confirmed (physical remeasure) rough opening. Image estimates and customer entries do not satisfy this gate.
+- **Client-side pricing calculation:** The customer-facing configurator must respond to configuration changes without server round-trips. The pricing grid is preloaded at session open; all calculations run client-side. Server validates on submission. This is the architectural response to the performance failures of existing manufacturer and retail configurator tools.
+- **No expertise required from the customer:** The customer-facing interface must be operable by a homeowner with no window industry knowledge. Jargon, expert-only inputs, and complex option trees are out of scope for the customer surface.
