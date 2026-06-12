@@ -1,11 +1,8 @@
 # GitHub Copilot Instructions — WindowConfigurator
 
-Read these two files first. They contain the full working preferences, TDD rules, code conventions, architecture principles, and documentation requirements:
+Read `AGENTS.md` in this directory first. It contains the full working preferences, TDD rules, code conventions, architecture principles, documentation requirements, and skill registry.
 
-1. `AGENTS.md` (repo root) — project-specific bootstrap and skill registry
-2. `../AGENTS.md` — Dorian's full working preferences (TDD, backend-first, naming, testing, interaction patterns)
-
-Do not start any task before reading both.
+Do not start any task before reading it.
 
 ---
 
@@ -39,7 +36,7 @@ After reading the two AGENTS files above, read these in order:
 - **Verify the current branch before starting.** Check `git branch` — do not assume you are on main.
 - **Do not work outside `D:\Repos\renonerd\`.** Other repos in `D:\Repos\` are unrelated.
 
-Full rules and rationale: `../AGENTS.md`
+Full rules and rationale: `AGENTS.md`
 
 ---
 

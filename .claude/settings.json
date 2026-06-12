@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(d:/Repos/agent-orchestration/**)",
+      "Write(d:/Repos/agent-orchestration/**)",
+      "Edit(d:/Repos/agent-orchestration/**)"
+    ]
+  }
+}
