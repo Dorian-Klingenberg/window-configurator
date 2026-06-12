@@ -1,6 +1,6 @@
 # Concept of Operations — WindowConfigurator
 
-*Pre-Phase A artifact · Version 1.0 · 2026-06-12*
+*Pre-Phase A artifact · Version 1.1 · 2026-06-12*
 
 ---
 
@@ -21,7 +21,8 @@ The platform is contractor-branded — contractors embed or link to it from thei
 - Session lifecycle management (draft → customer review → confirmed → order-ready)
 - Customer-facing configuration link (contractor-issued, contractor-branded)
 - Image processing pipeline for exterior measurement estimation
-- Contractor portal for session management and customer handoff
+- Speech recognition pipeline for hands-free window specification capture
+- Contractor portal for session management and customer handoff (mobile-first)
 
 **Outside the system:**
 - CRM systems (contractors integrate via outbound webhooks; the platform never calls a CRM)
@@ -49,15 +50,17 @@ The platform is contractor-branded — contractors embed or link to it from thei
 This is the primary flow. The contractor is the first mover.
 
 1. **Site visit:** Contractor visits the customer's property for an initial assessment.
-2. **Photo capture:** Contractor photographs each window from the exterior using the contractor portal or mobile interface.
-3. **Image processing estimate:** The system analyzes the exterior photo and produces an estimated rough opening for each window. This is estimate-grade accuracy — sufficient for configuration and indicative pricing, not for order placement.
-4. **Window specification:** Contractor selects the window type for each opening (e.g., right casement, left casement, double-hung) and confirms the image-derived dimensions or adjusts them.
-5. **Session creation:** The system creates a configuration session per window (or per project) with sizing locked to the contractor. Pricing is calculated and labeled as an estimate.
-6. **Customer link issued:** The contractor sends the customer a link to their session. The customer can view the configuration and pricing, and modify any attribute that does not affect fit — finish, hardware, grille pattern, glass options, etc. Sizing fields are read-only.
-7. **Customer review:** The customer explores the configuration, sees how their choices affect pricing, and communicates their preferences to the contractor. This is not a quote acceptance — it is a preference declaration.
-8. **Final remeasure scheduled:** The customer and contractor agree on a direction. The contractor schedules a second visit.
-9. **Physical remeasure:** On the second visit, the contractor removes interior casing and takes a precise interior frame measurement, and a precise exterior brick mold measurement. These replace the image-processing estimate. Pricing updates to final (confirmed) status.
-10. **Order placement:** Papers are signed. The system produces an order-ready configuration. The order is placed with the manufacturer.
+2. **On-site capture (hands-free):** Standing at each window, the contractor performs two simultaneous inputs via the mobile portal:
+   - **Photo** — photographs the window from the exterior. The system analyzes the image and derives an estimated rough opening.
+   - **Voice** — speaks the window specification (e.g., "right casement, two over two grille, white exterior"). The system transcribes and parses the specification into structured configuration fields.
+   The contractor is not typing. The interaction is designed for someone on a ladder or with hands occupied.
+3. **System review:** The contractor reviews the image-derived dimensions and voice-parsed specification on the mobile portal, corrects any misreads, and confirms.
+4. **Session creation from on-site capture:** The system creates a configuration session from the confirmed photo + voice inputs, with sizing locked to the contractor. Pricing is calculated and labeled as an estimate.
+5. **Customer link issued:** The contractor sends the customer a link to their session. The customer can view the configuration and pricing, and modify any attribute that does not affect fit — finish, hardware, grille pattern, glass options, etc. Sizing fields are read-only.
+6. **Customer review:** The customer explores the configuration, sees how their choices affect pricing, and communicates their preferences to the contractor. This is not a quote acceptance — it is a preference declaration.
+7. **Final remeasure scheduled:** The customer and contractor agree on a direction. The contractor schedules a second visit.
+8. **Physical remeasure:** On the second visit, the contractor removes interior casing and takes a precise interior frame measurement, and a precise exterior brick mold measurement. These replace the image-processing estimate. Pricing updates to final (confirmed) status.
+9. **Order placement:** Papers are signed. The system produces an order-ready configuration. The order is placed with the manufacturer.
 
 ### Scenario B — Customer-Led Flow (Online Initiation)
 
@@ -67,7 +70,7 @@ This is the secondary flow. The customer is the first mover.
 2. **Self-configuration:** The customer configures their window preferences — type, style, finish, hardware — and optionally enters their own sizing estimates. The system accepts customer-entered sizing but labels the resulting pricing as indicative only.
 3. **Submission:** The customer submits the configuration as an inquiry to the contractor. The system notifies the contractor via webhook.
 4. **Contractor review:** The contractor reviews the customer's configuration and preferences, uses it as a briefing document for the initial visit, and schedules a site visit.
-5. **Merge into Scenario A:** From the site visit onward, the flow is identical to Scenario A from step 2. The contractor's image-processing estimate supersedes the customer's self-entered sizing with a higher-confidence measurement.
+5. **Merge into Scenario A:** From the site visit onward, the flow is identical to Scenario A from step 2 (on-site capture — photo + voice). The contractor's image-processing estimate supersedes the customer's self-entered sizing with a higher-confidence measurement.
 
 ---
 

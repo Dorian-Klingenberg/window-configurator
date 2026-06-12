@@ -1,6 +1,6 @@
 # Mission Objectives and Needs — WindowConfigurator
 
-*Pre-Phase A artifact · Version 1.0 · 2026-06-12*
+*Pre-Phase A artifact · Version 1.1 · 2026-06-12*
 
 ---
 
@@ -56,6 +56,7 @@ These are the high-level system needs derived from the mission and objectives. T
 |---|---|
 | N-01 | The system shall support two session initiation modes: contractor-initiated and customer-initiated. |
 | N-02 | The system shall accept exterior window photographs as input and derive estimated rough opening dimensions from them. |
+| N-02b | The system shall accept voice input from the contractor and parse spoken window specifications into structured configuration fields (type, style, finish, grille pattern, etc.). |
 | N-03 | The system shall maintain a measurement source record for each dimension (customer-entered, image-estimate, physical-confirmed). |
 | N-04 | The system shall compute and display pricing at all measurement confidence tiers, with labels appropriate to each tier. |
 | N-05 | The system shall prevent order placement until a physical remeasure has been recorded for all items in the session. |
