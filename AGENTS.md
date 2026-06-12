@@ -129,6 +129,25 @@ Non-negotiable:
 
 ---
 
+## Repository Zones
+
+The repo has four documentation/work zones with different rules:
+
+| Directory | Zone | V-Model applies? | Required output |
+|---|---|---|---|
+| `sandboxes/` | Pre-Phase A — exploration | No | Lesson with "What This Tells the Project" chapter |
+| `requirements/` | Phase A entry | Yes — this IS the gate | Baselined requirements doc before slice branch opens |
+| production slices | Phase A–D — implementation | Yes | TDD, ADR, PR gate |
+| `metrics/` | Measurement layer | N/A — observation only | Tier 1 baseline + per-slice Tier 2 records |
+
+**Sandboxes:** V-Model-free space. Each sandbox gets `sandboxes/NNN-kebab-question/` with a README stating the question before code is written. The only exit artifact required is a lesson. A sandbox does not have to produce a requirement — understanding is a valid result. See `sandboxes/README.md`.
+
+**Requirements:** Written before any implementation work begins on a slice. One file per slice (`requirements/slice-N-kebab-topic.md`). IDs are `REQ-X-NNN`. Once written, baselined for the slice. See `requirements/README.md`.
+
+**Metrics:** Tracks the Agile V adoption experiment. `metrics/baseline.md` holds Tier 1 numbers from git history. Per-slice Tier 2 files accumulate as work completes. See `metrics/README.md`.
+
+---
+
 ## Documentation Conventions
 
 ### ADRs

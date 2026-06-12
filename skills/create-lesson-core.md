@@ -12,10 +12,11 @@ Produce a structured lesson document from recently completed work — a phase, a
 
 ## When To Invoke
 
-After any phase, slice, step, or session where:
+After any phase, slice, step, sandbox, or session where:
 - New files were created or significantly changed
 - At least one non-trivial design decision was made
 - Tests were written (implementation lessons) OR a significant framework/approach was adopted (planning lessons)
+- A sandbox produced a result — positive, negative, or inconclusive
 
 ---
 
@@ -73,6 +74,8 @@ For implementation lessons, the content chapters typically cover:
 - The TDD sequence (red → green → wire)
 - Key code patterns introduced
 - ADR written
+
+For sandbox lessons, add a required chapter: **"What This Tells the Project"** — explicitly states the connection (or absence of one) back to the main codebase. Can say "this approach works, here is the shape it would take," "this doesn't work because X," or "this is promising but needs another sandbox." This chapter is what makes the sandbox traceable even without a requirement.
 
 For planning/experiment lessons, the content chapters typically cover:
 - The problem or opportunity that triggered the decision

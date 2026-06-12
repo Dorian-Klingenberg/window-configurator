@@ -31,9 +31,23 @@ Every code snippet must come from actual source files — do not invent them.]
 
 ---
 
+## Chapter N: What This Tells the Project
+
+[SANDBOX LESSONS ONLY — omit for implementation and planning lessons.]
+
+[This chapter is required for any lesson exiting a sandbox. State the connection — or
+absence of one — back to the main codebase. Valid answers include:
+- "This approach works. Here is the shape it would take in a production slice."
+- "This doesn't work because X. We won't pursue it."
+- "Promising but needs more investigation. Next sandbox: NNN."
+- "Interesting but not relevant to current project direction."]
+
+---
+
 ## Chapter N: What We Learned
 
-[THIS IS THE ONLY CHAPTER THAT USES BULLET POINTS.]
+[THIS IS THE ONLY CHAPTER THAT USES BULLET POINTS. In sandbox lessons, comes after
+"What This Tells the Project".]
 
 - Each bullet is one complete sentence.
 - Focus on transferable insight: "X matters because Y" not just "X is true."
