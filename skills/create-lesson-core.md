@@ -37,12 +37,14 @@ Do not invent code snippets. Every snippet in the lesson must come from actual s
 ## File Naming
 
 ```
-lessons/YYYY-MM-DD_kebab-topic.md
+lessons/lesson_YYYY-MM-DD_kebab-topic.md
 ```
 
 Examples:
-- `lessons/2026-06-11_agile-v-experiment-design.md`
-- `lessons/2026-07-01_slice-d-requirements-first.md`
+- `lessons/lesson_2026-06-11_agile-v-experiment-design.md`
+- `lessons/lesson_2026-07-01_slice-d-requirements-first.md`
+
+Phase lessons written before the skill existed follow a different pattern (`phase-NN-kebab-topic.md`) — leave those filenames as-is.
 
 If a lesson file for this topic already exists, update it rather than creating a duplicate.
 

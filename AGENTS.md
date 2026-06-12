@@ -159,12 +159,14 @@ Significant architectural decisions go in `adr/` as numbered Markdown files:
 - Write ADRs the same day decisions are made.
 
 ### Journals
-Work sessions are documented in `journal/YYYY-MM-DD.md`. Entries are narrative and retrospective — what happened, what was learned, and why. Not ADRs. Always include:
+Work sessions are documented in `journal/YYYY-MM-DD.md`. One file per calendar day. If a second session happens the same day, append to the existing file with a `---` separator — do not create `YYYY-MM-DDa.md` or `YYYY-MM-DD-topic.md`. Entries are narrative and retrospective — what happened, what was learned, and why. Not ADRs. Always include:
 - **What** decision was made
 - **Why** that decision was made (tradeoffs, constraints, risk reduction rationale)
 
+A few older files in `journal/` use non-standard names (`pricing-bug-investigation-2026-05-18.md`, `2026-06-07-ai-integration-opportunities.md`, `2026-05-21b.md`). Leave them. New entries use `YYYY-MM-DD.md` only.
+
 ### Lessons
-At each phase handoff, create or update a lesson in `lessons/`. See `skills/create-lesson-core.md` for the format. Keep `lessons/LESSON_CATALOG.md` current.
+At each phase handoff, create or update a lesson in `lessons/`. Naming: `lesson_YYYY-MM-DD_kebab-topic.md`. Phase lessons written before this convention use `phase-NN-kebab-topic.md` — leave those filenames as-is. See `skills/create-lesson-core.md` for the full format. Keep `lessons/LESSON_CATALOG.md` current.
 
 ### ATM (Artifact Traceability Matrix)
 When a slice has baselined requirements, produce `requirements/atm-slice-N.md` as a closing artifact. It is a table with three columns: `REQ-X-NNN | Implementation (file:class/method) | Test (file:method)`. One row per requirement. This is the audit evidence that H2 (100% requirement-level verification) is met.
