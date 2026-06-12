@@ -298,7 +298,77 @@ Effort: low.
 
 ---
 
-## Phase 10: Optional UI Port Or Technical Modernization
+## Phase 10: Customer-Facing Demo Surfaces
+
+Risk reduced: inability to demonstrate the system end-to-end to a real prospect.
+Effort: medium to high.
+
+### Slices
+
+| Slice | What | State |
+|---|---|---|
+| A — MockContractorSite | Contractor landing page, iframe configurator launch | ✅ Complete |
+| B — MockContractorCrm | Mock CRM portal, start-quote flow | ✅ Complete |
+| C — Completion confirmation | postMessage signaling, CRM polling, GET session API extension | ✅ Complete |
+| D — First Agile V slice | Scope defined by Pre-Phase A Draft Requirements | ⬜ Blocked — Pre-Phase A gate |
+
+### Note — 2026-06-12
+
+Slice D was previously described as "demo UX hardening." That framing is superseded. Pre-Phase A work revealed a significantly expanded product direction (see `pre-phase-a/`). Slice D scope will be determined by the Draft Requirements artifact once the Pre-Phase A gate is satisfied.
+
+---
+
+## Pre-Phase A: Agile V Adoption and Product Direction (Active)
+
+*Initiated 2026-06-11. This section governs work before any implementation slice opens.*
+
+WindowConfigurator is the live experiment ground for Agile V methodology adoption and for validating the expanded product direction that emerged in the 2026-06-12 session.
+
+### Expanded Product Direction
+
+The system is evolving from a backend-only configuration engine into a two-sided platform:
+
+- **Two entry points:** Contractor-led (on-site photo + voice capture) and customer-led (online self-configuration)
+- **Image processing pipeline:** Exterior photo → estimated rough opening (estimate-grade accuracy)
+- **Speech recognition pipeline:** Spoken specification → structured configuration fields (hands-free, mobile-first)
+- **Measurement confidence model:** Customer-entered (indicative) → image-estimate → physical-confirmed (order-ready)
+- **Client-side pricing:** Grid preloaded at session open; no per-change server round-trips
+- **Customer-appropriate UX:** No window expertise required
+
+### V-Model Pre-Phase A Gate
+
+All five artifact types must be complete before any implementation slice opens:
+
+| Artifact | File | Status |
+|---|---|---|
+| Concept of Operations (ConOps) | `pre-phase-a/conops.md` | ✅ Complete (v1.1) |
+| Mission Objectives & Needs | `pre-phase-a/mission-objectives.md` | ✅ Complete (v1.1) |
+| System Architecture Diagrams | `pre-phase-a/architecture-diagrams.md` | ⬜ Not started |
+| Draft Requirements (Level 1/2) | `pre-phase-a/draft-requirements.md` | ⬜ Not started |
+| Preliminary Validation Plan | `pre-phase-a/validation-plan.md` | ⬜ Not started |
+
+### Agile V Experiment Baseline
+
+Pre-intervention baseline extracted from git history: `metrics/baseline.md`
+- 203 tests, 18 ADRs, ~5.5% fix commit ratio
+- Tier 2 metrics begin at the first slice that passes the Pre-Phase A gate
+
+### Skills Validated (Sandboxes)
+
+| Sandbox | Skill | Finding | Lesson |
+|---|---|---|---|
+| 001 | interview-me | Belongs at Pre-Phase A entry gate; seeds ConOps + Mission Objectives | `lessons/lesson_2026-06-12_sandbox-001-interview-me.md` |
+| 002 | idea-refine | Bridges confirmed intent to MVP scope + Not Doing list; seeds Draft Requirements | `lessons/lesson_2026-06-12_sandbox-002-idea-refine.md` |
+
+### Pre-Phase A Skill Sequence (Established)
+
+```
+interview-me → confirmed intent → idea-refine → MVP scope + Not Doing list → Draft Requirements → slice REQ-X-NNN
+```
+
+---
+
+## Phase 11: Optional UI Port Or Technical Modernization
 
 Risk reduced: long-term maintainability, aging frontend stack.
 Effort: high.
@@ -338,6 +408,14 @@ If work needs to start immediately, do the next items in this order:
 - HubSpot setup remains script-driven via `tools/hubspot_org_config.py` and can be resumed once tenant responsiveness stabilizes.
 - Demo execution strategy is now explicitly two-surface: a mock contractor website plus a mock contractor CRM portal, with real CRM kept as an integration-validation track rather than a demo dependency.
 - Multi-window continuation/add-item UX is assigned to configurator-phase UI work (not host website shell), since backend multi-item session support already exists.
+
+### Execution Note — June 12, 2026
+
+- Phases 0–10C are complete. All merged to main.
+- Active focus is Pre-Phase A gate. Three artifacts remain: Architecture Diagrams, Draft Requirements, Preliminary Validation Plan.
+- No implementation slice opens until all five Pre-Phase A artifact types are complete.
+- Slice D scope is no longer "demo UX hardening" — it will be defined by the Draft Requirements artifact.
+- GitHub issues: #6 (Draft Requirements), #7 (Slice D) remain open. #4 and #5 (sandboxes) closed 2026-06-12.
 
 ## Definition Of A Meaningfully Real Product
 
