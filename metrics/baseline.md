@@ -140,5 +140,8 @@ When Slice D closes, compare Tier 2 data against these benchmarks:
 | Commits per slice | 1–4 (Phase 10 slices) | Commit count on Slice D branch |
 | Requirements written before coding | 0 (none existed) | Count REQ-D-NNN written before branch opened |
 | Requirements with passing test | N/A | REQ-D-NNN covered by at least one test |
+| Test-to-requirement ratio | N/A (no requirements existed) | Tests added ÷ REQ-D-NNN count (paper benchmark: 6.75:1) |
+| Human prompts per cycle | Not tracked | Count prompts per Infinity Loop cycle (paper benchmark: 6) |
+| Red Team findings per cycle | Not tracked | Count findings per test-design review pass (paper benchmark: 10 in Cycle 2) |
 
 The primary Agile V question for Slice D: **does requirements-first + TDD produce a measurable improvement in the fix commit ratio and test coverage, and what is the token cost of that improvement?**

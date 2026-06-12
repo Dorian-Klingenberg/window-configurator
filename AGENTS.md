@@ -114,6 +114,8 @@ Only comment code that genuinely needs clarification. No XML doc comments on tri
 - One behavior per test method. Assert one thing, or closely related things.
 - Test method names: `Subject_Condition_ExpectedBehavior` or `MethodName_WhenCondition_Behavior`
 
+**Red Team Protocol (when requirements exist):** The agent or prompt session designing tests must receive only the requirements file — never the implementation. This is a hard rule, not a preference. A test suite written with visibility into the implementation cannot falsify the implementation; it can only confirm it. Withhold all code context from the test-design pass. Run test design and implementation in separate agent contexts or separate prompt sessions from the same requirements source.
+
 ---
 
 ## Architecture Principles
@@ -163,6 +165,9 @@ Work sessions are documented in `journal/YYYY-MM-DD.md`. Entries are narrative a
 
 ### Lessons
 At each phase handoff, create or update a lesson in `lessons/`. See `skills/create-lesson-core.md` for the format. Keep `lessons/LESSON_CATALOG.md` current.
+
+### ATM (Artifact Traceability Matrix)
+When a slice has baselined requirements, produce `requirements/atm-slice-N.md` as a closing artifact. It is a table with three columns: `REQ-X-NNN | Implementation (file:class/method) | Test (file:method)`. One row per requirement. This is the audit evidence that H2 (100% requirement-level verification) is met.
 
 ### Domain knowledge
 The window industry domain reference lives in `window-domain-knowledge.md`. Update it when domain knowledge is discovered or clarified during a session.
