@@ -197,21 +197,12 @@ App runs at `http://localhost:5149` by default.
 
 ---
 
-## Build Lessons
+## Product Direction and History
 
-Phase-by-phase teaching documents (with code snippets and Mermaid diagrams) live in [`lessons/`](./lessons/README.md).
-
----
-
-## Branching
-
-Active branch lanes and merge policy are defined in [`BRANCHING.md`](./BRANCHING.md).
-
-Current working model:
-- `main` for stable integration
-- `feature/phase10-ui-*` for customer-facing UI work
-- `feature/phase10-demo-*` for demo orchestration slices
-- `feature/hubspot-tooling-*` for HubSpot support tooling
+The current product boundary is summarized in
+[product-direction.md](./product-direction.md). Historical phase, methodology,
+lesson, and branch records are preserved in the
+[agent governance reset archive](./archive/2026-11-agent-governance-reset/README.md).
 
 ---
 

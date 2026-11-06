@@ -66,13 +66,19 @@ The ATM is the evidence that H2 (100% requirement-level verification) is met. It
 
 ---
 
-## Red Team Protocol
+## Historical Red Team Protocol
 
-Test design for each slice must follow the Red Team Protocol documented in `AGENTS.md` (Testing Conventions section):
+This plan originally recorded a Red Team Protocol in the now-archived
+`AGENTS.md`. Its rationale remains useful as an experiment to evaluate, not as
+an active repository-wide instruction:
 
 - The agent or prompt session designing tests receives only the requirements file — never the implementation.
 - Build Agent (code) and Test Designer (tests) work from the same requirements source with no shared context.
 - This structural separation is what makes Red Team findings meaningful. A test suite written with visibility into the implementation cannot falsify that implementation.
+
+For a future slice, decide whether to use this approach in its approved
+requirements and Gherkin/scenario baseline. The migration plan records how
+that decision should be evaluated before it becomes a standing practice.
 
 ---
 
